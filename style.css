@@ -56,7 +56,7 @@ a:hover {
 }
 
 .logo {
-  width: 110px;
+  width: 180px;
   height: auto;
   margin-bottom: 24px;
 }
@@ -100,21 +100,25 @@ h2 {
 }
 
 .project-card {
+  display: flex;
+  gap: 24px;
+  align-items: center;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  overflow: hidden;
+  padding: 20px;
 }
 
 .project-image {
-  width: 100%;
-  aspect-ratio: 16 / 9;
+  width: 260px;
+  height: 150px;
   object-fit: cover;
-  background: #2d2d31;
+  border-radius: 10px;
+  flex-shrink: 0;
 }
 
 .project-text {
-  padding: 22px;
+  flex: 1;
 }
 
 .project-text h3 {
@@ -165,4 +169,18 @@ h2 {
     flex-wrap: wrap;
     gap: 10px;
   }
+}
+
+@media (max-width: 640px) {
+
+  .project-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .project-image {
+    width: 100%;
+    height: auto;
+  }
+
 }
