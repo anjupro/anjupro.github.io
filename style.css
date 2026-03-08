@@ -206,3 +206,21 @@ h2 {
     gap: 10px;
   }
 }
+
+/* --- App Store Badge Styling --- */
+
+.app-store-badge {
+  display: inline-block;
+  margin-top: 16px; /* Gives it nice breathing room below the paragraph */
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.app-store-badge img {
+  height: 40px; /* This is the industry-standard size for mobile/web badges */
+  width: auto;
+}
+
+.app-store-badge:hover {
+  transform: scale(1.04); /* Gives the button a satisfying 'pop' when hovered */
+  opacity: 1; /* Overrides your default a:hover opacity so the badge stays punchy */
+}
