@@ -87,7 +87,12 @@ h1 {
 
 .intro {
   border-top: 1px solid var(--line);
-  padding-top: 40px;
+  border-bottom: 1px solid var(--line);
+  padding: 40px 0; /* This forces exactly 40px of space above AND below the text */
+}
+
+.projects {
+  padding-top: 40px; /* This ensures the space below the new line matches the rest of the site */
 }
 
 /* Updated typography spacing for long-form text (like Privacy Policy) */
