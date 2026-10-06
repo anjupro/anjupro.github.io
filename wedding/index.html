@@ -374,6 +374,13 @@
             margin-bottom: 0;
         }
 
+        /* Highlighted Timeline Event */
+    .timeline li.highlight-event .time,
+    .timeline li.highlight-event .event {
+        color: var(--accent);
+        font-weight: 600;
+    }
+
         /* Visual Timeline */
         .timeline { list-style: none; padding: 0; margin: 40px 0 0 0; position: relative; }
         .timeline::before {
@@ -484,7 +491,7 @@
                     <span class="time">11:00</span>
                     <span class="event">Guests arrive. Welcome drinks and mingling.</span>
                 </li>
-                <li>
+                <li class="highlight-event">
                     <span class="time">12:00</span>
                     <span class="event">The wedding ceremony begins.</span>
                 </li>
