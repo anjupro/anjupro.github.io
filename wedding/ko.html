@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juuso & Bomin - Wedding</title>
+    <style>
+        /* Note: Added Noto Serif KR for elegant Korean typography */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Noto+Serif+KR:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
+        :root {
+            --bg-color: #384030; 
+            --alt-bg: #434B3A; 
+            --inset-bg: #303729; 
+            --text-main: #F4F1EA; 
+            --text-muted: #C0C3B7; 
+            --accent: #D4AF37; 
+            --divider: rgba(212, 175, 55, 0.15); 
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0; padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            /* Updated font stack to prioritize Korean fonts */
+            font-family: 'Noto Serif KR', 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.8;
+            word-break: keep-all; /* Keeps Korean words from breaking awkwardly */
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', 'Noto Serif KR', serif;
+            font-weight: 400;
+            margin: 0;
+        }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+        .container section {
+            background-color: var(--alt-bg);
+            border-radius: 12px;
+            padding: 56px 48px;
+            margin-bottom: 32px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .container section:first-of-type { margin-top: 20px; }
+        .container section:last-of-type { margin-bottom: 100px; }
+        
+        .container section:nth-child(1) { animation-delay: 0.1s; }
+        .container section:nth-child(2) { animation-delay: 0.2s; }
+        .container section:nth-child(3) { animation-delay: 0.3s; }
+        .container section:nth-child(4) { animation-delay: 0.4s; }
+        .container section:nth-child(5) { animation-delay: 0.5s; }
+        .container section:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-wrapper {
+            height: 100vh; padding: 24px; box-sizing: border-box;
+            width: 100%; max-width: 1200px; margin: 0 auto;
+        }
+
+        .hero {
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            height: 100%; width: 100%; border-radius: 12px; text-align: center;
+            padding: 0 24px; position: relative; box-sizing: border-box;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('couple.jpg');
+            background-size: cover; background-position: center; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25); overflow: hidden;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.8rem; letter-spacing: -0.02em;
+            margin-bottom: 16px; color: #FFFFFF; text-shadow: 0 2px 10px rgba(0,0,0,0.3); 
+        }
+
+        .hero p {
+            font-size: 1.25rem; color: #FFFFFF; margin-bottom: 8px;
+            letter-spacing: 0.05em; text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .scroll-arrow {
+            position: absolute; bottom: 40px; left: 50%; margin-left: -22px; 
+            color: #FFFFFF; text-decoration: none; animation: scrollPulse 2.5s infinite;
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-arrow:hover { opacity: 0.7; }
+
+        @keyframes scrollPulse {
+            0% { transform: translateY(0); opacity: 0.6; filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3)); }
+            50% { transform: translateY(12px); opacity: 1; filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.95)); }
+            100% { transform: translateY(0); opacity: 0.6; filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3)); }
+        }
+
+        .floating-rsvp {
+            position: fixed; bottom: 32px; right: 32px; background-color: var(--inset-bg);
+            color: var(--accent); border: 1px solid var(--accent);
+            font-family: 'Inter', sans-serif; font-size: 1.1rem; padding: 12px 28px;
+            border-radius: 30px; text-decoration: none; z-index: 50;
+            opacity: 0; visibility: hidden; transform: translateY(20px);
+            transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease, background-color 0.3s ease;
+        }
+
+        .floating-rsvp.visible {
+            opacity: 1; visibility: visible; transform: translateY(0);
+            animation: rsvpButtonGlow 1.8s ease-in-out infinite alternate;
+        }
+
+        .floating-rsvp:hover { background-color: #353D2E; transform: translateY(-3px); }
+
+        @keyframes rsvpButtonGlow {
+            0% { box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 10px rgba(212, 175, 55, 0.3); }
+            100% { box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 40px rgba(212, 175, 55, 0.9); }
+        }
+
+        .info-block h2, .split-section h2 {
+            font-size: 2.2rem; margin-bottom: 24px; color: var(--text-main);
+            position: relative; padding-bottom: 20px;
+        }
+
+        .info-block h2::after, .split-section h2::after {
+            content: ''; position: absolute; left: 0; bottom: 0; width: 40px;
+            height: 2px; background-color: var(--accent);
+        }
+
+        .centered-block { text-align: center; }
+        .centered-block h2::after { left: 50%; margin-left: -20px; }
+
+        .info-block h3 {
+            font-size: 1.25rem; margin-bottom: 12px; font-weight: 600;
+            color: var(--text-main); margin-top: 32px;
+        }
+
+        .info-block h3:first-of-type { margin-top: 0; }
+        
+        .info-block p { color: var(--text-muted); margin-bottom: 16px; font-size: 1.05rem; }
+
+        .info-block a {
+            color: var(--text-main); text-decoration: none; border-bottom: 1px solid var(--accent);
+            transition: color 0.3s ease;
+        }
+
+        .info-block a:hover { color: var(--accent); }
+
+        .split-section { display: flex; align-items: center; gap: 40px; }
+        .split-text { flex: 1; }
+        .split-text h2 { margin-top: 0; }
+        .split-text p { color: var(--text-muted); font-size: 1.05rem; margin: 0 0 16px 0; }
+        .split-text p:last-child { margin-bottom: 0; }
+
+        .split-image-side {
+            flex: 0 0 45%; height: 320px; border-radius: 6px; background-size: cover;
+            background-position: center; box-shadow: 0 8px 24px rgba(0,0,0,0.2); 
+            background-image: url('sunwoongak.jpeg');
+        }
+
+        .tips-button {
+            background-color: var(--inset-bg); border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px; padding: 24px; margin-top: 20px; width: 100%;
+            text-align: left; cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; transition: all 0.3s ease;
+        }
+
+        .tips-button:hover { background-color: #353D2E; }
+
+        .tips-button span:first-child { font-size: 1.4rem; color: var(--accent); font-family: 'Noto Serif KR', serif; }
+        .tips-button .plus-icon { font-family: 'Inter', sans-serif; font-size: 1.8rem; font-weight: 300; color: var(--text-muted); }
+
+        .tips-modal {
+            background-color: var(--alt-bg); border: 1px solid var(--divider);
+            border-radius: 12px; width: 90vw; max-width: 700px; max-height: 85vh;
+            padding: 0; box-shadow: 0 20px 60px rgba(0,0,0,0.5); margin: auto; 
+            color: var(--text-main); font-family: 'Noto Serif KR', serif;
+        }
+        
+        .tips-modal::backdrop { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px); }
+
+        .modal-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 24px 32px; border-bottom: 1px solid var(--divider); position: sticky;
+            top: 0; background-color: var(--alt-bg); border-top-left-radius: 12px;
+            border-top-right-radius: 12px; z-index: 10;
+        }
+
+        .modal-header h2 { font-size: 1.6rem; color: var(--accent); margin: 0; }
+
+        .close-modal-btn {
+            background: none; border: none; color: var(--text-main); font-size: 1.4rem;
+            cursor: pointer; padding: 8px; transition: color 0.3s ease;
+        }
+
+        .close-modal-btn:hover { color: var(--accent); }
+
+        .modal-content { padding: 32px; overflow-y: auto; }
+
+        .photo-gallery img {
+            width: 100%; height: auto; border-radius: 8px; margin-bottom: 24px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3); display: block;
+        }
+        .photo-gallery img:last-child { margin-bottom: 0; }
+
+        .timeline { list-style: none; padding: 0; margin: 40px 0 0 0; position: relative; }
+        .timeline::before { content: ''; position: absolute; top: 5px; bottom: 20px; left: 80px; width: 1px; background-color: var(--divider); }
+        .timeline li { display: flex; margin-bottom: 30px; position: relative; }
+        .timeline li::before {
+            content: ''; position: absolute; left: 76px; top: 8px; width: 9px; height: 9px;
+            border-radius: 50%; background-color: var(--accent); box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1); 
+        }
+        .timeline .time { font-family: 'Inter', sans-serif; font-weight: 600; width: 60px; flex-shrink: 0; color: var(--accent); text-align: right; padding-right: 0; margin-top: 1px; }
+        .timeline .event { color: var(--text-muted); margin-left: 45px; flex: 1; font-size: 1.05rem; }
+        
+        .timeline li.highlight-event .time, .timeline li.highlight-event .event {
+            color: var(--accent); font-weight: 600;
+        }
+
+        .container section.rsvp-block { 
+            background-color: #474F3E; border: 1px solid rgba(212, 175, 55, 0.6); 
+            animation: fadeInUp 0.8s ease-out forwards, rsvpGlow 1.8s ease-in-out infinite alternate;
+        }
+
+        .account-box {
+            background-color: var(--inset-bg); padding: 20px; border-radius: 8px;
+            margin-top: 20px; text-align: left;
+        }
+
+        @media (max-width: 700px) {
+            .hero-wrapper { padding: 16px; } 
+            .hero h1 { font-size: 3.5rem; }
+            .container section { padding: 40px 24px; margin-bottom: 24px; }
+            .container section:first-of-type { margin-top: 16px; }
+            .split-section { flex-direction: column-reverse; gap: 32px; }
+            .split-image-side { flex: none; width: 100%; height: 240px; }
+            .timeline::before { left: 5px; }
+            .timeline li { flex-direction: column; margin-bottom: 28px; }
+            .timeline li::before { left: 1px; top: 7px; }
+            .timeline .time { text-align: left; margin-left: 25px; margin-bottom: 6px; }
+            .timeline .event { margin-left: 25px; }
+            .modal-header { padding: 20px 24px; }
+            .modal-content { padding: 24px; }
+            .floating-rsvp { bottom: 24px; right: 24px; padding: 10px 24px; font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-wrapper">
+        <section class="hero">
+            <h1>Juuso & Bomin</h1>
+            <p style="font-family: 'Inter', sans-serif;">1st of May, 2027</p>
+            <p>선운각, 서울</p>
+            
+            <a href="#welcome" class="scroll-arrow" aria-label="Scroll down">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </a>
+        </section>
+    </div>
+
+    <a href="#rsvp-section" id="floating-rsvp" class="floating-rsvp">참석 여부 전달</a>
+
+    <div class="container">
+        
+        <section class="info-block centered-block" id="welcome">
+            <h2>초대합니다</h2>
+            <p>저희 두 사람이 사랑으로 만나, 새 출발을 하는 자리에 소중한 분들을 모시고자 합니다.<br>
+            <strong>2027년 5월 1일</strong>, 핀란드와 한국 두 가족이 하나 되는 뜻깊은 날에 함께해 주시면 더없는 기쁨이 되겠습니다.</p>
+        </section>
+
+        <section class="split-section">
+            <div class="split-text">
+                <h2>예식장 안내</h2>
+                <p>북한산 자락에 위치한 아름다운 전통 한옥, <strong>선운각</strong>에서 예식을 올립니다. 고즈넉한 자연 속에서 한국의 멋을 느낄 수 있는 곳입니다. 귀한 걸음 하시어 저희의 앞날을 축복해 주시기 바랍니다.</p>
+            </div>
+            <div class="split-image-side"></div>
+        </section>
+
+        <section class="info-block">
+            <h2>예식 식순</h2>
+            <p>저희 결혼식은 아래와 같은 순서로 여유롭게 진행될 예정입니다.</p>
+            
+            <ul class="timeline">
+                <li>
+                    <span class="time">11:00</span>
+                    <span class="event">하객 맞이 및 웰컴 드링크</span>
+                </li>
+                <li class="highlight-event">
+                    <span class="time">12:00</span>
+                    <span class="event">본식 시작</span>
+                </li>
+                <li>
+                    <span class="time">12:30</span>
+                    <span class="event">피로연 (뷔페 식사 및 자유로운 시간)</span>
+                </li>
+                <li>
+                    <span class="time">15:00</span>
+                    <span class="event">예식 종료 및 휴식</span>
+                </li>
+                <li>
+                    <span class="time">18:00</span>
+                    <span class="event">애프터 파티 (서울 시내)</span>
+                </li>
+                <li>
+                    <span class="time">00:00</span>
+                    <span class="event">이후 자유 일정</span>
+                </li>
+            </ul>
+        </section>
+
+        <section class="info-block">
+            <h2>오시는 길</h2>
+            
+            <h3 style="margin-top: 0;">대중교통 이용 시</h3>
+            <p>우이신설선 <strong>북한산우이역</strong>에서 하차 후, 예식장까지 운행하는 전용 셔틀버스를 이용하실 수 있습니다.</p>
+
+            <h3>자가용 이용 시</h3>
+            <p>예식장 인근에 하객 여러분을 위한 넓은 주차장이 마련되어 있습니다. 주차 후 선운각까지 셔틀버스가 수시로 운행되오니 편하게 이용해 주시기 바랍니다.</p>
+
+            <button id="open-photos" class="tips-button" aria-label="Open our Seoul travel pictures">
+                <span>저희의 서울 여행 사진</span>
+                <span class="plus-icon">+</span>
+            </button>
+        </section>
+
+        <section class="info-block">
+            <h2>애프터 파티</h2>
+            <p>예식 후 저녁 <strong>6시</strong>부터 서울 시내에서 가벼운 애프터 파티가 열릴 예정입니다. 참석을 원하시는 분들은 함께 자리해 주시면 감사하겠습니다. (정확한 장소는 추후 업데이트될 예정입니다.)</p>
+        </section>
+
+        <section class="info-block centered-block">
+            <h2>마음 전하실 곳</h2>
+            <p>참석이 어려우시더라도 축하해 주시는 마음 깊이 간직하겠습니다.<br>따뜻한 마음으로 축복해 주시는 모든 분들께 감사드립니다.</p>
+            
+            <div class="account-box">
+                <p style="margin-bottom: 8px;"><strong>신랑 측 계좌:</strong> [추후 업데이트 예정]</p>
+                <p style="margin: 0;"><strong>신부 측 계좌:</strong> [추후 업데이트 예정]</p>
+            </div>
+        </section>
+
+        <section class="info-block centered-block rsvp-block" id="rsvp-section">
+            <h2>참석 여부 전달</h2>
+            <p>원활한 예식 준비를 위해 참석 여부 및 애프터 파티 참석 유무, 알레르기 등 식사 관련 요청 사항을 미리 알려주시면 감사하겠습니다.</p>
+            <p style="margin-top: 24px;">
+                <strong>카카오톡 ID:</strong> [추후 업데이트 예정]<br><br>
+                <strong>이메일:</strong> <a href="mailto:juuso.anttila@outlook.com">juuso.anttila@outlook.com</a>
+            </p>
+        </section>
+    </div>
+
+    <!-- The Native HTML Modal overlay for Seoul Travel Pictures -->
+    <dialog id="photos-modal" class="tips-modal">
+        <div class="modal-header">
+            <h2>저희의 서울 여행 사진</h2>
+            <button id="close-photos" class="close-modal-btn" aria-label="Close photos">✕</button>
+        </div>
+        <div class="modal-content photo-gallery">
+            <img src="photo1.jpeg" alt="Seoul Travel Photo 1" loading="lazy">
+            <img src="photo2.jpeg" alt="Seoul Travel Photo 2" loading="lazy">
+            <img src="photo3.jpeg" alt="Seoul Travel Photo 3" loading="lazy">
+            <img src="photo4.jpeg" alt="Seoul Travel Photo 4" loading="lazy">
+            <img src="photo5.jpeg" alt="Seoul Travel Photo 5" loading="lazy">
+            <img src="photo6.jpeg" alt="Seoul Travel Photo 6" loading="lazy">
+            <img src="photo7.jpeg" alt="Seoul Travel Photo 7" loading="lazy">
+            <img src="photo8.jpeg" alt="Seoul Travel Photo 8" loading="lazy">
+            <img src="photo9.jpeg" alt="Seoul Travel Photo 9" loading="lazy">
+            <img src="photo10.jpeg" alt="Seoul Travel Photo 10" loading="lazy">
+            <img src="photo11.jpeg" alt="Seoul Travel Photo 11" loading="lazy">
+            <img src="photo12.jpeg" alt="Seoul Travel Photo 12" loading="lazy">
+            <img src="photo13.jpeg" alt="Seoul Travel Photo 13" loading="lazy">
+            <img src="photo14.jpeg" alt="Seoul Travel Photo 14" loading="lazy">
+            <img src="photo15.jpeg" alt="Seoul Travel Photo 15" loading="lazy">
+            <img src="photo16.jpeg" alt="Seoul Travel Photo 16" loading="lazy">
+            <img src="photo17.jpeg" alt="Seoul Travel Photo 17" loading="lazy">
+            <img src="photo18.jpeg" alt="Seoul Travel Photo 18" loading="lazy">
+            <img src="photo19.jpeg" alt="Seoul Travel Photo 19" loading="lazy">
+            <img src="photo20.jpeg" alt="Seoul Travel Photo 20" loading="lazy">
+        </div>
+    </dialog>
+
+    <script>
+        function setupModal(openBtnId, modalId, closeBtnId) {
+            const modal = document.getElementById(modalId);
+            const openBtn = document.getElementById(openBtnId);
+            const closeBtn = document.getElementById(closeBtnId);
+
+            if(openBtn) {
+                openBtn.addEventListener('click', () => {
+                    modal.showModal();
+                    document.body.style.overflow = 'hidden'; 
+                });
+            }
+
+            if(closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    modal.close();
+                    document.body.style.overflow = '';
+                });
+            }
+
+            if(modal) {
+                modal.addEventListener('click', (e) => {
+                    const dialogDimensions = modal.getBoundingClientRect();
+                    if (
+                        e.clientX < dialogDimensions.left ||
+                        e.clientX > dialogDimensions.right ||
+                        e.clientY < dialogDimensions.top ||
+                        e.clientY > dialogDimensions.bottom
+                    ) {
+                        modal.close();
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+        }
+
+        setupModal('open-photos', 'photos-modal', 'close-photos');
+
+        const floatingRsvp = document.getElementById('floating-rsvp');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > window.innerHeight * 0.6) {
+                floatingRsvp.classList.add('visible');
+            } else {
+                floatingRsvp.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>
