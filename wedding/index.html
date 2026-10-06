@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juuso & Bomin</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+        /* Imported Noto Serif KR for the elegant Korean button text */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Noto+Serif+KR:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
 
         :root {
             --bg-color: #384030; 
@@ -61,7 +62,7 @@
             font-family: 'Playfair Display', serif;
             font-size: 4.8rem; 
             letter-spacing: -0.02em;
-            margin: 0 0 40px 0; /* Pushes the buttons down slightly */
+            margin: 0 0 40px 0; 
             color: #FFFFFF; 
             text-shadow: 0 2px 10px rgba(0,0,0,0.3); 
         }
@@ -72,6 +73,8 @@
             flex-direction: column;
             gap: 16px;
             align-items: center;
+            width: 100%;
+            max-width: 300px; /* Keeps the buttons neatly sized */
         }
 
         /* Side-by-side flags */
@@ -112,12 +115,12 @@
         }
 
         .camera-btn {
-            padding: 16px 32px;
-            font-size: 1.2rem;
+            padding: 14px 24px;
             width: 100%; 
             box-sizing: border-box;
-            gap: 12px;
-            border-color: rgba(212, 175, 55, 0.4); /* Subtle gold tint on border */
+            gap: 16px;
+            border-color: rgba(212, 175, 55, 0.4); 
+            justify-content: flex-start; /* Aligns contents neatly to the left inside the button */
         }
 
         .camera-btn:hover {
@@ -126,6 +129,26 @@
 
         .camera-btn svg {
             color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .btn-text-wrapper {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .btn-text-en {
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+
+        .btn-text-ko {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: rgba(244, 241, 234, 0.7); /* Faded cream color */
+            margin-top: 2px;
         }
 
         /* Mobile adjustments */
@@ -155,11 +178,14 @@
                 
                 <!-- Camera Button links to upload.html -->
                 <a href="upload.html" class="nav-btn camera-btn" aria-label="Share Photos">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
                         <circle cx="12" cy="13" r="4"></circle>
                     </svg>
-                    <span>Share Photos</span>
+                    <div class="btn-text-wrapper">
+                        <span class="btn-text-en">Share Photos</span>
+                        <span class="btn-text-ko">사진 공유하기</span>
+                    </div>
                 </a>
             </div>
         </section>
