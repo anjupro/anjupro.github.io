@@ -21,7 +21,7 @@
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         h1, h2, h3 {
@@ -37,27 +37,50 @@
         }
 
         section {
-            padding: 50px 0;
+            padding: 60px 0;
             border-bottom: 1px solid #EAEAEA;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
         }
+        
+        /* Staggering the fade-in animation for a premium feel */
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.3s; }
+        section:nth-child(4) { animation-delay: 0.4s; }
+        section:nth-child(5) { animation-delay: 0.5s; }
+        section:nth-child(6) { animation-delay: 0.6s; }
+        section:nth-child(7) { animation-delay: 0.7s; }
+        section:nth-child(8) { animation-delay: 0.8s; }
         
         section:last-child {
             border-bottom: none;
+            padding-bottom: 100px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 120px 24px 80px 24px;
+            padding: 140px 24px 80px 24px;
             border-bottom: 1px solid #EAEAEA; 
             position: relative;
             background-size: cover;
             background-position: center;
         }
 
-        /* Increased Main Title Size */
         .hero h1 {
-            font-size: 4.8rem; /* Made significantly larger */
+            font-size: 4.8rem; 
             letter-spacing: -0.02em;
             margin-bottom: 16px;
             color: var(--text-main); 
@@ -67,6 +90,7 @@
             font-size: 1.25rem;
             color: var(--text-muted);
             margin-bottom: 8px;
+            letter-spacing: 0.05em;
         }
 
         /* Information Blocks */
@@ -85,12 +109,29 @@
             margin-bottom: 12px;
             font-family: 'Inter', sans-serif;
             font-weight: 600;
+            color: var(--text-main);
+            margin-top: 32px;
+        }
+
+        .info-block h3:first-of-type {
+            margin-top: 0;
         }
 
         .info-block p {
             color: var(--text-muted);
             margin-bottom: 16px;
             font-size: 1.05rem;
+        }
+
+        .info-block a {
+            color: var(--text-main);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent);
+            transition: color 0.3s ease;
+        }
+
+        .info-block a:hover {
+            color: var(--accent);
         }
 
         /* Venue Section */
@@ -121,13 +162,14 @@
         .venue-image-side {
             flex: 0 0 45%; 
             height: 280px;
-            border-radius: 4px;
+            border-radius: 6px;
             background-image: url('sunwoongak.jpeg');
             background-size: cover;
             background-position: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05); /* Subtle shadow for depth */
         }
 
-        /* New Visual Timeline */
+        /* Visual Timeline */
         .timeline {
             list-style: none;
             padding: 0;
@@ -135,7 +177,6 @@
             position: relative;
         }
 
-        /* The vertical line */
         .timeline::before {
             content: '';
             position: absolute;
@@ -152,62 +193,62 @@
             position: relative;
         }
 
-        /* The timeline dot */
         .timeline li::before {
             content: '';
             position: absolute;
-            left: 76px; /* Centered over the 1px line */
-            top: 7px;
+            left: 76px; 
+            top: 8px;
             width: 9px;
             height: 9px;
             border-radius: 50%;
-            background-color: var(--accent); /* Gold dot */
+            background-color: var(--accent); 
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15); /* Soft glow around the dot */
         }
 
         .timeline .time {
             font-weight: 600;
-            width: 60px; /* Fixed width so times align perfectly */
+            width: 60px; 
             flex-shrink: 0;
             color: var(--accent);
             text-align: right;
             padding-right: 0;
-            margin-top: 1px; /* Optical alignment with text */
+            margin-top: 1px; 
         }
 
         .timeline .event {
             color: var(--text-muted);
-            margin-left: 45px; /* Pushes text past the dot and line */
+            margin-left: 45px; 
             flex: 1;
+            font-size: 1.05rem;
         }
 
         /* Mobile Adjustments */
         @media (max-width: 700px) {
             .hero h1 {
-                font-size: 3.5rem; /* Keeps it massive but fits on phone screens */
+                font-size: 3.5rem; 
             }
             .hero {
-                padding: 80px 24px 50px 24px;
+                padding: 100px 24px 60px 24px;
             }
             section {
-                padding: 40px 0; 
+                padding: 50px 0; 
             }
             .venue-section {
                 flex-direction: column-reverse; 
-                gap: 24px;
+                gap: 32px;
             }
             .venue-image-side {
                 flex: none;
                 width: 100%;
-                height: 220px;
+                height: 240px;
             }
             
-            /* Mobile Timeline Layout */
             .timeline::before {
-                left: 5px; /* Moves vertical line to the far left edge */
+                left: 5px; 
             }
             .timeline li {
                 flex-direction: column;
-                margin-bottom: 24px;
+                margin-bottom: 28px;
             }
             .timeline li::before {
                 left: 1px;
@@ -215,11 +256,11 @@
             }
             .timeline .time {
                 text-align: left;
-                margin-left: 25px; /* Pushes time past the line */
-                margin-bottom: 4px;
+                margin-left: 25px; 
+                margin-bottom: 6px;
             }
             .timeline .event {
-                margin-left: 25px; /* Matches the time indentation */
+                margin-left: 25px; 
             }
         }
     </style>
@@ -250,6 +291,13 @@
                 <p>Nestled at the foothills of the Bukhansan mountains, Sunwoongak is a stunning traditional Korean estate, known as a <em>hanok</em>. With its sweeping wooden rooflines and serene natural surroundings, it offers a peaceful retreat from the bustling city of Seoul. We are thrilled to share this beautiful piece of Korean heritage with you as we celebrate our marriage.</p>
             </div>
             <div class="venue-image-side"></div>
+        </section>
+
+        <!-- Weather & Dress Code -->
+        <section class="info-block">
+            <h2>Weather & Dress Code</h2>
+            <p>Early May is one of the most beautiful times to visit South Korea. You can expect mild, pleasant spring weather, with daytime temperatures generally hovering around 18–22°C.</p>
+            <p>For the celebration, we kindly request formal or semi-formal attire—suits for gentlemen and elegant dresses or equivalent for ladies. Please note that the traditional hanok venue features natural stone and wooden pathways, so we highly recommend choosing comfortable footwear for the day.</p>
         </section>
 
         <!-- Travel & Accommodation -->
@@ -297,9 +345,26 @@
         </section>
 
         <!-- Afterparty -->
-        <section class="info-block" style="border-bottom: none;">
+        <section class="info-block">
             <h2>The Afterparty</h2>
             <p>For our younger guests, the celebration continues in the evening. We will be hosting an afterparty starting around <strong>6:00 PM</strong> somewhere in central Seoul. The exact venue is currently being finalized, and we will update this page as soon as it is booked.</p>
+        </section>
+
+        <!-- A Note on Gifts -->
+        <section class="info-block">
+            <h2>A Note on Gifts</h2>
+            <p>Having you travel across the globe to celebrate with us is truly the most meaningful gift we could receive. Since we are currently living in Doha and will be traveling light, we kindly ask that no physical gifts be brought to the venue.</p>
+            <p>If you would still like to bless our marriage with a gift, a monetary contribution towards our future together would be deeply appreciated. This can be sent conveniently via MobilePay or bank transfer.</p>
+        </section>
+
+        <!-- RSVP -->
+        <section class="info-block" style="border-bottom: none; text-align: center; padding-top: 80px;">
+            <h2>RSVP</h2>
+            <p>Please kindly confirm your attendance, along with any dietary requirements.</p>
+            <p style="margin-top: 24px;">
+                <strong>WhatsApp:</strong> <a href="https://wa.me/97474495910" target="_blank">+974 7449 5910</a><br><br>
+                <strong>Email:</strong> <a href="mailto:juuso.anttila@outlook.com">juuso.anttila@outlook.com</a>
+            </p>
         </section>
     </div>
 
