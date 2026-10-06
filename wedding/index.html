@@ -148,24 +148,31 @@
             padding: 12px 28px;
             border-radius: 30px;
             text-decoration: none;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
             z-index: 50;
             opacity: 0;
             visibility: hidden;
             transform: translateY(20px);
-            transition: all 0.4s ease;
+            /* Specific transitions to prevent conflicts with the glowing box-shadow animation */
+            transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease, background-color 0.3s ease;
         }
 
         .floating-rsvp.visible {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
+            /* New glowing pulse for the floating button */
+            animation: rsvpButtonGlow 1.8s ease-in-out infinite alternate;
         }
 
         .floating-rsvp:hover {
             background-color: #353D2E;
             transform: translateY(-3px);
-            box-shadow: 0 12px 28px rgba(0,0,0,0.5);
+        }
+
+        /* Animation for Floating RSVP Button */
+        @keyframes rsvpButtonGlow {
+            0% { box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 10px rgba(212, 175, 55, 0.3); }
+            100% { box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 40px rgba(212, 175, 55, 0.9); }
         }
 
         /* Information Blocks Formatting */
@@ -375,13 +382,15 @@
         /* The Custom RSVP Block with Glowing Breathing Effect */
         .container section.rsvp-block { 
             background-color: #474F3E; 
-            border: 1px solid rgba(212, 175, 55, 0.4); 
-            animation: fadeInUp 0.8s ease-out forwards, rsvpGlow 4s ease-in-out infinite alternate;
+            border: 1px solid rgba(212, 175, 55, 0.6); 
+            /* Sped up from 4s to 1.8s */
+            animation: fadeInUp 0.8s ease-out forwards, rsvpGlow 1.8s ease-in-out infinite alternate;
         }
 
+        /* Stronger, faster glow for the main RSVP card */
         @keyframes rsvpGlow {
-            0% { box-shadow: 0 8px 30px rgba(0,0,0,0.15), 0 0 5px rgba(212, 175, 55, 0.1); }
-            100% { box-shadow: 0 8px 30px rgba(0,0,0,0.15), 0 0 25px rgba(212, 175, 55, 0.4); }
+            0% { box-shadow: 0 8px 30px rgba(0,0,0,0.15), 0 0 10px rgba(212, 175, 55, 0.2); }
+            100% { box-shadow: 0 8px 30px rgba(0,0,0,0.15), 0 0 45px rgba(212, 175, 55, 0.8); }
         }
 
         /* Mobile Adjustments */
