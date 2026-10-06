@@ -11,7 +11,7 @@
             /* Elegant Dark Olive Palette */
             --bg-color: #384030; /* Deep Olive Background */
             --alt-bg: #434B3A; /* Slightly lighter Olive for the cards */
-            --inset-bg: #303729; /* Darker tone for the accordion */
+            --inset-bg: #303729; /* Darker tone for buttons/insets */
             --text-main: #F4F1EA; /* Cream */
             --text-muted: #C0C3B7; /* Soft Sage */
             --accent: #D4AF37; /* Gold */
@@ -44,7 +44,7 @@
             padding: 0 24px;
         }
 
-        /* Floating Card Design for all Sections */
+        /* Floating Card Design for Content Sections */
         .container section {
             background-color: var(--alt-bg);
             border-radius: 12px;
@@ -55,38 +55,48 @@
             animation: fadeInUp 0.8s ease-out forwards;
         }
 
-        /* Spacing for the first and last cards */
-        .container section:first-of-type { margin-top: 60px; }
+        .container section:first-of-type { margin-top: 20px; }
         .container section:last-of-type { margin-bottom: 100px; }
         
-        /* Staggered Animations */
         .container section:nth-child(1) { animation-delay: 0.1s; }
         .container section:nth-child(2) { animation-delay: 0.2s; }
         .container section:nth-child(3) { animation-delay: 0.3s; }
         .container section:nth-child(4) { animation-delay: 0.4s; }
         .container section:nth-child(5) { animation-delay: 0.5s; }
         .container section:nth-child(6) { animation-delay: 0.6s; }
-        .container section:nth-child(7) { animation-delay: 0.7s; }
-        .container section:nth-child(8) { animation-delay: 0.8s; }
 
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Hero Section */
+        /* Upgraded Hero Section Wrapper */
+        .hero-wrapper {
+            height: 100vh;
+            padding: 24px; /* Leaves the elegant olive margin around the hero */
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 1200px; /* Limits max width on ultra-wide screens */
+            margin: 0 auto;
+        }
+
         .hero {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh; 
+            height: 100%; 
+            width: 100%;
+            border-radius: 12px;
             text-align: center;
             padding: 0 24px;
             position: relative;
+            box-sizing: border-box;
             background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('couple.jpg');
             background-size: cover;
             background-position: center; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25); /* Deep shadow for the image */
+            overflow: hidden;
         }
 
         .hero h1 {
@@ -205,54 +215,102 @@
 
         .two-column-text > div { flex: 1; }
 
-        /* Elegant Expandable Seoul Tips Section (Dark Inset Look) */
-        details.tips-accordion {
+        /* The New Modal Trigger Button */
+        .tips-button {
             background-color: var(--inset-bg);
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 8px;
             padding: 24px;
             margin-top: 24px;
-            transition: all 0.3s ease;
-        }
-        
-        details.tips-accordion summary {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
-            color: var(--accent);
-            list-style: none;
+            width: 100%;
+            text-align: left;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 0;
+            transition: all 0.3s ease;
         }
-        
-        details.tips-accordion summary::-webkit-details-marker { display: none; }
-        
-        details.tips-accordion summary::after {
-            content: '+';
+
+        .tips-button:hover { background-color: #353D2E; }
+
+        .tips-button span:first-child {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--accent);
+        }
+
+        .tips-button .plus-icon {
             font-family: 'Inter', sans-serif;
             font-size: 1.8rem;
             font-weight: 300;
             color: var(--text-muted);
         }
-        
-        details.tips-accordion[open] summary::after { content: '−'; }
-        
-        details.tips-accordion[open] summary {
-            border-bottom: 1px solid var(--divider);
-            padding-bottom: 16px;
-            margin-bottom: 16px;
+
+        /* The Full-Screen Modal Styling */
+        .tips-modal {
+            background-color: var(--alt-bg);
+            border: 1px solid var(--divider);
+            border-radius: 12px;
+            width: 90vw;
+            max-width: 700px;
+            max-height: 85vh;
+            padding: 0;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            margin: auto; /* Centers the dialog */
         }
         
-        details.tips-accordion ul {
+        .tips-modal::backdrop {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px); /* Frosted glass effect */
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 32px;
+            border-bottom: 1px solid var(--divider);
+            position: sticky;
+            top: 0;
+            background-color: var(--alt-bg);
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            z-index: 10;
+        }
+
+        .modal-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin: 0;
+        }
+
+        .close-modal-btn {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal-btn:hover { color: var(--accent); }
+
+        .modal-content {
+            padding: 32px;
+            overflow-y: auto;
+        }
+
+        .modal-content ul {
             padding-left: 20px;
             color: var(--text-muted);
             font-size: 1.05rem;
             margin: 0;
         }
         
-        details.tips-accordion li { margin-bottom: 12px; }
+        .modal-content li { margin-bottom: 16px; line-height: 1.8; }
+        .modal-content strong { color: var(--text-main); }
 
         /* Visual Timeline */
         .timeline { list-style: none; padding: 0; margin: 40px 0 0 0; position: relative; }
@@ -271,20 +329,20 @@
 
         /* The Custom RSVP Block */
         .container section.rsvp-block { 
-            background-color: #474F3E; /* Ever so slightly lighter to stand out as the final step */
-            border: 1px solid var(--divider); /* Faint gold border */
+            background-color: #474F3E; 
+            border: 1px solid var(--divider); 
         }
 
         /* Mobile Adjustments */
         @media (max-width: 700px) {
+            .hero-wrapper { padding: 16px; } /* Slightly smaller margin on mobile */
             .hero h1 { font-size: 3.5rem; }
-            .hero { padding: 0 24px; }
             
             .container section { 
                 padding: 40px 24px; 
                 margin-bottom: 24px; 
             }
-            .container section:first-of-type { margin-top: 40px; }
+            .container section:first-of-type { margin-top: 16px; }
             
             .split-section { flex-direction: column-reverse; gap: 32px; }
             .split-image-side { flex: none; width: 100%; height: 240px; }
@@ -296,26 +354,29 @@
             .timeline li::before { left: 1px; top: 7px; }
             .timeline .time { text-align: left; margin-left: 25px; margin-bottom: 6px; }
             .timeline .event { margin-left: 25px; }
+            
+            .modal-header { padding: 20px 24px; }
+            .modal-content { padding: 24px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Hero Section (Outside the container so it stays full screen width/height) -->
-    <section class="hero">
-        <div style="padding: 0; width: 100%; max-width: 800px; margin: 0 auto;">
+    <!-- Boxed Hero Section -->
+    <div class="hero-wrapper">
+        <section class="hero">
             <h1>Juuso & Bomin</h1>
             <p>1st of May, 2027</p>
             <p>Sunwoongak, Seoul</p>
-        </div>
-        
-        <!-- Glowing Down Arrow -->
-        <a href="#welcome" class="scroll-arrow" aria-label="Scroll down">
-            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
-        </a>
-    </section>
+            
+            <!-- Glowing Down Arrow -->
+            <a href="#welcome" class="scroll-arrow" aria-label="Scroll down">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </a>
+        </section>
+    </div>
 
     <!-- Content Sections wrapped in Cards -->
     <div class="container">
@@ -391,16 +452,11 @@
                 </div>
             </div>
 
-            <!-- Elegant Expandable Seoul Tips Section -->
-            <details class="tips-accordion">
-                <summary>Tips for Exploring Seoul</summary>
-                <ul>
-                    <li><strong>T-Money Card:</strong> Grab a T-Money transit card from any convenience store (CU, GS25, 7-Eleven) when you arrive. You can tap it for subways, buses, and even to pay for snacks.</li>
-                    <li><strong>Navigation:</strong> Google Maps does not provide walking directions in South Korea. We highly recommend downloading <strong>Naver Map</strong> or <strong>KakaoMap</strong> for accurate navigation.</li>
-                    <li><strong>Palaces in Hanbok:</strong> If you visit the grand Gyeongbokgung Palace, consider renting a traditional Hanbok nearby—entry to the palace is completely free if you are wearing one!</li>
-                    <li><strong>Cafe Culture:</strong> Seoul has one of the most incredible cafe cultures in the world. Don't hesitate to wander down small alleyways in areas like Seongsu or Bukchon to find stunning hidden coffee shops.</li>
-                </ul>
-            </details>
+            <!-- Beautiful Trigger Button for Modal -->
+            <button id="open-tips" class="tips-button" aria-label="Open tips for exploring Seoul">
+                <span>Tips for Exploring Seoul</span>
+                <span class="plus-icon">+</span>
+            </button>
         </section>
 
         <!-- Afterparty -->
@@ -427,5 +483,53 @@
         </section>
     </div>
 
+    <!-- The Native HTML Modal overlay for Seoul Tips -->
+    <dialog id="tips-modal" class="tips-modal">
+        <div class="modal-header">
+            <h2>Exploring Seoul</h2>
+            <button id="close-tips" class="close-modal-btn" aria-label="Close tips">✕</button>
+        </div>
+        <div class="modal-content">
+            <ul>
+                <li><strong>T-Money Card:</strong> Grab a T-Money transit card from any convenience store (CU, GS25, 7-Eleven) when you arrive. You can tap it for subways, buses, and even to pay for snacks.</li>
+                <li><strong>Navigation:</strong> Google Maps does not provide walking directions in South Korea. We highly recommend downloading <strong>Naver Map</strong> or <strong>KakaoMap</strong> for accurate navigation.</li>
+                <li><strong>Palaces in Hanbok:</strong> If you visit the grand Gyeongbokgung Palace, consider renting a traditional Hanbok nearby—entry to the palace is completely free if you are wearing one!</li>
+                <li><strong>Cafe Culture:</strong> Seoul has one of the most incredible cafe cultures in the world. Don't hesitate to wander down small alleyways in areas like Seongsu or Bukchon to find stunning hidden coffee shops.</li>
+            </ul>
+        </div>
+    </dialog>
+
+    <!-- Tiny script to handle the modal opening/closing smoothly -->
+    <script>
+        const modal = document.getElementById('tips-modal');
+        const openBtn = document.getElementById('open-tips');
+        const closeBtn = document.getElementById('close-tips');
+
+        // Open Modal and prevent background from scrolling
+        openBtn.addEventListener('click', () => {
+            modal.showModal();
+            document.body.style.overflow = 'hidden'; 
+        });
+
+        // Close Modal and restore background scrolling
+        closeBtn.addEventListener('click', () => {
+            modal.close();
+            document.body.style.overflow = '';
+        });
+
+        // Allow closing by clicking the blurred backdrop
+        modal.addEventListener('click', (e) => {
+            const dialogDimensions = modal.getBoundingClientRect();
+            if (
+                e.clientX < dialogDimensions.left ||
+                e.clientX > dialogDimensions.right ||
+                e.clientY < dialogDimensions.top ||
+                e.clientY > dialogDimensions.bottom
+            ) {
+                modal.close();
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
 </body>
 </html>
