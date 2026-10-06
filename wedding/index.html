@@ -87,7 +87,7 @@
             letter-spacing: -0.02em;
             margin-bottom: 16px;
             color: #FFFFFF; 
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3); /* Helps text pop on background */
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         .hero p {
@@ -186,30 +186,23 @@
             border-radius: 6px;
             background-size: cover;
             background-position: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3); /* Darker shadow for dark mode */
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3); 
             background-image: url('sunwoongak.jpeg');
         }
 
-        /* Map Embed Layouts */
-        .map-block {
+        /* Two Column Text Layout for Travel & Logistics */
+        .two-column-text {
             display: flex;
-            align-items: center;
             gap: 40px;
             margin-top: 32px;
             margin-bottom: 40px;
         }
-        
-        .map-text { flex: 1; }
-        .map-embed {
-            flex: 0 0 45%;
-            height: 250px;
-            border-radius: 6px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
-        .map-embed iframe { width: 100%; height: 100%; border: none; }
 
-        /* Elegant Expandable Accordion for Tips */
+        .two-column-text > div {
+            flex: 1;
+        }
+
+        /* Elegant Expandable Seoul Tips Section */
         details.tips-accordion {
             background-color: var(--alt-bg);
             border-radius: 8px;
@@ -282,9 +275,7 @@
             section { padding: 50px 0; }
             .split-section { flex-direction: column-reverse; gap: 32px; }
             .split-image-side { flex: none; width: 100%; height: 240px; }
-            .map-block { flex-direction: column; gap: 24px; margin-top: 16px; }
-            .map-block:nth-child(even) { flex-direction: column-reverse; } /* Keeps text above map consistently */
-            .map-embed { flex: none; width: 100%; height: 220px; }
+            .two-column-text { flex-direction: column; gap: 24px; }
             .timeline::before { left: 5px; }
             .timeline li { flex-direction: column; margin-bottom: 28px; }
             .timeline li::before { left: 1px; top: 7px; }
@@ -304,7 +295,7 @@
             <p>Sunwoongak, Seoul</p>
         </div>
         
-        <!-- Larger Glowing Down Arrow -->
+        <!-- Glowing Down Arrow -->
         <a href="#welcome" class="scroll-arrow" aria-label="Scroll down">
             <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="6 9 12 15 18 9"></polyline>
@@ -329,53 +320,7 @@
             <div class="split-image-side"></div>
         </section>
 
-        <!-- Weather & Dress Code -->
-        <section class="info-block">
-            <h2>Weather & Dress Code</h2>
-            <p>Early May is one of the most beautiful times to visit South Korea. You can expect mild, pleasant spring weather, with daytime temperatures generally hovering around 18–22°C. Evenings cool down to around 10–13°C, so a light jacket or wrap is recommended for the afterparty. Historically, early May offers clear, sunny skies with very little chance of rain.</p>
-            <p>For the celebration, we kindly request formal or semi-formal attire—suits for gentlemen and elegant dresses or equivalent for ladies. Please note that the traditional hanok venue features natural stone and wooden pathways, so we highly recommend choosing comfortable footwear for the day.</p>
-        </section>
-
-        <!-- Travel & Logistics with Google Maps -->
-        <section class="info-block">
-            <h2>Travel & Logistics</h2>
-            
-            <!-- Myeongdong Map Block -->
-            <div class="map-block" style="flex-direction: row-reverse;">
-                <div class="map-text">
-                    <h3>Where to Stay</h3>
-                    <p>For our guests traveling from Finland, we highly recommend booking your hotel in the <strong>Myeongdong</strong> area. It is centrally located and serves as the perfect base for exploring the city. Myeongdong is famous for its vibrant street food night markets, fantastic shopping, and lively atmosphere, while also offering seamless public transport connections to both historical palaces and modern districts.</p>
-                </div>
-                <div class="map-embed">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d101235.1952220468!2d126.90698188177431!3d37.55018698651817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2f7300fbfdb%3A0x6b13e13d5c64dc78!2sMyeong-dong%2C%20Jung%20District%2C%20Seoul%2C%20South%20Korea!5e0!3m2!1sen!2sqa!4v1700000000000!5m2!1sen!2sqa" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-            </div>
-
-            <!-- Venue Map Block -->
-            <div class="map-block">
-                <div class="map-text">
-                    <h3>Getting to the Venue</h3>
-                    <p>Our venue, Sunwoongak, is tucked away in the beautiful nature of northern Seoul. The easiest way to arrive via public transit is to take the subway to <strong>Bukhansan Ui</strong> station. From there, a dedicated shuttle bus will be operating to bring guests directly to the venue doors.</p>
-                    <p>For those arriving by car, there is a large, spacious parking area near the venue. A continuous shuttle service is provided from the parking lot directly to the estate.</p>
-                </div>
-                <div class="map-embed">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3159.083758793392!2d127.00762417666245!3d37.64706507191632!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357cbef90ba03817%3A0xc3f604de425143a!2sSunwoongak!5e0!3m2!1sen!2sqa!4v1700000000000!5m2!1sen!2sqa" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-            </div>
-
-            <!-- Elegant Expandable Seoul Tips Section -->
-            <details class="tips-accordion">
-                <summary>Tips for Exploring Seoul</summary>
-                <ul>
-                    <li><strong>T-Money Card:</strong> Grab a T-Money transit card from any convenience store (CU, GS25, 7-Eleven) when you arrive. You can tap it for subways, buses, and even to pay for snacks.</li>
-                    <li><strong>Navigation:</strong> Google Maps does not provide walking directions in South Korea. We highly recommend downloading <strong>Naver Map</strong> or <strong>KakaoMap</strong> for accurate navigation.</li>
-                    <li><strong>Palaces in Hanbok:</strong> If you visit the grand Gyeongbokgung Palace, consider renting a traditional Hanbok nearby—entry to the palace is completely free if you are wearing one!</li>
-                    <li><strong>Cafe Culture:</strong> Seoul has one of the most incredible cafe cultures in the world. Don't hesitate to wander down small alleyways in areas like Seongsu or Bukchon to find stunning hidden coffee shops.</li>
-                </ul>
-            </details>
-        </section>
-
-        <!-- The Schedule -->
+        <!-- The Schedule (Moved up here) -->
         <section class="info-block">
             <h2>The Day's Flow</h2>
             <p>Korean weddings have a slightly different rhythm than Finnish ones! The main event is beautifully concise, focusing on the ceremony and a shared meal in the early afternoon.</p>
@@ -406,6 +351,41 @@
                     <span class="event">Nightlife up to everyone's consideration.</span>
                 </li>
             </ul>
+        </section>
+
+        <!-- Weather & Dress Code -->
+        <section class="info-block">
+            <h2>Weather & Dress Code</h2>
+            <p>Early May is one of the most beautiful times to visit South Korea. You can expect mild, pleasant spring weather, with daytime temperatures generally hovering around 18–22°C. Evenings cool down to around 10–13°C, so a light jacket or wrap is recommended for the afterparty. Historically, early May offers clear, sunny skies with very little chance of rain.</p>
+            <p>For the celebration, we kindly request formal or semi-formal attire—suits for gentlemen and elegant dresses or equivalent for ladies. Please note that the traditional hanok venue features natural stone and wooden pathways, so we highly recommend choosing comfortable footwear for the day.</p>
+        </section>
+
+        <!-- Travel & Logistics -->
+        <section class="info-block">
+            <h2>Travel & Logistics</h2>
+            
+            <div class="two-column-text">
+                <div>
+                    <h3 style="margin-top: 0;">Where to Stay</h3>
+                    <p>For our guests traveling from Finland, we highly recommend booking your hotel in the <strong>Myeongdong</strong> area. It is centrally located and serves as the perfect base for exploring the city. Myeongdong is famous for its vibrant street food night markets, fantastic shopping, and lively atmosphere, while also offering seamless public transport connections to both historical palaces and modern districts.</p>
+                </div>
+                <div>
+                    <h3 style="margin-top: 0;">Getting to the Venue</h3>
+                    <p>Our venue, Sunwoongak, is tucked away in the beautiful nature of northern Seoul. The easiest way to arrive via public transit is to take the subway to <strong>Bukhansan Ui</strong> station. From there, a dedicated shuttle bus will be operating to bring guests directly to the venue doors.</p>
+                    <p>For those arriving by car, there is a large, spacious parking area near the venue. A continuous shuttle service is provided from the parking lot directly to the estate.</p>
+                </div>
+            </div>
+
+            <!-- Elegant Expandable Seoul Tips Section -->
+            <details class="tips-accordion">
+                <summary>Tips for Exploring Seoul</summary>
+                <ul>
+                    <li><strong>T-Money Card:</strong> Grab a T-Money transit card from any convenience store (CU, GS25, 7-Eleven) when you arrive. You can tap it for subways, buses, and even to pay for snacks.</li>
+                    <li><strong>Navigation:</strong> Google Maps does not provide walking directions in South Korea. We highly recommend downloading <strong>Naver Map</strong> or <strong>KakaoMap</strong> for accurate navigation.</li>
+                    <li><strong>Palaces in Hanbok:</strong> If you visit the grand Gyeongbokgung Palace, consider renting a traditional Hanbok nearby—entry to the palace is completely free if you are wearing one!</li>
+                    <li><strong>Cafe Culture:</strong> Seoul has one of the most incredible cafe cultures in the world. Don't hesitate to wander down small alleyways in areas like Seongsu or Bukchon to find stunning hidden coffee shops.</li>
+                </ul>
+            </details>
         </section>
 
         <!-- Afterparty -->
