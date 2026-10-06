@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juuso & Bo Min - Wedding 2027</title>
+    
+    <!-- Load Tailwind CSS for layout and spacing -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Load Elegant Serif Fonts (Playfair Display for headers, Noto Serif KR for Korean, Lora for body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Noto+Serif+KR:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-bg: #FCFBF9;
+            --color-text: #2C2C2C;
+            --color-accent: #8A7F73;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: 'Lora', 'Noto Serif KR', serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, .heading-font {
+            font-family: 'Playfair Display', 'Noto Serif KR', serif;
+            font-weight: 500;
+        }
+
+        /* Language Toggle Logic */
+        body[data-lang="fi"] .lang-ko { display: none !important; }
+        body[data-lang="ko"] .lang-fi { display: none !important; }
+
+        /* Smooth transitions */
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 
+         * ==========================================
+         * BACKGROUND IMAGE PLACEHOLDERS
+         * ==========================================
+         * Add your background image URLs here later!
+         * Remove the background-color and uncomment the background-image lines.
+         */
+        
+        .bg-hero-placeholder {
+            /* background-image: url('images/your-hero-image.jpg'); */
+            background-color: #EFEBE7; /* Remove this when adding image */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .bg-venue-placeholder {
+            /* background-image: url('images/sunwoongak-venue.jpg'); */
+            background-color: #EAE6E1; /* Remove this when adding image */
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* Decorative line */
+        .divider {
+            width: 1px;
+            height: 60px;
+            background-color: var(--color-accent);
+            margin: 2rem auto;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<!-- Default language set to Finnish ('fi') -->
+<body data-lang="fi" class="text-center">
+
+    <header class="fixed top-0 w-full z-50 p-4 flex justify-end">
+        <button id="langToggleBtn" onclick="toggleLanguage()" class="bg-white/80 backdrop-blur-sm border border-gray-300 px-4 py-2 rounded-full text-sm tracking-widest uppercase hover:bg-white transition shadow-sm">
+            FI / KO
+        </button>
+    </header>
+
+    <section class="relative h-screen flex flex-col items-center justify-center bg-hero-placeholder px-6">
+        <!-- Optional overlay to make text readable if you add a dark background image -->
+        <div class="absolute inset-0 bg-white/30"></div> 
+        
+        <div class="relative z-10 fade-in">
+            <p class="text-sm tracking-[0.3em] uppercase text-gray-700 mb-6 lang-fi">Tervetuloa häihimme</p>
+            <p class="text-sm tracking-[0.3em] uppercase text-gray-700 mb-6 lang-ko">저희 결혼식에 초대합니다</p>
+            
+            <h1 class="text-5xl md:text-7xl mb-4 lang-fi">Juuso & Bo Min</h1>
+            <h1 class="text-5xl md:text-7xl mb-4 lang-ko">유소 & 보민</h1>
+            
+            <p class="text-lg md:text-xl italic mt-6 lang-fi">Juhlimme rakkauttamme vuonna 2027</p>
+            <p class="text-lg md:text-xl mt-6 lang-ko">2027년, 저희 두 사람의 새로운 시작을 함께해 주세요</p>
+            
+            <div class="divider"></div>
+            
+            <p class="text-md uppercase tracking-widest lang-fi">Soul, Etelä-Korea</p>
+            <p class="text-md uppercase tracking-widest lang-ko">대한민국, 서울</p>
+        </div>
+    </section>
+
+    <section class="py-24 px-6 max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl mb-12 lang-fi">Juhlapaikka</h2>
+        <h2 class="text-3xl md:text-4xl mb-12 lang-ko">예식장 안내</h2>
+        
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="aspect-square bg-venue-placeholder rounded-t-full shadow-lg"></div>
+            <div class="text-left flex flex-col justify-center">
+                <h3 class="text-2xl mb-4 heading-font">Sunwoongak</h3>
+                <h3 class="text-2xl mb-4 heading-font lang-ko">선운각</h3>
+                
+                <p class="mb-6 leading-relaxed text-gray-600 lang-fi">
+                    Vihkiminen ja hääjuhla pidetään kauniissa Sunwoongakissa, perinteisessä korealaisessa Hanok-miljöössä, jota ympäröi Soulin upea luonto.
+                </p>
+                <p class="mb-6 leading-relaxed text-gray-600 lang-ko">
+                    북한산의 아름다운 자연이 어우러진 전통 한옥, 선운각에서 예식을 올립니다. 귀한 걸음 하시어 축복해 주시면 감사하겠습니다.
+                </p>
+                
+                <p class="text-sm tracking-wide text-gray-500 uppercase lang-fi">Tarkempi osoite ja saapumisohjeet päivitetään lähempänä juhlaa.</p>
+                <p class="text-sm tracking-wide text-gray-500 lang-ko">자세한 주소와 오시는 길은 추후 업데이트 될 예정입니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6 bg-[#F4F2EF]">
+        <div class="max-w-2xl mx-auto">
+            <h2 class="text-3xl md:text-4xl mb-16 lang-fi">Ohjelma</h2>
+            <h2 class="text-3xl md:text-4xl mb-16 lang-ko">예식 순서</h2>
+            
+            <div class="space-y-12">
+                <!-- Event 1 -->
+                <div>
+                    <p class="text-sm tracking-widest text-[#8A7F73] mb-2">15:00</p>
+                    <h3 class="text-xl mb-2 lang-fi">Tervetulomalja</h3>
+                    <h3 class="text-xl mb-2 lang-ko">하객 맞이 및 웰컴 드링크</h3>
+                </div>
+                <!-- Event 2 -->
+                <div>
+                    <p class="text-sm tracking-widest text-[#8A7F73] mb-2">16:00</p>
+                    <h3 class="text-xl mb-2 lang-fi">Vihkitilaisuus</h3>
+                    <h3 class="text-xl mb-2 lang-ko">본식</h3>
+                </div>
+                <!-- Event 3 -->
+                <div>
+                    <p class="text-sm tracking-widest text-[#8A7F73] mb-2">17:30</p>
+                    <h3 class="text-xl mb-2 lang-fi">Hääillallinen & Juhla</h3>
+                    <h3 class="text-xl mb-2 lang-ko">피로연 및 식사</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32 px-6">
+        <div class="max-w-xl mx-auto border border-gray-200 p-12 bg-white shadow-sm">
+            <h2 class="text-3xl md:text-4xl mb-6 lang-fi">Ilmoittautuminen</h2>
+            <h2 class="text-3xl md:text-4xl mb-6 lang-ko">참석 여부 확인</h2>
+            
+            <p class="mb-8 text-gray-600 lang-fi">
+                Toivomme, että pääset juhlistamaan tätä tärkeää päivää kanssamme. Pyydämme ystävällisesti ilmoittamaan osallistumisestasi ja mahdollisista erityisruokavalioista alle linkitetyn lomakkeen kautta.
+            </p>
+            <p class="mb-8 text-gray-600 lang-ko">
+                저희의 뜻깊은 날, 함께 자리해 주시면 더없는 기쁨이겠습니다. 원활한 예식 준비를 위해 참석 여부를 아래 버튼을 통해 알려주시면 감사하겠습니다.
+            </p>
+            
+            <!-- Replace "#" with your actual Google Form or RSVP link later -->
+            <a href="#" class="inline-block bg-[#2C2C2C] text-white px-8 py-3 tracking-widest text-sm uppercase hover:bg-black transition lang-fi">
+                RSVP Lomake
+            </a>
+            <a href="#" class="inline-block bg-[#2C2C2C] text-white px-8 py-3 tracking-widest text-sm lang-ko">
+                참석 여부 전달하기
+            </a>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center text-gray-400 text-sm">
+        <p class="lang-fi">Odotamme innolla näkevämme teidät!</p>
+        <p class="lang-ko">그날 뵙기를 고대합니다!</p>
+        <p class="mt-4">Juuso & Bo Min • 2027</p>
+    </footer>
+
+    <script>
+        function toggleLanguage() {
+            const body = document.body;
+            const currentLang = body.getAttribute('data-lang');
+            
+            if (currentLang === 'fi') {
+                body.setAttribute('data-lang', 'ko');
+            } else {
+                body.setAttribute('data-lang', 'fi');
+            }
+        }
+    </script>
+</body>
+</html>
