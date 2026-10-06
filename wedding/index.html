@@ -70,13 +70,13 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Upgraded Hero Section Wrapper */
+        /* Boxed Hero Section Wrapper */
         .hero-wrapper {
             height: 100vh;
-            padding: 24px; /* Leaves the elegant olive margin around the hero */
+            padding: 24px; 
             box-sizing: border-box;
             width: 100%;
-            max-width: 1200px; /* Limits max width on ultra-wide screens */
+            max-width: 1200px; 
             margin: 0 auto;
         }
 
@@ -95,7 +95,7 @@
             background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('couple.jpg');
             background-size: cover;
             background-position: center; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.25); /* Deep shadow for the image */
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25); 
             overflow: hidden;
         }
 
@@ -256,12 +256,12 @@
             max-height: 85vh;
             padding: 0;
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-            margin: auto; /* Centers the dialog */
+            margin: auto; 
         }
         
         .tips-modal::backdrop {
             background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(4px); /* Frosted glass effect */
+            backdrop-filter: blur(4px); 
         }
 
         .modal-header {
@@ -302,13 +302,28 @@
             overflow-y: auto;
         }
 
+        /* Elegant inner headers for the modal */
+        .modal-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--text-main);
+            margin: 24px 0 12px 0;
+            border-bottom: 1px solid var(--divider);
+            padding-bottom: 8px;
+        }
+
+        .modal-content h3:first-child {
+            margin-top: 0;
+        }
+
         .modal-content ul {
             padding-left: 20px;
             color: var(--text-muted);
             font-size: 1.05rem;
-            margin: 0;
+            margin: 0 0 24px 0;
         }
         
+        .modal-content ul:last-child { margin-bottom: 0; }
         .modal-content li { margin-bottom: 16px; line-height: 1.8; }
         .modal-content strong { color: var(--text-main); }
 
@@ -335,7 +350,7 @@
 
         /* Mobile Adjustments */
         @media (max-width: 700px) {
-            .hero-wrapper { padding: 16px; } /* Slightly smaller margin on mobile */
+            .hero-wrapper { padding: 16px; } 
             .hero h1 { font-size: 3.5rem; }
             
             .container section { 
@@ -490,16 +505,43 @@
             <button id="close-tips" class="close-modal-btn" aria-label="Close tips">✕</button>
         </div>
         <div class="modal-content">
+            
+            <h3>Getting Around</h3>
             <ul>
-                <li><strong>T-Money Card:</strong> Grab a T-Money transit card from any convenience store (CU, GS25, 7-Eleven) when you arrive. You can tap it for subways, buses, and even to pay for snacks.</li>
-                <li><strong>Navigation:</strong> Google Maps does not provide walking directions in South Korea. We highly recommend downloading <strong>Naver Map</strong> or <strong>KakaoMap</strong> for accurate navigation.</li>
-                <li><strong>Palaces in Hanbok:</strong> If you visit the grand Gyeongbokgung Palace, consider renting a traditional Hanbok nearby—entry to the palace is completely free if you are wearing one!</li>
-                <li><strong>Cafe Culture:</strong> Seoul has one of the most incredible cafe cultures in the world. Don't hesitate to wander down small alleyways in areas like Seongsu or Bukchon to find stunning hidden coffee shops.</li>
+                <li><strong>Navigate like a Local:</strong> Google Maps does not provide walking directions in Korea. We highly recommend downloading <strong>Naver Map</strong> (or KakaoMap) before you arrive—it's essential for navigating the city!</li>
+                <li><strong>T-Money Card:</strong> The easiest way to pay for public transit. You can buy and top up a T-Money card (cash only) at any convenience store like CU, GS25, or 7-Eleven.</li>
+                <li><strong>Airport to City:</strong> Trains (AREX) and Airport Limousine buses are excellent ways to get from Incheon Airport to Seoul. However, because local cards are often needed at automated kiosks, buying your initial tickets at the manned airport counters with cash or a credit card might be easiest.</li>
+                <li><strong>Taxis:</strong> <strong>Uber</strong> works perfectly in Seoul. It automatically dispatches local "UT" taxis and charges your linked card, skipping any language or payment barriers entirely.</li>
             </ul>
+
+            <h3>Sights & Culture</h3>
+            <ul>
+                <li><strong>Palaces & Hanboks:</strong> A visit to <strong>Gyeongbokgung Palace</strong> is highly recommended. If you rent and wear a traditional <em>hanbok</em> from one of the nearby rental shops, your entry to the palace is completely free! (Be sure to check opening hours, as palaces often close on Tuesdays).</li>
+                <li><strong>Hanok Village:</strong> Wander through the beautifully preserved <strong>Bukchon Hanok Village</strong> to see hundreds of traditional Korean homes nestled right in the middle of the modern city.</li>
+                <li><strong>Namsan Seoul Tower:</strong> For breathtaking views of the massive cityscape, head up to the base level of Namsan Tower. The viewing decks at the base are free and offer a stunning panorama, especially at sunset.</li>
+            </ul>
+
+            <h3>Food & Drink</h3>
+            <ul>
+                <li><strong>Korean BBQ & Delicacies:</strong> <strong>Korean Barbecue</strong> is an absolute must, and fantastic restaurants are incredibly easy to find on almost every corner. Don’t miss out on trying other local favorites like Korean fried chicken, bibimbap, and street food.</li>
+                <li><strong>Cafe Culture:</strong> Seoul’s cafe scene is legendary. Amazing breakfast and brunch cafes are tucked into every neighborhood. Just use Naver Map to search "Cafe" around your location, or explore trendy areas like Seongsu-dong or Yeonnam-dong.</li>
+            </ul>
+
+            <h3>Shopping & Nightlife</h3>
+            <ul>
+                <li><strong>Myeongdong Shopping:</strong> Myeongdong is shopping heaven. Visit the massive Lotte Department Store and the surrounding streets. Remember to carry your physical passport—many stores offer immediate tax-free discounts right at the checkout.</li>
+                <li><strong>Itaewon:</strong> For nightlife and partying, the vibrant streets behind the Hamilton Hotel in <strong>Itaewon</strong> are famous for a fantastic mix of bars, lounges, and clubs.</li>
+            </ul>
+
+            <h3>Helpful Extras</h3>
+            <ul>
+                <li><strong>Translation:</strong> Download the <strong>Papago</strong> app for the most accurate Korean-to-English translations (far superior to Google Translate here).</li>
+                <li><strong>Tipping:</strong> There is absolutely <strong>no tipping</strong> in South Korea. It is not expected in restaurants, taxis, or hotels!</li>
+            </ul>
+
         </div>
     </dialog>
 
-    <!-- Tiny script to handle the modal opening/closing smoothly -->
     <script>
         const modal = document.getElementById('tips-modal');
         const openBtn = document.getElementById('open-tips');
