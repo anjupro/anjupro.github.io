@@ -8,13 +8,13 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
 
         :root {
-            --bg-color: #FAFAFA;
+            --bg-color: #FCFBF8; /* A warmer, elegant alabaster tone */
+            --alt-bg: #F5F4F0; /* Slightly darker tone for the RSVP block */
             --text-main: #2C2C2C;
             --text-muted: #666666;
             --accent: #D4AF37; 
         }
 
-        /* Enables smooth gliding when the arrow is clicked */
         html {
             scroll-behavior: smooth;
         }
@@ -41,9 +41,9 @@
             padding: 0 24px;
         }
 
+        /* Removed the full-width grey borders for a cleaner look */
         section {
-            padding: 60px 0;
-            border-bottom: 1px solid #EAEAEA;
+            padding: 70px 0;
             opacity: 0;
             animation: fadeInUp 0.8s ease-out forwards;
         }
@@ -58,7 +58,6 @@
         section:nth-child(8) { animation-delay: 0.8s; }
         
         section:last-child {
-            border-bottom: none;
             padding-bottom: 100px;
         }
 
@@ -73,18 +72,17 @@
             }
         }
 
-        /* Hero Section - Now set to 100% of screen height */
+        /* Hero Section */
         .hero {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* 100% of the viewport height */
+            height: 100vh; 
             text-align: center;
             padding: 0 24px;
-            border-bottom: 1px solid #EAEAEA; 
             position: relative;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('couple.jpg');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('couple.jpeg');
             background-size: cover;
             background-position: center; 
         }
@@ -103,12 +101,12 @@
             letter-spacing: 0.05em;
         }
 
-        /* The Glowing Scroll Arrow */
+        /* Upgraded Glowing Scroll Arrow */
         .scroll-arrow {
             position: absolute;
             bottom: 40px;
             left: 50%;
-            margin-left: -16px; /* perfectly centers the 32px wide icon */
+            margin-left: -22px; /* Centers the new 44px icon */
             color: #FFFFFF;
             text-decoration: none;
             animation: scrollPulse 2.5s infinite;
@@ -122,18 +120,18 @@
         @keyframes scrollPulse {
             0% {
                 transform: translateY(0);
-                opacity: 0.5;
-                filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2));
+                opacity: 0.6;
+                filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3));
             }
             50% {
-                transform: translateY(10px);
+                transform: translateY(12px);
                 opacity: 1;
-                filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+                filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.95)); /* Stronger, wider glow */
             }
             100% {
                 transform: translateY(0);
-                opacity: 0.5;
-                filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2));
+                opacity: 0.6;
+                filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3));
             }
         }
 
@@ -142,10 +140,32 @@
             margin-bottom: 0; 
         }
 
-        .info-block h2 {
+        /* Added beautiful gold accents under all section titles */
+        .info-block h2, .split-section h2 {
             font-size: 2.4rem;
             margin-bottom: 24px;
             color: var(--text-main);
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .info-block h2::after, .split-section h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        /* Centers the gold line for centered text blocks like RSVP and Welcome */
+        .centered-block {
+            text-align: center;
+        }
+        .centered-block h2::after {
+            left: 50%;
+            margin-left: -20px;
         }
 
         .info-block h3 {
@@ -178,39 +198,57 @@
             color: var(--accent);
         }
 
-        /* Venue Section */
-        .venue-section {
+        /* Reusable Split Layout for Venue & Travel Sections */
+        .split-section {
             display: flex;
             align-items: center;
             gap: 40px;
         }
 
-        .venue-text {
+        /* This reverses the flex direction so the image is on the left */
+        .split-reversed {
+            flex-direction: row-reverse;
+        }
+
+        .split-text {
             flex: 1;
         }
 
-        .venue-text h2 {
-            font-size: 2.4rem;
-            margin-bottom: 24px;
-            color: var(--text-main);
+        .split-text h2 {
             font-family: 'Playfair Display', serif;
             font-weight: 400;
         }
 
-        .venue-text p {
+        .split-text p {
             color: var(--text-muted);
             font-size: 1.05rem;
-            margin: 0;
+            margin: 0 0 16px 0;
         }
 
-        .venue-image-side {
+        .split-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .split-image-side {
             flex: 0 0 45%; 
-            height: 280px;
+            height: 320px;
             border-radius: 6px;
-            background-image: url('sunwoongak.jpeg');
             background-size: cover;
             background-position: center;
             box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            background-color: #E6E6E6; /* Fallback placeholder color */
+        }
+
+        .img-venue {
+            background-image: url('sunwoongak.jpeg');
+        }
+
+        .img-seoul {
+            /* TO DO LATER: Upload a picture of Seoul/Myeongdong and add the URL here */
+            /* background-image: url('seoul.jpeg'); */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* Visual Timeline */
@@ -266,23 +304,30 @@
             font-size: 1.05rem;
         }
 
+        /* The Custom RSVP Block Background */
+        .rsvp-block {
+            background-color: var(--alt-bg);
+            border-radius: 8px;
+            padding: 60px 40px;
+            margin-top: 40px;
+        }
+
         /* Mobile Adjustments */
         @media (max-width: 700px) {
             .hero h1 {
                 font-size: 3.5rem; 
             }
             .hero {
-                /* We keep it at 100vh for mobile too, just adjust padding */
                 padding: 0 24px;
             }
             section {
                 padding: 50px 0; 
             }
-            .venue-section {
-                flex-direction: column-reverse; 
+            .split-section, .split-reversed {
+                flex-direction: column-reverse; /* Images always stack above text on mobile */
                 gap: 32px;
             }
-            .venue-image-side {
+            .split-image-side {
                 flex: none;
                 width: 100%;
                 height: 240px;
@@ -307,6 +352,9 @@
             .timeline .event {
                 margin-left: 25px; 
             }
+            .rsvp-block {
+                padding: 40px 24px;
+            }
         }
     </style>
 </head>
@@ -320,9 +368,9 @@
             <p>Sunwoongak, Seoul</p>
         </div>
         
-        <!-- Glowing Down Arrow linking to the welcome section -->
+        <!-- Larger Glowing Down Arrow -->
         <a href="#welcome" class="scroll-arrow" aria-label="Scroll down">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
         </a>
@@ -330,19 +378,19 @@
 
     <div class="container">
         
-        <!-- Welcome Section (Added id="welcome" for the arrow link to jump to) -->
-        <section class="info-block" id="welcome">
+        <!-- Welcome Section -->
+        <section class="info-block centered-block" id="welcome">
             <h2>Welcome</h2>
             <p>We are overjoyed to welcome you to South Korea to celebrate our marriage. On the 1st of May, 2027, we will gather with our closest family and friends to exchange our vows and begin our next chapter together. Bringing our two cultures and families together in Seoul is a dream come true, and having you there to share in this special day would mean the world to us.</p>
         </section>
 
-        <!-- The Venue -->
-        <section class="venue-section">
-            <div class="venue-text">
+        <!-- The Venue (Image on Right) -->
+        <section class="split-section">
+            <div class="split-text">
                 <h2>The Venue</h2>
                 <p>Nestled at the foothills of the Bukhansan mountains, Sunwoongak is a stunning traditional Korean estate, known as a <em>hanok</em>. With its sweeping wooden rooflines and serene natural surroundings, it offers a peaceful retreat from the bustling city of Seoul. We are thrilled to share this beautiful piece of Korean heritage with you as we celebrate our marriage.</p>
             </div>
-            <div class="venue-image-side"></div>
+            <div class="split-image-side img-venue"></div>
         </section>
 
         <!-- Weather & Dress Code -->
@@ -352,16 +400,22 @@
             <p>For the celebration, we kindly request formal or semi-formal attire—suits for gentlemen and elegant dresses or equivalent for ladies. Please note that the traditional hanok venue features natural stone and wooden pathways, so we highly recommend choosing comfortable footwear for the day.</p>
         </section>
 
-        <!-- Travel & Accommodation -->
-        <section class="info-block">
-            <h2>Travel & Logistics</h2>
-            
-            <h3>Where to Stay</h3>
-            <p>For our guests traveling from Finland, we highly recommend booking your hotel in the <strong>Myeongdong</strong> area. It is centrally located and serves as the perfect base for exploring the city. Myeongdong is famous for its vibrant street food night markets, fantastic shopping, and lively atmosphere, while also offering seamless public transport connections to both historical palaces and modern districts.</p>
+        <!-- Travel & Logistics (Image on Left) -->
+        <section class="split-section split-reversed">
+            <div class="split-text">
+                <h2>Travel & Logistics</h2>
+                
+                <h3>Where to Stay</h3>
+                <p>For our guests traveling from Finland, we highly recommend booking your hotel in the <strong>Myeongdong</strong> area. It is centrally located and serves as the perfect base for exploring the city. Myeongdong is famous for its vibrant street food night markets, fantastic shopping, and lively atmosphere, while also offering seamless public transport connections to both historical palaces and modern districts.</p>
 
-            <h3>Getting to the Venue</h3>
-            <p>Our venue, Sunwoongak, is tucked away in the beautiful nature of northern Seoul. The easiest way to arrive via public transit is to take the subway to <strong>Bukhansan Ui</strong> station. From there, a dedicated shuttle bus will be operating to bring guests directly to the venue doors.</p>
-            <p>For those arriving by car, there is a large, spacious parking area near the venue. A continuous shuttle service is provided from the parking lot directly to the estate.</p>
+                <h3>Getting to the Venue</h3>
+                <p>Our venue, Sunwoongak, is tucked away in the beautiful nature of northern Seoul. The easiest way to arrive via public transit is to take the subway to <strong>Bukhansan Ui</strong> station. From there, a dedicated shuttle bus will be operating to bring guests directly to the venue doors.</p>
+                <p>For those arriving by car, there is a large, spacious parking area near the venue. A continuous shuttle service is provided from the parking lot directly to the estate.</p>
+            </div>
+            <!-- The placeholder box for your Seoul/Myeongdong photo -->
+            <div class="split-image-side img-seoul">
+                <span style="color: #999; font-style: italic; font-family: 'Playfair Display', serif; font-size: 0.9rem;">[ Seoul Photo Placeholder ]</span>
+            </div>
         </section>
 
         <!-- The Schedule -->
@@ -410,8 +464,8 @@
             <p>If you would still like to bless our marriage with a gift, a monetary contribution towards our future together would be deeply appreciated. This can be sent conveniently via MobilePay or bank transfer.</p>
         </section>
 
-        <!-- RSVP -->
-        <section class="info-block" style="border-bottom: none; text-align: center; padding-top: 80px;">
+        <!-- RSVP Block with custom background -->
+        <section class="info-block centered-block rsvp-block">
             <h2>RSVP</h2>
             <p>Please kindly confirm your attendance, whether you plan to join us for the evening afterparty, and any dietary requirements you may have.</p>
             <p style="margin-top: 24px;">
