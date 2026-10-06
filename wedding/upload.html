@@ -25,7 +25,7 @@
             color: var(--text-main);
             font-family: 'Inter', 'Noto Serif KR', sans-serif;
             -webkit-font-smoothing: antialiased;
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
         h1, h2, h3 {
@@ -35,17 +35,17 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
-            padding: 40px 24px;
+            padding: 30px 20px;
         }
 
-        /* Floating Card Design matching the invitation pages */
+        /* Floating Card Design */
         .container section {
             background-color: var(--alt-bg);
             border-radius: 12px;
-            padding: 48px 40px;
-            margin-bottom: 32px;
+            padding: 36px 32px;
+            margin-bottom: 24px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
             animation: fadeInUp 0.8s ease-out forwards;
         }
@@ -57,12 +57,13 @@
 
         .centered-block { text-align: center; }
 
+        /* Unified Title Styling */
         h2 {
-            font-size: 2.2rem;
-            margin-bottom: 20px;
+            font-size: 1.8rem;
+            margin-bottom: 12px;
             color: var(--text-main);
             position: relative;
-            padding-bottom: 16px;
+            padding-bottom: 14px;
         }
 
         .centered-block h2::after {
@@ -78,31 +79,35 @@
 
         p {
             color: var(--text-muted);
-            margin-bottom: 12px;
-            font-size: 1.05rem;
+            margin: 0 0 6px 0;
+            font-size: 1rem;
         }
 
         .ko-sub {
             font-family: 'Noto Serif KR', serif;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
-            margin-top: -4px;
-            margin-bottom: 16px;
+            margin: 0;
         }
 
-        /* Inset box style for inputs and tips matching the Seoul tips box */
+        /* Inset box style */
         .inset-box {
             background-color: var(--inset-bg);
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 8px;
-            padding: 24px;
-            margin-top: 16px;
+            padding: 20px;
+            margin-top: 12px;
+            text-align: left;
+        }
+
+        .input-group {
+            margin-bottom: 24px;
             text-align: left;
         }
 
         .input-group label {
             display: block;
-            font-size: 1.05rem;
+            font-size: 1rem;
             color: var(--text-main);
             margin-bottom: 4px;
             font-weight: 600;
@@ -110,20 +115,20 @@
 
         .label-ko {
             font-family: 'Noto Serif KR', serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             display: block;
         }
 
         .name-input {
             width: 100%;
-            padding: 14px 16px;
-            background-color: var(--alt-bg);
+            padding: 12px 16px;
+            background-color: var(--inset-bg);
             border: 1px solid rgba(212, 175, 55, 0.3);
             border-radius: 8px;
             color: var(--text-main);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             box-sizing: border-box;
             outline: none;
             transition: border-color 0.3s ease;
@@ -135,17 +140,17 @@
         }
 
         .warning-text {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         .warning-text-ko {
             font-family: 'Noto Serif KR', serif;
-            font-size: 0.9rem;
-            margin-top: 12px;
+            font-size: 0.85rem;
+            margin-top: 8px;
             color: var(--text-muted);
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         /* The Custom Upload Button */
@@ -154,7 +159,6 @@
             overflow: hidden;
             display: inline-block;
             width: 100%;
-            margin-top: 24px;
         }
 
         .btn {
@@ -164,14 +168,14 @@
             background-color: var(--inset-bg);
             color: var(--accent);
             border: 1px solid var(--accent);
-            padding: 18px 24px;
+            padding: 16px 20px;
             border-radius: 8px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             width: 100%;
             box-sizing: border-box;
             cursor: pointer;
             transition: all 0.3s ease;
-            gap: 16px;
+            gap: 14px;
         }
 
         .btn:hover { background-color: #353D2E; }
@@ -184,7 +188,7 @@
 
         .btn-text-ko {
             font-family: 'Noto Serif KR', serif;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 300;
             color: var(--text-muted);
         }
@@ -202,7 +206,7 @@
         /* Back Button */
         .back-container {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
         }
 
         .back-link {
@@ -211,7 +215,7 @@
             text-decoration: none;
             border-bottom: 1px solid transparent;
             transition: all 0.3s ease;
-            font-size: 1.05rem;
+            font-size: 1rem;
         }
 
         .back-link:hover {
@@ -222,18 +226,18 @@
         /* Loading UI */
         #loading-ui {
             display: none;
-            margin-top: 24px;
+            margin-top: 20px;
             text-align: center;
         }
 
         .spinner {
             border: 3px solid rgba(212, 175, 55, 0.2);
-            width: 30px;
-            height: 30px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             border-left-color: var(--accent);
             animation: spin 1s linear infinite;
-            margin: 0 auto 16px auto;
+            margin: 0 auto 12px auto;
         }
 
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -241,18 +245,18 @@
         #status-text {
             color: var(--accent);
             font-weight: 600;
-            margin-bottom: 4px;
-            font-size: 1.1rem;
+            margin-bottom: 2px;
+            font-size: 1rem;
         }
         
         #progress-text {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         @media (max-width: 700px) {
-            .container { padding: 20px 16px; }
-            .container section { padding: 36px 24px; }
+            .container { padding: 16px 12px; }
+            .container section { padding: 28px 20px; }
         }
     </style>
 </head>
@@ -260,43 +264,25 @@
 
     <div class="container">
         
-        <!-- Header Section Card -->
+        <!-- Header Section -->
         <section class="info-block centered-block">
-            <h2>Share Photos</h2>
-            <div class="ko-sub">사진 공유하기</div>
-            <p>Upload your favorite memories from the day directly to our wedding album.</p>
-            <div class="ko-sub" style="margin-bottom: 0;">예식의 소중한 순간들을 담은 사진을 웨딩 앨범에 바로 업로드해 주세요.</div>
+            <h2>Share Photos / 사진 공유하기</h2>
+            <p>Upload your favorite memories directly to our wedding album.</p>
+            <p class="ko-sub">예식의 소중한 순간들을 웨딩 앨범에 바로 업로드해 주세요.</p>
         </section>
 
-        <!-- Name Input Card -->
+        <!-- Main Action Section (Name + Upload Button in one box) -->
         <section class="info-block">
             <div class="input-group">
                 <label for="uploader-name">Your Name / Family Name</label>
                 <span class="label-ko">성함 또는 가족 성함 (보내주신 분을 확인하기 위함입니다)</span>
-                <div class="inset-box">
-                    <input type="text" id="uploader-name" class="name-input" placeholder="e.g. Juuso" required />
-                </div>
-            </div>
-        </section>
-
-        <!-- Tips & Upload Card -->
-        <section class="info-block">
-            <h2>Important Notes</h2>
-            <div class="ko-sub">안내 사항</div>
-            
-            <div class="inset-box">
-                <div class="warning-text">
-                    <em>💡 Tip: Please enter your name so we know who sent the photos. Uploading raw files may take a few moments—we recommend using fast Wi-Fi and keeping your screen awake!</em>
-                </div>
-                <div class="warning-text-ko">
-                    <em>💡 팁: 사진을 보내주신 분을 알 수 있도록 성함을 먼저 입력해 주세요. 원본 파일 전송으로 인해 다소 시간이 걸릴 수 있으니, 빠른 와이파이(Wi-Fi) 환경에서 화면을 켠 채로 진행해 주시는 것을 권장합니다!</em>
-                </div>
+                <input type="text" id="uploader-name" class="name-input" placeholder="e.g. Juuso" required />
             </div>
 
             <!-- Upload Interface -->
             <div id="upload-interface" class="upload-btn-wrapper">
                 <button class="btn" id="select-btn">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
                         <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
                         <circle cx="12" cy="13" r="4"></circle>
                     </svg>
@@ -313,6 +299,19 @@
                 <div class="spinner"></div>
                 <div id="status-text">Uploading... / 업로드 중...</div>
                 <div id="progress-text">Preparing photos</div>
+            </div>
+        </section>
+
+        <!-- Important Notes Section (Moved to Bottom) -->
+        <section class="info-block">
+            <h3 style="font-size: 1.2rem; margin-bottom: 8px; color: var(--text-main);">Important Notes / 안내 사항</h3>
+            <div class="inset-box">
+                <div class="warning-text">
+                    <em>💡 Please enter your name first. Raw files may take a few moments—fast Wi-Fi and keeping your screen awake is recommended!</em>
+                </div>
+                <div class="warning-text-ko">
+                    <em>💡 성함을 먼저 입력해 주세요. 원본 전송은 다소 시간이 걸릴 수 있으니, 빠른 와이파이 환경에서 화면을 켠 채로 진행해 주세요!</em>
+                </div>
             </div>
         </section>
 
