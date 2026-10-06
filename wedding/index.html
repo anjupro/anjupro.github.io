@@ -9,8 +9,9 @@
 
         :root {
             /* Elegant Dark Olive Palette */
-            --bg-color: #384030; 
-            --alt-bg: #404837; 
+            --bg-color: #384030; /* Deep Olive Background */
+            --alt-bg: #434B3A; /* Slightly lighter Olive for the cards */
+            --inset-bg: #303729; /* Darker tone for the accordion */
             --text-main: #F4F1EA; /* Cream */
             --text-muted: #C0C3B7; /* Soft Sage */
             --accent: #D4AF37; /* Gold */
@@ -43,24 +44,30 @@
             padding: 0 24px;
         }
 
-        section {
-            padding: 70px 0;
+        /* Floating Card Design for all Sections */
+        .container section {
+            background-color: var(--alt-bg);
+            border-radius: 12px;
+            padding: 56px 48px;
+            margin-bottom: 32px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
             opacity: 0;
             animation: fadeInUp 0.8s ease-out forwards;
         }
+
+        /* Spacing for the first and last cards */
+        .container section:first-of-type { margin-top: 60px; }
+        .container section:last-of-type { margin-bottom: 100px; }
         
-        section:nth-child(1) { animation-delay: 0.1s; }
-        section:nth-child(2) { animation-delay: 0.2s; }
-        section:nth-child(3) { animation-delay: 0.3s; }
-        section:nth-child(4) { animation-delay: 0.4s; }
-        section:nth-child(5) { animation-delay: 0.5s; }
-        section:nth-child(6) { animation-delay: 0.6s; }
-        section:nth-child(7) { animation-delay: 0.7s; }
-        section:nth-child(8) { animation-delay: 0.8s; }
-        
-        section:last-child {
-            padding-bottom: 100px;
-        }
+        /* Staggered Animations */
+        .container section:nth-child(1) { animation-delay: 0.1s; }
+        .container section:nth-child(2) { animation-delay: 0.2s; }
+        .container section:nth-child(3) { animation-delay: 0.3s; }
+        .container section:nth-child(4) { animation-delay: 0.4s; }
+        .container section:nth-child(5) { animation-delay: 0.5s; }
+        .container section:nth-child(6) { animation-delay: 0.6s; }
+        .container section:nth-child(7) { animation-delay: 0.7s; }
+        .container section:nth-child(8) { animation-delay: 0.8s; }
 
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
@@ -87,7 +94,7 @@
             letter-spacing: -0.02em;
             margin-bottom: 16px;
             color: #FFFFFF; 
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3); 
         }
 
         .hero p {
@@ -118,9 +125,7 @@
             100% { transform: translateY(0); opacity: 0.6; filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3)); }
         }
 
-        /* Information Blocks */
-        .info-block { margin-bottom: 0; }
-
+        /* Information Blocks Formatting */
         .info-block h2, .split-section h2 {
             font-size: 2.4rem;
             margin-bottom: 24px;
@@ -176,7 +181,7 @@
         }
 
         .split-text { flex: 1; }
-        .split-text h2 { font-family: 'Playfair Display', serif; font-weight: 400; }
+        .split-text h2 { font-family: 'Playfair Display', serif; font-weight: 400; margin-top: 0; }
         .split-text p { color: var(--text-muted); font-size: 1.05rem; margin: 0 0 16px 0; }
         .split-text p:last-child { margin-bottom: 0; }
 
@@ -186,7 +191,7 @@
             border-radius: 6px;
             background-size: cover;
             background-position: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3); 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2); 
             background-image: url('sunwoongak.jpeg');
         }
 
@@ -198,16 +203,15 @@
             margin-bottom: 40px;
         }
 
-        .two-column-text > div {
-            flex: 1;
-        }
+        .two-column-text > div { flex: 1; }
 
-        /* Elegant Expandable Seoul Tips Section */
+        /* Elegant Expandable Seoul Tips Section (Dark Inset Look) */
         details.tips-accordion {
-            background-color: var(--alt-bg);
+            background-color: var(--inset-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 8px;
             padding: 24px;
-            margin-top: 20px;
+            margin-top: 24px;
             transition: all 0.3s ease;
         }
         
@@ -266,30 +270,40 @@
         .timeline .event { color: var(--text-muted); margin-left: 45px; flex: 1; font-size: 1.05rem; }
 
         /* The Custom RSVP Block */
-        .rsvp-block { background-color: var(--alt-bg); border-radius: 8px; padding: 60px 40px; margin-top: 40px; }
+        .container section.rsvp-block { 
+            background-color: #474F3E; /* Ever so slightly lighter to stand out as the final step */
+            border: 1px solid var(--divider); /* Faint gold border */
+        }
 
         /* Mobile Adjustments */
         @media (max-width: 700px) {
             .hero h1 { font-size: 3.5rem; }
             .hero { padding: 0 24px; }
-            section { padding: 50px 0; }
+            
+            .container section { 
+                padding: 40px 24px; 
+                margin-bottom: 24px; 
+            }
+            .container section:first-of-type { margin-top: 40px; }
+            
             .split-section { flex-direction: column-reverse; gap: 32px; }
             .split-image-side { flex: none; width: 100%; height: 240px; }
+            
             .two-column-text { flex-direction: column; gap: 24px; }
+            
             .timeline::before { left: 5px; }
             .timeline li { flex-direction: column; margin-bottom: 28px; }
             .timeline li::before { left: 1px; top: 7px; }
             .timeline .time { text-align: left; margin-left: 25px; margin-bottom: 6px; }
             .timeline .event { margin-left: 25px; }
-            .rsvp-block { padding: 40px 24px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Hero Section -->
+    <!-- Hero Section (Outside the container so it stays full screen width/height) -->
     <section class="hero">
-        <div class="container" style="padding: 0; width: 100%;">
+        <div style="padding: 0; width: 100%; max-width: 800px; margin: 0 auto;">
             <h1>Juuso & Bomin</h1>
             <p>1st of May, 2027</p>
             <p>Sunwoongak, Seoul</p>
@@ -303,6 +317,7 @@
         </a>
     </section>
 
+    <!-- Content Sections wrapped in Cards -->
     <div class="container">
         
         <!-- Welcome Section -->
@@ -320,7 +335,7 @@
             <div class="split-image-side"></div>
         </section>
 
-        <!-- The Schedule (Moved up here) -->
+        <!-- The Schedule -->
         <section class="info-block">
             <h2>The Day's Flow</h2>
             <p>Korean weddings have a slightly different rhythm than Finnish ones! The main event is beautifully concise, focusing on the ceremony and a shared meal in the early afternoon.</p>
@@ -401,7 +416,7 @@
             <p>If you would still like to bless our marriage with a gift, a monetary contribution towards our future together would be deeply appreciated. This can be sent conveniently via MobilePay or bank transfer.</p>
         </section>
 
-        <!-- RSVP Block with custom background -->
+        <!-- RSVP Block -->
         <section class="info-block centered-block rsvp-block">
             <h2>RSVP</h2>
             <p>Please kindly confirm your attendance, whether you plan to join us for the evening afterparty, and any dietary requirements you may have.</p>
