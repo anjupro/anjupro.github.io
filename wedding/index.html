@@ -126,23 +126,12 @@
         }
 
         .venue-image-side {
-            flex: 0 0 45%; /* Takes up 45% of the width on desktop */
+            flex: 0 0 45%; 
             height: 280px;
             border-radius: 4px;
             background-image: url('sunwoongak.jpeg');
-            
             background-size: cover;
             background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .venue-image-text {
-            color: #999999;
-            font-style: italic;
-            font-family: 'Playfair Display', serif;
-            font-size: 0.9rem;
         }
 
         /* Timeline / Schedule */
@@ -179,7 +168,7 @@
                 padding: 60px 0;
             }
             .venue-section {
-                flex-direction: column-reverse; /* Stacks image on top of text on mobile */
+                flex-direction: column-reverse; 
                 gap: 24px;
             }
             .venue-image-side {
@@ -199,7 +188,7 @@
 </head>
 <body>
 
-    <!-- Hero Section (Prepared for your background image) -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container" style="padding: 0;">
             <h1>Juuso & Bomin</h1>
@@ -209,15 +198,20 @@
     </section>
 
     <div class="container">
+        
+        <!-- Welcome Section -->
+        <section class="info-block">
+            <h2>Welcome</h2>
+            <p>We are overjoyed to welcome you to South Korea to celebrate our marriage. On the 1st of May, 2027, we will gather with our closest family and friends to exchange our vows and begin our next chapter together. Bringing our two cultures and families together in Seoul is a dream come true, and having you there to share in this special day would mean the world to us.</p>
+        </section>
+
         <!-- The Venue (Side by side layout) -->
         <section class="venue-section">
             <div class="venue-text">
                 <h2>The Venue</h2>
                 <p>Nestled at the foothills of the Bukhansan mountains, Sunwoongak is a stunning traditional Korean estate, known as a <em>hanok</em>. With its sweeping wooden rooflines and serene natural surroundings, it offers a peaceful retreat from the bustling city of Seoul. We are thrilled to share this beautiful piece of Korean heritage with you as we celebrate our marriage.</p>
             </div>
-            <div class="venue-image-side">
-                <span class="venue-image-text"></span>
-            </div>
+            <div class="venue-image-side"></div>
         </section>
 
         <!-- Travel & Accommodation -->
