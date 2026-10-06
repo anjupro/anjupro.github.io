@@ -14,6 +14,11 @@
             --accent: #D4AF37; 
         }
 
+        /* Enables smooth gliding when the arrow is clicked */
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
             padding: 0;
@@ -43,7 +48,6 @@
             animation: fadeInUp 0.8s ease-out forwards;
         }
         
-        /* Staggering the fade-in animation for a premium feel */
         section:nth-child(1) { animation-delay: 0.1s; }
         section:nth-child(2) { animation-delay: 0.2s; }
         section:nth-child(3) { animation-delay: 0.3s; }
@@ -69,22 +73,19 @@
             }
         }
 
-        /* Hero Section */
+        /* Hero Section - Now set to 100% of screen height */
         .hero {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 60vh; /* Takes up 60% of the screen height natively */
+            height: 100vh; /* 100% of the viewport height */
             text-align: center;
-            padding: 40px 24px;
+            padding: 0 24px;
             border-bottom: 1px solid #EAEAEA; 
             position: relative;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('couple.jpg');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('couple.jpeg');
             background-size: cover;
-            
-            /* ADJUSTING THE CROP: 
-               If your heads are being cut off on desktop, change 'center' to 'center 20%' or 'center top' */
             background-position: center; 
         }
 
@@ -100,6 +101,40 @@
             color: #FFFFFF;
             margin-bottom: 8px;
             letter-spacing: 0.05em;
+        }
+
+        /* The Glowing Scroll Arrow */
+        .scroll-arrow {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            margin-left: -16px; /* perfectly centers the 32px wide icon */
+            color: #FFFFFF;
+            text-decoration: none;
+            animation: scrollPulse 2.5s infinite;
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-arrow:hover {
+            opacity: 0.7;
+        }
+
+        @keyframes scrollPulse {
+            0% {
+                transform: translateY(0);
+                opacity: 0.5;
+                filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2));
+            }
+            50% {
+                transform: translateY(10px);
+                opacity: 1;
+                filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 0.5;
+                filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2));
+            }
         }
 
         /* Information Blocks */
@@ -237,8 +272,8 @@
                 font-size: 3.5rem; 
             }
             .hero {
-                min-height: 50vh; /* Slightly smaller height on phones */
-                padding: 40px 24px;
+                /* We keep it at 100vh for mobile too, just adjust padding */
+                padding: 0 24px;
             }
             section {
                 padding: 50px 0; 
@@ -279,17 +314,24 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container" style="padding: 0;">
+        <div class="container" style="padding: 0; width: 100%;">
             <h1>Juuso & Bomin</h1>
             <p>1st of May, 2027</p>
             <p>Sunwoongak, Seoul</p>
         </div>
+        
+        <!-- Glowing Down Arrow linking to the welcome section -->
+        <a href="#welcome" class="scroll-arrow" aria-label="Scroll down">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </a>
     </section>
 
     <div class="container">
         
-        <!-- Welcome Section -->
-        <section class="info-block">
+        <!-- Welcome Section (Added id="welcome" for the arrow link to jump to) -->
+        <section class="info-block" id="welcome">
             <h2>Welcome</h2>
             <p>We are overjoyed to welcome you to South Korea to celebrate our marriage. On the 1st of May, 2027, we will gather with our closest family and friends to exchange our vows and begin our next chapter together. Bringing our two cultures and families together in Seoul is a dream come true, and having you there to share in this special day would mean the world to us.</p>
         </section>
