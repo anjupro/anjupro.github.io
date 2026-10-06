@@ -3,201 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juuso & Bo Min - Wedding 2027</title>
-    
-    <!-- Load Tailwind CSS for layout and spacing -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Load Elegant Serif Fonts (Playfair Display for headers, Noto Serif KR for Korean, Lora for body) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Noto+Serif+KR:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-    
+    <title>Juuso & Bomin - Wedding</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
         :root {
-            --color-bg: #FCFBF9;
-            --color-text: #2C2C2C;
-            --color-accent: #8A7F73;
+            --bg-color: #FAFAFA;
+            --text-main: #2C2C2C;
+            --text-muted: #666666;
+            --accent: #D4AF37; /* Soft gold for subtle elegance */
         }
 
         body {
-            background-color: var(--color-bg);
-            color: var(--color-text);
-            font-family: 'Lora', 'Noto Serif KR', serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
         }
 
-        h1, h2, h3, .heading-font {
-            font-family: 'Playfair Display', 'Noto Serif KR', serif;
-            font-weight: 500;
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            margin: 0;
         }
 
-        /* Language Toggle Logic */
-        body[data-lang="fi"] .lang-ko { display: none !important; }
-        body[data-lang="ko"] .lang-fi { display: none !important; }
-
-        /* Smooth transitions */
-        .fade-in {
-            animation: fadeIn 1.5s ease-in-out;
+        /* Container for mobile padding and max-width on desktop */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* 
-         * ==========================================
-         * BACKGROUND IMAGE PLACEHOLDERS
-         * ==========================================
-         * Add your background image URLs here later!
-         * Remove the background-color and uncomment the background-image lines.
-         */
-        
-        .bg-hero-placeholder {
-            /* background-image: url('images/your-hero-image.jpg'); */
-            background-color: #EFEBE7; /* Remove this when adding image */
-            background-size: cover;
-            background-position: center;
-        }
-
-        .bg-venue-placeholder {
-            /* background-image: url('images/sunwoongak-venue.jpg'); */
-            background-color: #EAE6E1; /* Remove this when adding image */
-            background-size: cover;
-            background-position: center;
+        /* Sections spacing */
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid #EAEAEA;
         }
         
-        /* Decorative line */
-        .divider {
-            width: 1px;
-            height: 60px;
-            background-color: var(--color-accent);
-            margin: 2rem auto;
-            opacity: 0.5;
+        section:last-child {
+            border-bottom: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 120px 0 80px 0;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        /* Information Blocks */
+        .info-block {
+            margin-bottom: 40px;
+        }
+
+        .info-block h2 {
+            font-size: 2rem;
+            margin-bottom: 24px;
+            color: var(--text-main);
+        }
+
+        .info-block h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        .info-block p {
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+        }
+
+        /* Timeline / Schedule */
+        .timeline {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .timeline li {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .timeline .time {
+            font-weight: 600;
+            min-width: 90px;
+            color: var(--text-main);
+        }
+
+        .timeline .event {
+            color: var(--text-muted);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            section {
+                padding: 60px 0;
+            }
+            .timeline li {
+                flex-direction: column;
+                margin-bottom: 24px;
+            }
+            .timeline .time {
+                margin-bottom: 4px;
+            }
         }
     </style>
 </head>
-<!-- Default language set to Finnish ('fi') -->
-<body data-lang="fi" class="text-center">
+<body>
 
-    <header class="fixed top-0 w-full z-50 p-4 flex justify-end">
-        <button id="langToggleBtn" onclick="toggleLanguage()" class="bg-white/80 backdrop-blur-sm border border-gray-300 px-4 py-2 rounded-full text-sm tracking-widest uppercase hover:bg-white transition shadow-sm">
-            FI / KO
-        </button>
-    </header>
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Juuso & Bomin</h1>
+            <p>1st of May, 2027</p>
+            <p>Sunwoongak, Seoul</p>
+        </section>
 
-    <section class="relative h-screen flex flex-col items-center justify-center bg-hero-placeholder px-6">
-        <!-- Optional overlay to make text readable if you add a dark background image -->
-        <div class="absolute inset-0 bg-white/30"></div> 
-        
-        <div class="relative z-10 fade-in">
-            <p class="text-sm tracking-[0.3em] uppercase text-gray-700 mb-6 lang-fi">Tervetuloa häihimme</p>
-            <p class="text-sm tracking-[0.3em] uppercase text-gray-700 mb-6 lang-ko">저희 결혼식에 초대합니다</p>
+        <!-- Travel & Accommodation -->
+        <section class="info-block">
+            <h2>Travel & Logistics</h2>
             
-            <h1 class="text-5xl md:text-7xl mb-4 lang-fi">Juuso & Bo Min</h1>
-            <h1 class="text-5xl md:text-7xl mb-4 lang-ko">유소 & 보민</h1>
-            
-            <p class="text-lg md:text-xl italic mt-6 lang-fi">Juhlimme rakkauttamme vuonna 2027</p>
-            <p class="text-lg md:text-xl mt-6 lang-ko">2027년, 저희 두 사람의 새로운 시작을 함께해 주세요</p>
-            
-            <div class="divider"></div>
-            
-            <p class="text-md uppercase tracking-widest lang-fi">Soul, Etelä-Korea</p>
-            <p class="text-md uppercase tracking-widest lang-ko">대한민국, 서울</p>
-        </div>
-    </section>
+            <h3>Where to Stay</h3>
+            <p>For our guests traveling from Finland, we highly recommend booking your hotel in the <strong>Myeongdong</strong> area. It is centrally located, packed with great food, and offers excellent public transport connections to explore the rest of Seoul.</p>
 
-    <section class="py-24 px-6 max-w-4xl mx-auto">
-        <h2 class="text-3xl md:text-4xl mb-12 lang-fi">Juhlapaikka</h2>
-        <h2 class="text-3xl md:text-4xl mb-12 lang-ko">예식장 안내</h2>
-        
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-            <div class="aspect-square bg-venue-placeholder rounded-t-full shadow-lg"></div>
-            <div class="text-left flex flex-col justify-center">
-                <h3 class="text-2xl mb-4 heading-font">Sunwoongak</h3>
-                <h3 class="text-2xl mb-4 heading-font lang-ko">선운각</h3>
-                
-                <p class="mb-6 leading-relaxed text-gray-600 lang-fi">
-                    Vihkiminen ja hääjuhla pidetään kauniissa Sunwoongakissa, perinteisessä korealaisessa Hanok-miljöössä, jota ympäröi Soulin upea luonto.
-                </p>
-                <p class="mb-6 leading-relaxed text-gray-600 lang-ko">
-                    북한산의 아름다운 자연이 어우러진 전통 한옥, 선운각에서 예식을 올립니다. 귀한 걸음 하시어 축복해 주시면 감사하겠습니다.
-                </p>
-                
-                <p class="text-sm tracking-wide text-gray-500 uppercase lang-fi">Tarkempi osoite ja saapumisohjeet päivitetään lähempänä juhlaa.</p>
-                <p class="text-sm tracking-wide text-gray-500 lang-ko">자세한 주소와 오시는 길은 추후 업데이트 될 예정입니다.</p>
-            </div>
-        </div>
-    </section>
+            <h3>Getting to the Venue</h3>
+            <p>Our venue, Sunwoongak, is tucked away in the beautiful nature of northern Seoul. The easiest way to arrive is to take the subway to <strong>Bukhansan Ui</strong> station. From there, a dedicated shuttle bus will be operating to bring guests directly to the venue doors.</p>
+        </section>
 
-    <section class="py-24 px-6 bg-[#F4F2EF]">
-        <div class="max-w-2xl mx-auto">
-            <h2 class="text-3xl md:text-4xl mb-16 lang-fi">Ohjelma</h2>
-            <h2 class="text-3xl md:text-4xl mb-16 lang-ko">예식 순서</h2>
+        <!-- The Schedule -->
+        <section class="info-block">
+            <h2>The Day's Flow</h2>
+            <p>Korean weddings have a slightly different rhythm than Finnish ones! The main event is beautifully concise, focusing on the ceremony and a shared meal in the early afternoon.</p>
             
-            <div class="space-y-12">
-                <!-- Event 1 -->
-                <div>
-                    <p class="text-sm tracking-widest text-[#8A7F73] mb-2">15:00</p>
-                    <h3 class="text-xl mb-2 lang-fi">Tervetulomalja</h3>
-                    <h3 class="text-xl mb-2 lang-ko">하객 맞이 및 웰컴 드링크</h3>
-                </div>
-                <!-- Event 2 -->
-                <div>
-                    <p class="text-sm tracking-widest text-[#8A7F73] mb-2">16:00</p>
-                    <h3 class="text-xl mb-2 lang-fi">Vihkitilaisuus</h3>
-                    <h3 class="text-xl mb-2 lang-ko">본식</h3>
-                </div>
-                <!-- Event 3 -->
-                <div>
-                    <p class="text-sm tracking-widest text-[#8A7F73] mb-2">17:30</p>
-                    <h3 class="text-xl mb-2 lang-fi">Hääillallinen & Juhla</h3>
-                    <h3 class="text-xl mb-2 lang-ko">피로연 및 식사</h3>
-                </div>
-            </div>
-        </div>
-    </section>
+            <ul class="timeline">
+                <li>
+                    <span class="time">11:00</span>
+                    <span class="event">Guests arrive. Welcome drinks and mingling.</span>
+                </li>
+                <li>
+                    <span class="time">12:00</span>
+                    <span class="event">The wedding ceremony begins.</span>
+                </li>
+                <li>
+                    <span class="time">12:30</span>
+                    <span class="event">Dining buffet opens. Relaxing and hanging out at the venue.</span>
+                </li>
+                <li>
+                    <span class="time">15:00</span>
+                    <span class="event">The main event concludes. Guests are free to head back to the city to rest or explore.</span>
+                </li>
+            </ul>
+        </section>
 
-    <section class="py-32 px-6">
-        <div class="max-w-xl mx-auto border border-gray-200 p-12 bg-white shadow-sm">
-            <h2 class="text-3xl md:text-4xl mb-6 lang-fi">Ilmoittautuminen</h2>
-            <h2 class="text-3xl md:text-4xl mb-6 lang-ko">참석 여부 확인</h2>
-            
-            <p class="mb-8 text-gray-600 lang-fi">
-                Toivomme, että pääset juhlistamaan tätä tärkeää päivää kanssamme. Pyydämme ystävällisesti ilmoittamaan osallistumisestasi ja mahdollisista erityisruokavalioista alle linkitetyn lomakkeen kautta.
-            </p>
-            <p class="mb-8 text-gray-600 lang-ko">
-                저희의 뜻깊은 날, 함께 자리해 주시면 더없는 기쁨이겠습니다. 원활한 예식 준비를 위해 참석 여부를 아래 버튼을 통해 알려주시면 감사하겠습니다.
-            </p>
-            
-            <!-- Replace "#" with your actual Google Form or RSVP link later -->
-            <a href="#" class="inline-block bg-[#2C2C2C] text-white px-8 py-3 tracking-widest text-sm uppercase hover:bg-black transition lang-fi">
-                RSVP Lomake
-            </a>
-            <a href="#" class="inline-block bg-[#2C2C2C] text-white px-8 py-3 tracking-widest text-sm lang-ko">
-                참석 여부 전달하기
-            </a>
-        </div>
-    </section>
+        <!-- Afterparty -->
+        <section class="info-block">
+            <h2>The Afterparty</h2>
+            <p>For our younger guests, the celebration continues in the evening. We will be hosting an afterparty starting around <strong>6:00 PM</strong> somewhere in central Seoul. The exact venue is currently being finalized, and we will update this page as soon as it is booked.</p>
+        </section>
+    </div>
 
-    <footer class="py-12 text-center text-gray-400 text-sm">
-        <p class="lang-fi">Odotamme innolla näkevämme teidät!</p>
-        <p class="lang-ko">그날 뵙기를 고대합니다!</p>
-        <p class="mt-4">Juuso & Bo Min • 2027</p>
-    </footer>
-
-    <script>
-        function toggleLanguage() {
-            const body = document.body;
-            const currentLang = body.getAttribute('data-lang');
-            
-            if (currentLang === 'fi') {
-                body.setAttribute('data-lang', 'ko');
-            } else {
-                body.setAttribute('data-lang', 'fi');
-            }
-        }
-    </script>
 </body>
 </html>
