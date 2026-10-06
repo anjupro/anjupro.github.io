@@ -71,13 +71,21 @@
 
         /* Hero Section */
         .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 60vh; /* Takes up 60% of the screen height natively */
             text-align: center;
-            padding: 140px 24px 80px 24px;
+            padding: 40px 24px;
             border-bottom: 1px solid #EAEAEA; 
             position: relative;
             background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('couple.jpg');
             background-size: cover;
-            background-position: center;
+            
+            /* ADJUSTING THE CROP: 
+               If your heads are being cut off on desktop, change 'center' to 'center 20%' or 'center top' */
+            background-position: center; 
         }
 
         .hero h1 {
@@ -229,7 +237,8 @@
                 font-size: 3.5rem; 
             }
             .hero {
-                padding: 100px 24px 60px 24px;
+                min-height: 50vh; /* Slightly smaller height on phones */
+                padding: 40px 24px;
             }
             section {
                 padding: 50px 0; 
