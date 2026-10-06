@@ -114,13 +114,15 @@
             line-height: 1.2;
         }
 
+        /* Updated Camera Button to be square/balanced with icon on top and stacked text */
         .camera-btn {
-            padding: 14px 24px;
+            flex-direction: column;
+            padding: 24px 16px;
             width: 100%; 
             box-sizing: border-box;
-            gap: 16px;
+            gap: 10px;
             border-color: rgba(212, 175, 55, 0.4); 
-            justify-content: flex-start; /* Aligns contents neatly to the left inside the button */
+            text-align: center;
         }
 
         .camera-btn:hover {
@@ -130,25 +132,24 @@
         .camera-btn svg {
             color: var(--accent);
             flex-shrink: 0;
+            margin-bottom: 2px;
         }
 
         .btn-text-wrapper {
             display: flex;
             flex-direction: column;
-            text-align: left;
+            align-items: center;
+            gap: 2px;
+            width: 100%;
         }
 
-        .btn-text-en {
-            font-size: 1.2rem;
+        /* Both English and Korean texts share identical styling as requested */
+        .btn-text-en, .btn-text-ko {
+            font-family: 'Inter', 'Noto Serif KR', sans-serif;
+            font-size: 1.05rem;
             font-weight: 400;
-        }
-
-        .btn-text-ko {
-            font-family: 'Noto Serif KR', serif;
-            font-size: 0.9rem;
-            font-weight: 300;
-            color: rgba(244, 241, 234, 0.7); /* Faded cream color */
-            margin-top: 2px;
+            color: var(--text-main);
+            letter-spacing: 0.02em;
         }
 
         /* Mobile adjustments */
@@ -178,7 +179,7 @@
                 
                 <!-- Camera Button links to upload.html -->
                 <a href="upload.html" class="nav-btn camera-btn" aria-label="Share Photos">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
                         <circle cx="12" cy="13" r="4"></circle>
                     </svg>
