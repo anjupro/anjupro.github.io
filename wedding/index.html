@@ -36,7 +36,6 @@
             padding: 0 24px;
         }
 
-        /* Decreased padding here to tighten up the gaps between sections */
         section {
             padding: 50px 0;
             border-bottom: 1px solid #EAEAEA;
@@ -49,15 +48,16 @@
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 120px 24px 80px 24px; /* Slightly tightened hero padding */
+            padding: 120px 24px 80px 24px;
             border-bottom: 1px solid #EAEAEA; 
             position: relative;
             background-size: cover;
             background-position: center;
         }
 
+        /* Increased Main Title Size */
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 4.8rem; /* Made significantly larger */
             letter-spacing: -0.02em;
             margin-bottom: 16px;
             color: var(--text-main); 
@@ -71,10 +71,9 @@
 
         /* Information Blocks */
         .info-block {
-            margin-bottom: 0; /* Removed extra margin to keep spacing consistent with the dividers */
+            margin-bottom: 0; 
         }
 
-        /* Increased section title font size */
         .info-block h2 {
             font-size: 2.4rem;
             margin-bottom: 24px;
@@ -105,7 +104,6 @@
             flex: 1;
         }
 
-        /* Increased section title font size for the venue block too */
         .venue-text h2 {
             font-size: 2.4rem;
             margin-bottom: 24px;
@@ -129,38 +127,69 @@
             background-position: center;
         }
 
-        /* Timeline / Schedule */
+        /* New Visual Timeline */
         .timeline {
             list-style: none;
             padding: 0;
-            margin: 0;
+            margin: 40px 0 0 0;
+            position: relative;
+        }
+
+        /* The vertical line */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            bottom: 20px;
+            left: 80px;
+            width: 1px;
+            background-color: #EAEAEA;
         }
 
         .timeline li {
             display: flex;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        /* The timeline dot */
+        .timeline li::before {
+            content: '';
+            position: absolute;
+            left: 76px; /* Centered over the 1px line */
+            top: 7px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background-color: var(--accent); /* Gold dot */
         }
 
         .timeline .time {
             font-weight: 600;
-            min-width: 90px;
-            color: var(--text-main);
+            width: 60px; /* Fixed width so times align perfectly */
+            flex-shrink: 0;
+            color: var(--accent);
+            text-align: right;
+            padding-right: 0;
+            margin-top: 1px; /* Optical alignment with text */
         }
 
         .timeline .event {
             color: var(--text-muted);
+            margin-left: 45px; /* Pushes text past the dot and line */
+            flex: 1;
         }
 
         /* Mobile Adjustments */
         @media (max-width: 700px) {
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 3.5rem; /* Keeps it massive but fits on phone screens */
             }
             .hero {
                 padding: 80px 24px 50px 24px;
             }
             section {
-                padding: 40px 0; /* Tighter spacing on mobile */
+                padding: 40px 0; 
             }
             .venue-section {
                 flex-direction: column-reverse; 
@@ -171,12 +200,26 @@
                 width: 100%;
                 height: 220px;
             }
+            
+            /* Mobile Timeline Layout */
+            .timeline::before {
+                left: 5px; /* Moves vertical line to the far left edge */
+            }
             .timeline li {
                 flex-direction: column;
                 margin-bottom: 24px;
             }
+            .timeline li::before {
+                left: 1px;
+                top: 7px;
+            }
             .timeline .time {
+                text-align: left;
+                margin-left: 25px; /* Pushes time past the line */
                 margin-bottom: 4px;
+            }
+            .timeline .event {
+                margin-left: 25px; /* Matches the time indentation */
             }
         }
     </style>
