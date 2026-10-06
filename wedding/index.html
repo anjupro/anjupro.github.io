@@ -45,54 +45,35 @@
             border-bottom: none;
         }
 
-        /* Hero Section */
+        /* Hero Section (Prepared for your background photo later) */
         .hero {
             text-align: center;
-            padding: 120px 0 60px 0;
-            border-bottom: none; 
+            padding: 140px 24px 100px 24px;
+            border-bottom: 1px solid #EAEAEA; 
+            position: relative;
+            
+            /* TO ADD YOUR COUPLE PHOTO LATER:
+               1. Uncomment the background-image line below and add your link.
+               2. The linear-gradient creates a subtle dark overlay so white text stays readable! */
+               
+            /* background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('YOUR_COUPLE_PHOTO.jpg'); */
+            
+            background-size: cover;
+            background-position: center;
         }
 
+        /* When you add the background photo, you might want to change these colors to #FFFFFF */
         .hero h1 {
             font-size: 3.5rem;
             letter-spacing: -0.02em;
             margin-bottom: 16px;
+            color: var(--text-main); 
         }
 
         .hero p {
             font-size: 1.25rem;
             color: var(--text-muted);
             margin-bottom: 8px;
-        }
-
-        /* Venue Image Placeholder (Juhlapaikka) */
-        .venue-image-section {
-            padding: 0 0 60px 0;
-            border-bottom: none;
-        }
-
-        .venue-image {
-            width: 100%;
-            height: 450px;
-            border-radius: 4px;
-            
-            /* TO ADD YOUR PICTURE LATER: 
-               1. Delete or comment out the background-color line below.
-               2. Remove the /* from the background-image line and paste your image link! */
-            
-            background-color: #E6E6E6;
-            /* background-image: url('YOUR_IMAGE_LINK_HERE.jpg'); */
-            
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .venue-image-text {
-            color: #999999;
-            font-style: italic;
-            font-family: 'Playfair Display', serif;
         }
 
         /* Information Blocks */
@@ -119,6 +100,55 @@
             font-size: 1.05rem;
         }
 
+        /* Venue Section (Side by side layout) */
+        .venue-section {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .venue-text {
+            flex: 1;
+        }
+
+        .venue-text h2 {
+            font-size: 2rem;
+            margin-bottom: 24px;
+            color: var(--text-main);
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+        }
+
+        .venue-text p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin: 0;
+        }
+
+        .venue-image-side {
+            flex: 0 0 45%; /* Takes up 45% of the width on desktop */
+            height: 280px;
+            border-radius: 4px;
+            background-color: #E6E6E6;
+            
+            /* TO ADD YOUR HANOK PHOTO LATER: 
+               Delete the background-color above and uncomment the line below */
+            /* background-image: url('YOUR_HANOK_IMAGE.jpg'); */
+            
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .venue-image-text {
+            color: #999999;
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+        }
+
         /* Timeline / Schedule */
         .timeline {
             list-style: none;
@@ -142,21 +172,24 @@
         }
 
         /* Mobile Adjustments */
-        @media (max-width: 600px) {
+        @media (max-width: 700px) {
             .hero h1 {
                 font-size: 2.5rem;
             }
             .hero {
-                padding: 80px 0 40px 0;
+                padding: 100px 24px 60px 24px;
             }
             section {
                 padding: 60px 0;
             }
-            .venue-image-section {
-                padding: 0 0 40px 0;
+            .venue-section {
+                flex-direction: column-reverse; /* Stacks image on top of text on mobile */
+                gap: 24px;
             }
-            .venue-image {
-                height: 250px; 
+            .venue-image-side {
+                flex: none;
+                width: 100%;
+                height: 220px;
             }
             .timeline li {
                 flex-direction: column;
@@ -170,25 +203,25 @@
 </head>
 <body>
 
-    <div class="container">
-        <!-- Hero Section -->
-        <section class="hero">
+    <!-- Hero Section (Prepared for your background image) -->
+    <section class="hero">
+        <div class="container" style="padding: 0;">
             <h1>Juuso & Bomin</h1>
             <p>1st of May, 2027</p>
             <p>Sunwoongak, Seoul</p>
-        </section>
+        </div>
+    </section>
 
-        <!-- Venue Image (Juhlapaikka) -->
-        <section class="venue-image-section">
-            <div class="venue-image">
-                <span class="venue-image-text">[ Hanok Photo Placeholder ]</span>
+    <div class="container">
+        <!-- The Venue (Side by side layout) -->
+        <section class="venue-section">
+            <div class="venue-text">
+                <h2>The Venue</h2>
+                <p>Nestled at the foothills of the Bukhansan mountains, Sunwoongak is a stunning traditional Korean estate, known as a <em>hanok</em>. With its sweeping wooden rooflines and serene natural surroundings, it offers a peaceful retreat from the bustling city of Seoul. We are thrilled to share this beautiful piece of Korean heritage with you as we celebrate our marriage.</p>
             </div>
-        </section>
-
-        <!-- The Venue Description -->
-        <section class="info-block">
-            <h2>The Venue</h2>
-            <p>Nestled at the foothills of the Bukhansan mountains, Sunwoongak is a stunning traditional Korean estate, known as a <em>hanok</em>. With its sweeping wooden rooflines and serene natural surroundings, it offers a peaceful retreat from the bustling city of Seoul. We are thrilled to share this beautiful piece of Korean heritage with you as we celebrate our marriage.</p>
+            <div class="venue-image-side">
+                <span class="venue-image-text">[ Hanok Photo ]</span>
+            </div>
         </section>
 
         <!-- Travel & Accommodation -->
@@ -228,7 +261,7 @@
         </section>
 
         <!-- Afterparty -->
-        <section class="info-block">
+        <section class="info-block" style="border-bottom: none;">
             <h2>The Afterparty</h2>
             <p>For our younger guests, the celebration continues in the evening. We will be hosting an afterparty starting around <strong>6:00 PM</strong> somewhere in central Seoul. The exact venue is currently being finalized, and we will update this page as soon as it is booked.</p>
         </section>
