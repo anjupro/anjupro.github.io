@@ -114,7 +114,6 @@
         }
 
         .label-ko {
-            font-family: 'Noto Serif KR', serif;
             font-size: 0.85rem;
             color: var(--text-muted);
             margin-bottom: 10px;
@@ -141,14 +140,6 @@
 
         .warning-text {
             font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        .warning-text-ko {
-            font-family: 'Noto Serif KR', serif;
-            font-size: 0.85rem;
-            margin-top: 8px;
             color: var(--text-muted);
             line-height: 1.5;
         }
@@ -274,8 +265,8 @@
         <!-- Main Action Section (Name + Upload Button in one box) -->
         <section class="info-block">
             <div class="input-group">
-                <label for="uploader-name">Your Name / Family Name</label>
-                <span class="label-ko">성함 또는 가족 성함 (보내주신 분을 확인하기 위함입니다)</span>
+                <label for="uploader-name">Your name - 성함</label>
+                <span class="label-ko">To know who sent the pictures - 사진을 보내주신 분을 확인하기 위함입니다</span>
                 <input type="text" id="uploader-name" class="name-input" placeholder="e.g. Juuso" required />
             </div>
 
@@ -302,14 +293,14 @@
             </div>
         </section>
 
-        <!-- Important Notes Section (Moved to Bottom) -->
+        <!-- Important Notes Section -->
         <section class="info-block">
             <h3 style="font-size: 1.2rem; margin-bottom: 8px; color: var(--text-main);">Important Notes / 안내 사항</h3>
             <div class="inset-box">
                 <div class="warning-text">
                     <em>💡 Please enter your name first. Raw files may take a few moments—fast Wi-Fi and keeping your screen awake is recommended!</em>
                 </div>
-                <div class="warning-text-ko">
+                <div class="warning-text" style="margin-top: 10px;">
                     <em>💡 성함을 먼저 입력해 주세요. 원본 전송은 다소 시간이 걸릴 수 있으니, 빠른 와이파이 환경에서 화면을 켠 채로 진행해 주세요!</em>
                 </div>
             </div>
