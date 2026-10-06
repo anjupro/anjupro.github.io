@@ -252,78 +252,13 @@
 
         .two-column-text > div { flex: 1; }
 
-        /* --- STYLISH PHOTO SLIDESHOW --- */
-        .slideshow-container {
-            position: relative;
-            max-width: 100%;
-            height: 400px;
-            margin-top: 32px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-            background-color: var(--inset-bg);
-        }
-
-        .slide {
-            display: none;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Ensures photos frame nicely without distortion */
-        }
-
-        /* Next & Previous Navigation Buttons */
-        .slideshow-prev, .slideshow-next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 16px;
-            color: white;
-            font-weight: bold;
-            font-size: 1.5rem;
-            background-color: rgba(0, 0, 0, 0.4);
-            border-radius: 0 4px 4px 0;
-            user-select: none;
-            transition: background-color 0.3s ease;
-        }
-
-        .slideshow-next {
-            right: 0;
-            border-radius: 4px 0 0 4px;
-        }
-
-        .slideshow-prev:hover, .slideshow-next:hover {
-            background-color: rgba(0, 0, 0, 0.7);
-            color: var(--accent);
-        }
-
-        /* Slide Counter Indicator */
-        .slide-number {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: var(--text-main);
-            padding: 4px 10px;
-            font-size: 0.85rem;
-            border-radius: 20px;
-            font-family: 'Inter', sans-serif;
-            letter-spacing: 0.05em;
-        }
-
-        /* The New Modal Trigger Button */
+        /* Modal Trigger Buttons */
         .tips-button {
             background-color: var(--inset-bg);
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 8px;
             padding: 24px;
-            margin-top: 24px;
+            margin-top: 20px;
             width: 100%;
             text-align: left;
             cursor: pointer;
@@ -348,7 +283,7 @@
             color: var(--text-muted);
         }
 
-        /* The Full-Screen Modal Styling */
+        /* Full-Screen Modal Styling */
         .tips-modal {
             background-color: var(--alt-bg);
             border: 1px solid var(--divider);
@@ -426,6 +361,19 @@
         .modal-content li { margin-bottom: 16px; line-height: 1.8; }
         .modal-content strong { color: var(--text-main); }
 
+        /* Photo Gallery inside Modal */
+        .photo-gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+            display: block;
+        }
+        .photo-gallery img:last-child {
+            margin-bottom: 0;
+        }
+
         /* Visual Timeline */
         .timeline { list-style: none; padding: 0; margin: 40px 0 0 0; position: relative; }
         .timeline::before {
@@ -468,7 +416,6 @@
             .split-image-side { flex: none; width: 100%; height: 240px; }
             
             .two-column-text { flex-direction: column; gap: 24px; }
-            .slideshow-container { height: 260px; } /* Adjusts slideshow height nicely for mobile phones */
             
             .timeline::before { left: 5px; }
             .timeline li { flex-direction: column; margin-bottom: 28px; }
@@ -567,7 +514,7 @@
             <p>For the celebration, we kindly request formal or semi-formal attire—suits for gentlemen and elegant dresses or equivalent for ladies. Please note that the traditional hanok venue features natural stone and wooden pathways, so we highly recommend choosing comfortable footwear for the day.</p>
         </section>
 
-        <!-- Travel & Logistics (With Slideshow added at the bottom) -->
+        <!-- Travel & Logistics -->
         <section class="info-block">
             <h2>Travel & Logistics</h2>
             
@@ -583,39 +530,17 @@
                 </div>
             </div>
 
-            <!-- Beautiful Trigger Button for Modal -->
+            <!-- Tips Modal Trigger Button -->
             <button id="open-tips" class="tips-button" aria-label="Open tips for exploring Seoul">
                 <span>Tips for Exploring Seoul</span>
                 <span class="plus-icon">+</span>
             </button>
 
-            <!-- 21-Photo Slideshow widget -->
-            <div class="slideshow-container">
-                <div class="slide-number">1 / 21</div>
-                <div class="slide"><img src="photo1.jpeg" alt="Wedding photo 1"></div>
-                <div class="slide"><img src="photo2.jpeg" alt="Wedding photo 2"></div>
-                <div class="slide"><img src="photo3.jpeg" alt="Wedding photo 3"></div>
-                <div class="slide"><img src="photo4.jpeg" alt="Wedding photo 4"></div>
-                <div class="slide"><img src="photo5.jpeg" alt="Wedding photo 5"></div>
-                <div class="slide"><img src="photo6.jpeg" alt="Wedding photo 6"></div>
-                <div class="slide"><img src="photo7.jpeg" alt="Wedding photo 7"></div>
-                <div class="slide"><img src="photo8.jpeg" alt="Wedding photo 8"></div>
-                <div class="slide"><img src="photo9.jpeg" alt="Wedding photo 9"></div>
-                <div class="slide"><img src="photo10.jpeg" alt="Wedding photo 10"></div>
-                <div class="slide"><img src="photo11.jpeg" alt="Wedding photo 11"></div>
-                <div class="slide"><img src="photo12.jpeg" alt="Wedding photo 12"></div>
-                <div class="slide"><img src="photo13.jpeg" alt="Wedding photo 13"></div>
-                <div class="slide"><img src="photo14.jpeg" alt="Wedding photo 14"></div>
-                <div class="slide"><img src="photo15.jpeg" alt="Wedding photo 15"></div>
-                <div class="slide"><img src="photo16.jpeg" alt="Wedding photo 16"></div>
-                <div class="slide"><img src="photo17.jpeg" alt="Wedding photo 17"></div>
-                <div class="slide"><img src="photo18.jpeg" alt="Wedding photo 18"></div>
-                <div class="slide"><img src="photo19.jpeg" alt="Wedding photo 19"></div>
-                <div class="slide"><img src="photo20.jpeg" alt="Wedding photo 20"></div>
-
-                <a class="slideshow-prev" onclick="plusSlides(-1)">❮</a>
-                <a class="slideshow-next" onclick="plusSlides(1)">❯</a>
-            </div>
+            <!-- Photos Modal Trigger Button -->
+            <button id="open-photos" class="tips-button" aria-label="Open our Seoul travel pictures">
+                <span>Our Seoul Travel Pictures</span>
+                <span class="plus-icon">+</span>
+            </button>
         </section>
 
         <!-- Afterparty -->
@@ -686,34 +611,71 @@
         </div>
     </dialog>
 
+    <!-- The Native HTML Modal overlay for Seoul Travel Pictures -->
+    <dialog id="photos-modal" class="tips-modal">
+        <div class="modal-header">
+            <h2>Our Seoul Travel Pictures</h2>
+            <button id="close-photos" class="close-modal-btn" aria-label="Close photos">✕</button>
+        </div>
+        <div class="modal-content photo-gallery">
+            <img src="photo1.jpg" alt="Seoul Travel Photo 1" loading="lazy">
+            <img src="photo2.jpg" alt="Seoul Travel Photo 2" loading="lazy">
+            <img src="photo3.jpg" alt="Seoul Travel Photo 3" loading="lazy">
+            <img src="photo4.jpg" alt="Seoul Travel Photo 4" loading="lazy">
+            <img src="photo5.jpg" alt="Seoul Travel Photo 5" loading="lazy">
+            <img src="photo6.jpg" alt="Seoul Travel Photo 6" loading="lazy">
+            <img src="photo7.jpg" alt="Seoul Travel Photo 7" loading="lazy">
+            <img src="photo8.jpg" alt="Seoul Travel Photo 8" loading="lazy">
+            <img src="photo9.jpg" alt="Seoul Travel Photo 9" loading="lazy">
+            <img src="photo10.jpg" alt="Seoul Travel Photo 10" loading="lazy">
+            <img src="photo11.jpg" alt="Seoul Travel Photo 11" loading="lazy">
+            <img src="photo12.jpg" alt="Seoul Travel Photo 12" loading="lazy">
+            <img src="photo13.jpg" alt="Seoul Travel Photo 13" loading="lazy">
+            <img src="photo14.jpg" alt="Seoul Travel Photo 14" loading="lazy">
+            <img src="photo15.jpg" alt="Seoul Travel Photo 15" loading="lazy">
+            <img src="photo16.jpg" alt="Seoul Travel Photo 16" loading="lazy">
+            <img src="photo17.jpg" alt="Seoul Travel Photo 17" loading="lazy">
+            <img src="photo18.jpg" alt="Seoul Travel Photo 18" loading="lazy">
+            <img src="photo19.jpg" alt="Seoul Travel Photo 19" loading="lazy">
+            <img src="photo20.jpg" alt="Seoul Travel Photo 20" loading="lazy">
+            <img src="photo21.jpg" alt="Seoul Travel Photo 21" loading="lazy">
+        </div>
+    </dialog>
+
     <script>
-        // Modal Logic
-        const modal = document.getElementById('tips-modal');
-        const openBtn = document.getElementById('open-tips');
-        const closeBtn = document.getElementById('close-tips');
+        // Reusable function to handle opening/closing modals cleanly
+        function setupModal(openBtnId, modalId, closeBtnId) {
+            const modal = document.getElementById(modalId);
+            const openBtn = document.getElementById(openBtnId);
+            const closeBtn = document.getElementById(closeBtnId);
 
-        openBtn.addEventListener('click', () => {
-            modal.showModal();
-            document.body.style.overflow = 'hidden'; 
-        });
+            openBtn.addEventListener('click', () => {
+                modal.showModal();
+                document.body.style.overflow = 'hidden'; 
+            });
 
-        closeBtn.addEventListener('click', () => {
-            modal.close();
-            document.body.style.overflow = '';
-        });
-
-        modal.addEventListener('click', (e) => {
-            const dialogDimensions = modal.getBoundingClientRect();
-            if (
-                e.clientX < dialogDimensions.left ||
-                e.clientX > dialogDimensions.right ||
-                e.clientY < dialogDimensions.top ||
-                e.clientY > dialogDimensions.bottom
-            ) {
+            closeBtn.addEventListener('click', () => {
                 modal.close();
                 document.body.style.overflow = '';
-            }
-        });
+            });
+
+            modal.addEventListener('click', (e) => {
+                const dialogDimensions = modal.getBoundingClientRect();
+                if (
+                    e.clientX < dialogDimensions.left ||
+                    e.clientX > dialogDimensions.right ||
+                    e.clientY < dialogDimensions.top ||
+                    e.clientY > dialogDimensions.bottom
+                ) {
+                    modal.close();
+                    document.body.style.overflow = '';
+                }
+            });
+        }
+
+        // Initialize both modals
+        setupModal('open-tips', 'tips-modal', 'close-tips');
+        setupModal('open-photos', 'photos-modal', 'close-photos');
 
         // Floating RSVP Button Logic
         const floatingRsvp = document.getElementById('floating-rsvp');
@@ -724,36 +686,6 @@
                 floatingRsvp.classList.remove('visible');
             }
         });
-
-        // Slideshow Logic
-        let slideIndex = 1;
-        showSlides(slideIndex);
-
-        // Automatic slideshow timer (changes photo every 4 seconds)
-        let slideTimer = setInterval(() => {
-            plusSlides(1);
-        }, 4000);
-
-        function plusSlides(n) {
-            clearInterval(slideTimer); // Reset timer if user manually clicks arrows
-            showSlides(slideIndex += n);
-            slideTimer = setInterval(() => { plusSlides(1); }, 4000);
-        }
-
-        function showSlides(n) {
-            let i;
-            let slides = document.getElementsByClassName("slide");
-            let numberIndicator = document.querySelector(".slide-number");
-            if (n > slides.length) { slideIndex = 1; }
-            if (n < 1) { slideIndex = slides.length; }
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
-            }
-            slides[slideIndex - 1].style.display = "block";
-            if(numberIndicator) {
-                numberIndicator.innerText = slideIndex + " / " + slides.length;
-            }
-        }
     </script>
 </body>
 </html>
