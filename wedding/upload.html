@@ -52,19 +52,51 @@
 
         p {
             color: var(--text-muted);
-            margin: 0 0 16px 0;
+            margin: 0 0 24px 0;
             font-size: 1.05rem;
             line-height: 1.6;
         }
 
-        .warning-text {
+        /* Name Input Field Styling */
+        .input-group {
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
             font-size: 0.9rem;
-            color: rgba(244, 241, 234, 0.7); /* Slightly faded cream */
+            color: var(--accent);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .name-input {
+            width: 100%;
+            padding: 14px 16px;
+            background-color: var(--inset-bg);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 1.1rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .name-input:focus {
+            border-color: var(--accent);
+        }
+
+        .warning-text {
+            font-size: 0.85rem;
+            color: rgba(244, 241, 234, 0.7);
             background-color: rgba(0,0,0,0.15);
             padding: 12px 16px;
             border-radius: 8px;
-            margin-bottom: 32px;
+            margin-bottom: 24px;
             line-height: 1.5;
+            text-align: left;
         }
 
         /* The Custom Upload Button */
@@ -153,16 +185,21 @@
 
     <div class="upload-container">
         <h1>Share Photos</h1>
-        <p>Snap a photo right now, or select your favorite memories from the day to upload directly to our wedding album.</p>
+        <p>Upload your favorite memories from the day directly to our wedding album.</p>
         
-        <!-- Elegant Warning Text -->
+        <!-- Name Input -->
+        <div class="input-group">
+            <label for="uploader-name">Your Name / Family Name:</label>
+            <input type="text" id="uploader-name" class="name-input" placeholder="e.g. Maria Virtanen" required />
+        </div>
+
         <div class="warning-text">
-            <em>Note: To preserve the highest quality, photos are uploaded in their original size. We highly recommend using Wi-Fi, as uploads may take a few moments.</em>
+            <em>💡 Tip: Please keep your screen awake while uploading. Wi-Fi is recommended!</em>
         </div>
 
         <!-- Upload Interface -->
         <div id="upload-interface" class="upload-btn-wrapper">
-            <button class="btn">
+            <button class="btn" id="select-btn">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
                     <circle cx="12" cy="13" r="4"></circle>
@@ -184,30 +221,39 @@
 
     <script>
         // --- IMPORTANT: PASTE YOUR GOOGLE SCRIPT URL BELOW ---
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx3G17nXiSb_AF7krrClAUAFkIE5CaS2jT3GD24HoipN6ohdYLtO-GiiptwefvpqTei/exec';
+        const SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
 
         const fileInput = document.getElementById('file-input');
+        const nameInput = document.getElementById('uploader-name');
         const uploadInterface = document.getElementById('upload-interface');
         const loadingUi = document.getElementById('loading-ui');
         const statusText = document.getElementById('status-text');
         const progressText = document.getElementById('progress-text');
 
         fileInput.addEventListener('change', async (e) => {
+            const uploaderName = nameInput.value.trim();
+            if (!uploaderName) {
+                alert('Please enter your name before selecting photos!');
+                fileInput.value = '';
+                nameInput.focus();
+                return;
+            }
+
             const files = e.target.files;
             if (files.length === 0) return;
 
-            // Hide button, show loading spinner
+            // Hide form, show loading spinner
             uploadInterface.style.display = 'none';
+            nameInput.disabled = true;
             loadingUi.style.display = 'block';
             statusText.innerText = "Uploading Original Files...";
 
             let successCount = 0;
 
-            // Process files sequentially to avoid overloading the mobile connection
             for (let i = 0; i < files.length; i++) {
                 progressText.innerText = `Sending photo ${i + 1} of ${files.length}`;
                 try {
-                    await uploadRawFile(files[i]);
+                    await uploadRawFile(files[i], uploaderName);
                     successCount++;
                 } catch (error) {
                     console.error("Upload failed for a file", error);
@@ -217,6 +263,7 @@
             // Finished
             loadingUi.style.display = 'none';
             uploadInterface.style.display = 'inline-block';
+            nameInput.disabled = false;
             
             if (successCount === files.length) {
                 alert('Thank you! All your photos have been successfully added to our album.');
@@ -224,22 +271,21 @@
                 alert(`Uploaded ${successCount} out of ${files.length} photos. Please try again if some failed.`);
             }
             
-            fileInput.value = ''; // Reset input
+            fileInput.value = '';
         });
 
-        // Function to convert raw file to base64 and send to Google Script
-        function uploadRawFile(file) {
+        function uploadRawFile(file, uploaderName) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 
                 reader.onload = function(f) {
-                    // Extract just the raw base64 string without compressing
                     const base64Data = f.target.result.split(',')[1];
                     
                     const formData = new URLSearchParams();
                     formData.append('data', base64Data);
                     formData.append('filename', file.name);
                     formData.append('mimeType', file.type);
+                    formData.append('uploaderName', uploaderName); // Pass name to Google Drive
 
                     fetch(SCRIPT_URL, {
                         method: 'POST',
@@ -253,7 +299,7 @@
                 };
                 
                 reader.onerror = () => reject("Error reading file");
-                reader.readAsDataURL(file); // Reads the exact original file
+                reader.readAsDataURL(file);
             });
         }
     </script>
