@@ -9,13 +9,13 @@
 
         :root {
             /* Elegant Dark Olive Palette */
-            --bg-color: #384030; /* Deep Olive Background */
-            --alt-bg: #434B3A; /* Slightly lighter Olive for the cards */
-            --inset-bg: #303729; /* Darker tone for buttons/insets */
-            --text-main: #F4F1EA; /* Cream */
-            --text-muted: #C0C3B7; /* Soft Sage */
-            --accent: #D4AF37; /* Gold */
-            --divider: rgba(212, 175, 55, 0.15); /* Faint gold for lines */
+            --bg-color: #384030; 
+            --alt-bg: #434B3A; 
+            --inset-bg: #303729; 
+            --text-main: #F4F1EA; 
+            --text-muted: #C0C3B7; 
+            --accent: #D4AF37; 
+            --divider: rgba(212, 175, 55, 0.15); 
         }
 
         html {
@@ -133,6 +133,39 @@
             0% { transform: translateY(0); opacity: 0.6; filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3)); }
             50% { transform: translateY(12px); opacity: 1; filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.95)); }
             100% { transform: translateY(0); opacity: 0.6; filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3)); }
+        }
+
+        /* Floating RSVP Button */
+        .floating-rsvp {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            background-color: var(--inset-bg);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            z-index: 50;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+
+        .floating-rsvp.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .floating-rsvp:hover {
+            background-color: #353D2E;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.5);
         }
 
         /* Information Blocks Formatting */
@@ -302,7 +335,6 @@
             overflow-y: auto;
         }
 
-        /* Elegant inner headers for the modal */
         .modal-content h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.4rem;
@@ -312,9 +344,7 @@
             padding-bottom: 8px;
         }
 
-        .modal-content h3:first-child {
-            margin-top: 0;
-        }
+        .modal-content h3:first-child { margin-top: 0; }
 
         .modal-content ul {
             padding-left: 20px;
@@ -342,10 +372,16 @@
         .timeline .time { font-weight: 600; width: 60px; flex-shrink: 0; color: var(--accent); text-align: right; padding-right: 0; margin-top: 1px; }
         .timeline .event { color: var(--text-muted); margin-left: 45px; flex: 1; font-size: 1.05rem; }
 
-        /* The Custom RSVP Block */
+        /* The Custom RSVP Block with Glowing Breathing Effect */
         .container section.rsvp-block { 
             background-color: #474F3E; 
-            border: 1px solid var(--divider); 
+            border: 1px solid rgba(212, 175, 55, 0.4); 
+            animation: fadeInUp 0.8s ease-out forwards, rsvpGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes rsvpGlow {
+            0% { box-shadow: 0 8px 30px rgba(0,0,0,0.15), 0 0 5px rgba(212, 175, 55, 0.1); }
+            100% { box-shadow: 0 8px 30px rgba(0,0,0,0.15), 0 0 25px rgba(212, 175, 55, 0.4); }
         }
 
         /* Mobile Adjustments */
@@ -372,6 +408,13 @@
             
             .modal-header { padding: 20px 24px; }
             .modal-content { padding: 24px; }
+
+            .floating-rsvp {
+                bottom: 24px;
+                right: 24px;
+                padding: 10px 24px;
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
@@ -392,6 +435,9 @@
             </a>
         </section>
     </div>
+
+    <!-- Floating RSVP Button (Fades in on scroll) -->
+    <a href="#rsvp-section" id="floating-rsvp" class="floating-rsvp">RSVP</a>
 
     <!-- Content Sections wrapped in Cards -->
     <div class="container">
@@ -488,9 +534,9 @@
         </section>
 
         <!-- RSVP Block -->
-        <section class="info-block centered-block rsvp-block">
+        <section class="info-block centered-block rsvp-block" id="rsvp-section">
             <h2>RSVP</h2>
-            <p>Please kindly confirm your attendance, whether you plan to join us for the evening afterparty, and any dietary requirements you may have.</p>
+            <p>Please kindly confirm your attendance, whether you plan to join us for the evening afterparty, and any dietary requirements you may have by <strong>[Date to be decided]</strong>.</p>
             <p style="margin-top: 24px;">
                 <strong>WhatsApp:</strong> <a href="https://wa.me/97474495910" target="_blank">+974 7449 5910</a><br><br>
                 <strong>Email:</strong> <a href="mailto:juuso.anttila@outlook.com">juuso.anttila@outlook.com</a>
@@ -543,23 +589,21 @@
     </dialog>
 
     <script>
+        // Modal Logic
         const modal = document.getElementById('tips-modal');
         const openBtn = document.getElementById('open-tips');
         const closeBtn = document.getElementById('close-tips');
 
-        // Open Modal and prevent background from scrolling
         openBtn.addEventListener('click', () => {
             modal.showModal();
             document.body.style.overflow = 'hidden'; 
         });
 
-        // Close Modal and restore background scrolling
         closeBtn.addEventListener('click', () => {
             modal.close();
             document.body.style.overflow = '';
         });
 
-        // Allow closing by clicking the blurred backdrop
         modal.addEventListener('click', (e) => {
             const dialogDimensions = modal.getBoundingClientRect();
             if (
@@ -570,6 +614,17 @@
             ) {
                 modal.close();
                 document.body.style.overflow = '';
+            }
+        });
+
+        // Floating RSVP Button Logic
+        const floatingRsvp = document.getElementById('floating-rsvp');
+        window.addEventListener('scroll', () => {
+            // Show button after scrolling past 60% of the viewport height (past the hero image)
+            if (window.scrollY > window.innerHeight * 0.6) {
+                floatingRsvp.classList.add('visible');
+            } else {
+                floatingRsvp.classList.remove('visible');
             }
         });
     </script>
