@@ -36,8 +36,9 @@
             padding: 0 24px;
         }
 
+        /* Decreased padding here to tighten up the gaps between sections */
         section {
-            padding: 80px 0;
+            padding: 50px 0;
             border-bottom: 1px solid #EAEAEA;
         }
         
@@ -45,24 +46,16 @@
             border-bottom: none;
         }
 
-        /* Hero Section (Prepared for your background photo later) */
+        /* Hero Section */
         .hero {
             text-align: center;
-            padding: 140px 24px 100px 24px;
+            padding: 120px 24px 80px 24px; /* Slightly tightened hero padding */
             border-bottom: 1px solid #EAEAEA; 
             position: relative;
-            
-            /* TO ADD YOUR COUPLE PHOTO LATER:
-               1. Uncomment the background-image line below and add your link.
-               2. The linear-gradient creates a subtle dark overlay so white text stays readable! */
-               
-            /* background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('YOUR_COUPLE_PHOTO.jpg'); */
-            
             background-size: cover;
             background-position: center;
         }
 
-        /* When you add the background photo, you might want to change these colors to #FFFFFF */
         .hero h1 {
             font-size: 3.5rem;
             letter-spacing: -0.02em;
@@ -78,11 +71,12 @@
 
         /* Information Blocks */
         .info-block {
-            margin-bottom: 40px;
+            margin-bottom: 0; /* Removed extra margin to keep spacing consistent with the dividers */
         }
 
+        /* Increased section title font size */
         .info-block h2 {
-            font-size: 2rem;
+            font-size: 2.4rem;
             margin-bottom: 24px;
             color: var(--text-main);
         }
@@ -100,7 +94,7 @@
             font-size: 1.05rem;
         }
 
-        /* Venue Section (Side by side layout) */
+        /* Venue Section */
         .venue-section {
             display: flex;
             align-items: center;
@@ -111,8 +105,9 @@
             flex: 1;
         }
 
+        /* Increased section title font size for the venue block too */
         .venue-text h2 {
-            font-size: 2rem;
+            font-size: 2.4rem;
             margin-bottom: 24px;
             color: var(--text-main);
             font-family: 'Playfair Display', serif;
@@ -162,10 +157,10 @@
                 font-size: 2.5rem;
             }
             .hero {
-                padding: 100px 24px 60px 24px;
+                padding: 80px 24px 50px 24px;
             }
             section {
-                padding: 60px 0;
+                padding: 40px 0; /* Tighter spacing on mobile */
             }
             .venue-section {
                 flex-direction: column-reverse; 
@@ -205,7 +200,7 @@
             <p>We are overjoyed to welcome you to South Korea to celebrate our marriage. On the 1st of May, 2027, we will gather with our closest family and friends to exchange our vows and begin our next chapter together. Bringing our two cultures and families together in Seoul is a dream come true, and having you there to share in this special day would mean the world to us.</p>
         </section>
 
-        <!-- The Venue (Side by side layout) -->
+        <!-- The Venue -->
         <section class="venue-section">
             <div class="venue-text">
                 <h2>The Venue</h2>
@@ -245,7 +240,15 @@
                 </li>
                 <li>
                     <span class="time">15:00</span>
-                    <span class="event">The main event concludes. Guests are free to head back to the city to rest or explore.</span>
+                    <span class="event">Getting back to Seoul, time for a short break.</span>
+                </li>
+                <li>
+                    <span class="time">18:00</span>
+                    <span class="event">Afterparty in Seoul.</span>
+                </li>
+                <li>
+                    <span class="time">00:00</span>
+                    <span class="event">Nightlife up to everyone's consideration.</span>
                 </li>
             </ul>
         </section>
