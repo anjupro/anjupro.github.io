@@ -8,31 +8,47 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
 
         :root {
-            var(--bg-color): #384030; 
-            --alt-bg: #434B3A; 
+            --bg-color: #384030; 
+            --inset-bg: #303729; 
             --text-main: #F4F1EA; 
-            --text-muted: #C0C3B7; 
             --accent: #D4AF37; 
         }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: #384030; /* Deep Olive */
+            background-color: var(--bg-color);
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
         }
 
-        .front-door-container {
-            padding: 40px 24px;
-            max-width: 500px;
+        /* Exactly matches your beautifully boxed hero section */
+        .hero-wrapper {
+            height: 100vh;
+            padding: 24px; 
+            box-sizing: border-box;
             width: 100%;
+            max-width: 1200px; 
+            margin: 0 auto;
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%; 
+            width: 100%;
+            border-radius: 12px;
+            text-align: center;
+            padding: 0 24px;
+            box-sizing: border-box;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('couple.jpg');
+            background-size: cover;
+            background-position: center; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25); 
+            overflow: hidden;
             animation: fadeInUp 1s ease-out forwards;
         }
 
@@ -41,114 +57,112 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        h1 {
+        .hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            font-weight: 400;
-            margin: 0 0 8px 0;
-            color: var(--text-main);
+            font-size: 4.8rem; 
             letter-spacing: -0.02em;
+            margin: 0 0 40px 0; /* Pushes the buttons down slightly */
+            color: #FFFFFF; 
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3); 
         }
 
-        .date-location {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 48px;
-            letter-spacing: 0.05em;
-        }
-
-        .divider {
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-            margin: 0 auto 48px auto;
-        }
-
-        /* Elegant Menu Buttons */
-        .menu-grid {
+        /* Container for the buttons */
+        .actions-container {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
+            align-items: center;
         }
 
+        /* Side-by-side flags */
+        .flag-row {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+        }
+
+        /* Frosted Glass Button Styling */
         .nav-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--alt-bg);
+            background-color: rgba(48, 55, 41, 0.75); /* Semi-transparent olive */
+            backdrop-filter: blur(10px); /* Creates the frosted glass look */
+            -webkit-backdrop-filter: blur(10px); /* For iPhones */
             color: var(--text-main);
             text-decoration: none;
-            padding: 20px 32px;
             border-radius: 12px;
-            font-size: 1.2rem;
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             transition: all 0.3s ease;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
         }
 
         .nav-btn:hover {
-            background-color: #4A5340;
-            border-color: rgba(212, 175, 55, 0.6);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-        }
-
-        .btn-icon {
-            font-size: 1.8rem;
-            margin-right: 16px;
-        }
-
-        /* Camera Button gets a special gold accent */
-        .camera-btn {
-            margin-top: 16px;
-            background-color: #303729;
+            background-color: rgba(48, 55, 41, 0.95);
             border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+        }
+
+        .flag-btn {
+            flex: 1; /* Makes both flags perfectly equal width */
+            padding: 20px 0;
+            font-size: 3rem; /* Massive, clickable emojis */
+            line-height: 1.2;
+        }
+
+        .camera-btn {
+            padding: 16px 32px;
+            font-size: 1.2rem;
+            width: 100%; 
+            box-sizing: border-box;
+            gap: 12px;
+            border-color: rgba(212, 175, 55, 0.4); /* Subtle gold tint on border */
         }
 
         .camera-btn:hover {
-            background-color: #3A4332;
             border-color: var(--accent);
         }
 
-        .camera-btn .btn-icon {
+        .camera-btn svg {
             color: var(--accent);
         }
 
+        /* Mobile adjustments */
+        @media (max-width: 700px) {
+            .hero-wrapper { padding: 16px; } 
+            .hero h1 { font-size: 3.5rem; margin-bottom: 32px; }
+            .flag-btn { padding: 16px 0; font-size: 2.8rem; }
+        }
     </style>
 </head>
 <body>
-
-    <div class="front-door-container">
-        <h1>Juuso & Bomin</h1>
-        <div class="date-location">1.5.2027 • Seoul</div>
-        
-        <div class="divider"></div>
-
-        <div class="menu-grid">
-            <!-- Link to the English/Finnish Invitation -->
-            <a href="en.html" class="nav-btn">
-                <span class="btn-icon">🇫🇮</span>
-                <span>Enter Invitation</span>
-            </a>
-
-            <!-- Link to the Korean Invitation -->
-            <a href="ko.html" class="nav-btn">
-                <span class="btn-icon">🇰🇷</span>
-                <span style="font-family: 'Noto Serif KR', serif;">모바일 청첩장 보기</span>
-            </a>
-
-            <!-- Link to the Upload page we are about to build -->
-            <a href="upload.html" class="nav-btn camera-btn">
-                <span class="btn-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <div class="hero-wrapper">
+        <section class="hero">
+            <h1>Juuso & Bomin</h1>
+            
+            <div class="actions-container">
+                <div class="flag-row">
+                    <!-- Finnish Flag links to en.html -->
+                    <a href="en.html" class="nav-btn flag-btn" aria-label="English / Finnish">
+                        🇫🇮
+                    </a>
+                    <!-- Korean Flag links to ko.html -->
+                    <a href="ko.html" class="nav-btn flag-btn" aria-label="Korean">
+                        🇰🇷
+                    </a>
+                </div>
+                
+                <!-- Camera Button links to upload.html -->
+                <a href="upload.html" class="nav-btn camera-btn" aria-label="Share Photos">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
                         <circle cx="12" cy="13" r="4"></circle>
                     </svg>
-                </span>
-                <span>Share Photos</span>
-            </a>
-        </div>
+                    <span>Share Photos</span>
+                </a>
+            </div>
+        </section>
     </div>
-
 </body>
 </html>
