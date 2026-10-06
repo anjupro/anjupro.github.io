@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Photos - Juuso & Bomin</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
+        :root {
+            --bg-color: #384030; 
+            --alt-bg: #434B3A; 
+            --inset-bg: #303729; 
+            --text-main: #F4F1EA; 
+            --text-muted: #C0C3B7; 
+            --accent: #D4AF37; 
+        }
+
+        body {
+            margin: 0; padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            min-height: 100vh;
+        }
+
+        .upload-container {
+            background-color: var(--alt-bg);
+            border-radius: 12px;
+            padding: 48px 32px;
+            max-width: 400px;
+            width: 85%;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin: 0 0 8px 0;
+            color: var(--accent);
+        }
+
+        p {
+            color: var(--text-muted);
+            margin: 0 0 32px 0;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        /* The Custom Upload Button */
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--inset-bg);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 16px 24px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            width: 100%;
+            box-sizing: border-box;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            gap: 12px;
+        }
+
+        .btn:hover { background-color: #353D2E; }
+
+        /* Hides the ugly default file input, stretches it over our beautiful button */
+        .upload-btn-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+            height: 100%;
+        }
+
+        /* Back Button */
+        .back-link {
+            display: inline-block;
+            margin-top: 32px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--text-main);
+            border-bottom: 1px solid var(--text-main);
+        }
+
+        /* Loading UI */
+        #loading-ui {
+            display: none;
+            margin-top: 24px;
+        }
+
+        .spinner {
+            border: 3px solid rgba(212, 175, 55, 0.2);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border-left-color: var(--accent);
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px auto;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        #status-text {
+            color: var(--accent);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="upload-container">
+        <h1>Share Photos</h1>
+        <p>Snap a photo right now, or select your favorite memories from the day to upload directly to our wedding album.</p>
+
+        <!-- Upload Interface -->
+        <div id="upload-interface" class="upload-btn-wrapper">
+            <button class="btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                    <circle cx="12" cy="13" r="4"></circle>
+                </svg>
+                Select Photos
+            </button>
+            <!-- accept="image/*" triggers the native camera/library selector on phones. multiple allows picking many at once. -->
+            <input type="file" id="file-input" accept="image/*" multiple />
+        </div>
+
+        <!-- Loading Interface -->
+        <div id="loading-ui">
+            <div class="spinner"></div>
+            <div id="status-text">Uploading...</div>
+        </div>
+
+        <a href="index.html" class="back-link">← Back to Menu</a>
+    </div>
+
+    <script>
+        // 2. PASTE YOUR GOOGLE WEB APP URL HERE:
+        const SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+
+        const fileInput = document.getElementById('file-input');
+        const uploadInterface = document.getElementById('upload-interface');
+        const loadingUi = document.getElementById('loading-ui');
+        const statusText = document.getElementById('status-text');
+
+        fileInput.addEventListener('change', async (e) => {
+            const files = e.target.files;
+            if (files.length === 0) return;
+
+            // Hide button, show loading spinner
+            uploadInterface.style.display = 'none';
+            loadingUi.style.display = 'block';
+
+            let successCount = 0;
+
+            // Process files one by one to ensure the connection doesn't get overwhelmed
+            for (let i = 0; i < files.length; i++) {
+                statusText.innerText = `Uploading photo ${i + 1} of ${files.length}...`;
+                try {
+                    await uploadSingleFile(files[i]);
+                    successCount++;
+                } catch (error) {
+                    console.error("Upload failed for a file", error);
+                }
+            }
+
+            // Finished
+            loadingUi.style.display = 'none';
+            uploadInterface.style.display = 'inline-block';
+            
+            if (successCount === files.length) {
+                alert('Thank you! Your photos have been added to our album.');
+            } else {
+                alert(`Uploaded ${successCount} out of ${files.length} photos. Please try again if some failed.`);
+            }
+            
+            // Reset input so they can upload more
+            fileInput.value = '';
+        });
+
+        // Function to convert file to base64 and send to Google Script
+        function uploadSingleFile(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                
+                reader.onload = function(f) {
+                    // Extract just the raw base64 string
+                    const base64Data = f.target.result.split(',')[1];
+                    
+                    const formData = new URLSearchParams();
+                    formData.append('data', base64Data);
+                    formData.append('filename', file.name);
+                    formData.append('mimeType', file.type);
+
+                    // We use mode: 'no-cors' so the browser doesn't block the request to Google
+                    fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        body: formData,
+                        mode: 'no-cors' 
+                    }).then(() => {
+                        resolve();
+                    }).catch((error) => {
+                        reject(error);
+                    });
+                };
+                
+                reader.onerror = () => reject("Error reading file");
+                reader.readAsDataURL(file);
+            });
+        }
+    </script>
+</body>
+</html>
