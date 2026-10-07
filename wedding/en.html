@@ -375,11 +375,11 @@
         }
 
         /* Highlighted Timeline Event */
-    .timeline li.highlight-event .time,
-    .timeline li.highlight-event .event {
-        color: var(--accent);
-        font-weight: 600;
-    }
+        .timeline li.highlight-event .time,
+        .timeline li.highlight-event .event {
+            color: var(--accent);
+            font-weight: 600;
+        }
 
         /* Visual Timeline */
         .timeline { list-style: none; padding: 0; margin: 40px 0 0 0; position: relative; }
@@ -396,7 +396,7 @@
         .timeline .time { font-weight: 600; width: 60px; flex-shrink: 0; color: var(--accent); text-align: right; padding-right: 0; margin-top: 1px; }
         .timeline .event { color: var(--text-muted); margin-left: 45px; flex: 1; font-size: 1.05rem; }
 
-        /* The Custom RSVP Block with Glowing Breathing Effect */
+        /* The Custom RSVP Block */
         .container section.rsvp-block { 
             background-color: #474F3E; 
             border: 1px solid rgba(212, 175, 55, 0.6); 
@@ -407,6 +407,102 @@
             0% { box-shadow: 0 8px 30px rgba(0,0,0,0.15), 0 0 10px rgba(212, 175, 55, 0.2); }
             100% { box-shadow: 0 8px 30px rgba(0,0,0,0.15), 0 0 45px rgba(212, 175, 55, 0.8); }
         }
+
+        /* RSVP Form Styling */
+        .rsvp-form {
+            margin-top: 32px;
+            text-align: left;
+            background-color: var(--bg-color); /* Darker inset for the form box */
+            padding: 32px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            background-color: var(--alt-bg);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 1.05rem;
+            box-sizing: border-box;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: var(--accent);
+        }
+
+        .form-input::placeholder {
+            color: rgba(192, 195, 183, 0.5); /* Faded text-muted */
+        }
+
+        /* Custom styling for Select Dropdowns */
+        select.form-input {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23D4AF37%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px top 50%;
+            background-size: 12px auto;
+            cursor: pointer;
+        }
+        
+        select.form-input option {
+            background-color: var(--alt-bg);
+            color: var(--text-main);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--inset-bg);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            font-size: 1.15rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .submit-btn:hover {
+            background-color: #353D2E;
+            transform: translateY(-2px);
+        }
+
+        .contact-alternatives {
+            margin-top: 24px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--divider);
+            padding-top: 24px;
+        }
+
+        .contact-alternatives a {
+            color: var(--text-main);
+            border-bottom: 1px solid var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .contact-alternatives a:hover { color: var(--accent); }
 
         /* Mobile Adjustments */
         @media (max-width: 700px) {
@@ -439,6 +535,8 @@
                 padding: 10px 24px;
                 font-size: 1.1rem;
             }
+
+            .rsvp-form { padding: 24px 20px; }
         }
     </style>
 </head>
@@ -449,7 +547,7 @@
         <section class="hero">
             <h1>Juuso & Bomin</h1>
             <p>1st of May, 2027</p>
-            <p>Sunwoongak, Seoul</p>
+            <p><strong>Sunwoongak</strong>, <strong>Seoul</strong></p>
             
             <!-- Glowing Down Arrow -->
             <a href="#welcome" class="scroll-arrow" aria-label="Scroll down">
@@ -469,14 +567,14 @@
         <!-- Welcome Section -->
         <section class="info-block centered-block" id="welcome">
             <h2>Welcome</h2>
-            <p>We are overjoyed to welcome you to South Korea to celebrate our marriage. On the 1st of May, 2027, we will gather with our closest family and friends to exchange our vows and begin our next chapter together. Bringing our two cultures and families together in Seoul is a dream come true, and having you there to share in this special day would mean the world to us.</p>
+            <p>We are overjoyed to welcome you to South Korea to celebrate our marriage. On the <strong>1st of May, 2027</strong>, we will gather with our closest family and friends to exchange our vows and begin our next chapter together. Bringing our two cultures and families together in <strong>Seoul</strong> is a dream come true, and having you there to share in this special day would mean the world to us.</p>
         </section>
 
         <!-- The Venue -->
         <section class="split-section">
             <div class="split-text">
                 <h2>The Venue</h2>
-                <p>Nestled at the foothills of the Bukhansan mountains, Sunwoongak is a stunning traditional Korean estate, known as a <em>hanok</em>. With its sweeping wooden rooflines and serene natural surroundings, it offers a peaceful retreat from the bustling city of Seoul. We are thrilled to share this beautiful piece of Korean heritage with you as we celebrate our marriage.</p>
+                <p>Nestled at the foothills of the Bukhansan mountains, <strong>Sunwoongak</strong> is a stunning traditional Korean estate, known as a <em>hanok</em>. With its sweeping wooden rooflines and serene natural surroundings, it offers a peaceful retreat from the bustling city of Seoul. We are thrilled to share this beautiful piece of Korean heritage with you as we celebrate our marriage.</p>
             </div>
             <div class="split-image-side"></div>
         </section>
@@ -566,11 +664,47 @@
         <!-- RSVP Block -->
         <section class="info-block centered-block rsvp-block" id="rsvp-section">
             <h2>RSVP</h2>
-            <p>Please kindly confirm your attendance, whether you plan to join us for the evening afterparty, and any dietary requirements you may have by <strong>[Date to be decided]</strong>.</p>
-            <p style="margin-top: 24px;">
-                <strong>WhatsApp:</strong> <a href="https://wa.me/97474495910" target="_blank">+974 7449 5910</a><br><br>
-                <strong>Email:</strong> <a href="mailto:juuso.anttila@outlook.com">juuso.anttila@outlook.com</a>
-            </p>
+            <p>Please confirm your attendance by filling out the form below by <strong>[Date to be decided]</strong>.</p>
+            
+            <!-- RSVP Form (Update the action attribute with your Formspree link) -->
+            <form class="rsvp-form" action="https://formspree.io/f/xqpeelwa" method="POST">
+                
+                <div class="form-group">
+                    <label for="name">Guest Name(s)</label>
+                    <input type="text" id="name" name="Name" class="form-input" required placeholder="e.g. Maria & Matti Virtanen">
+                </div>
+                
+                <div class="form-group">
+                    <label for="ceremony">Attending the Wedding Ceremony?</label>
+                    <select id="ceremony" name="Ceremony_Attendance" class="form-input" required>
+                        <option value="" disabled selected>Please select...</option>
+                        <option value="Yes">Joyfully accept</option>
+                        <option value="No">Regretfully decline</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="afterparty">Attending the Afterparty in Seoul?</label>
+                    <select id="afterparty" name="Afterparty_Attendance" class="form-input" required>
+                        <option value="" disabled selected>Please select...</option>
+                        <option value="Yes">Yes, we will be there!</option>
+                        <option value="No">No, maybe next time</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="dietary">Dietary Restrictions / Allergies</label>
+                    <input type="text" id="dietary" name="Dietary_Restrictions" class="form-input" placeholder="e.g. Vegetarian, nut allergy, none">
+                </div>
+
+                <button type="submit" class="submit-btn">Send RSVP</button>
+            </form>
+
+            <div class="contact-alternatives">
+                If you prefer, you can also RSVP or reach out directly:<br><br>
+                <strong>WhatsApp:</strong> <a href="https://wa.me/97474495910" target="_blank">+974 7449 5910</a><br>
+                <strong>Email:</strong> <a href="mailto:juuso.anttila@gmail.com">juuso.anttila@gmail.com</a>
+            </div>
         </section>
     </div>
 
