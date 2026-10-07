@@ -418,6 +418,55 @@
             border: 1px solid rgba(255,255,255,0.05);
         }
 
+        /* Dynamic Guest Input Styling */
+        .guest-input-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .guest-input-row input {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .add-guest-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 24px;
+            transition: opacity 0.3s ease;
+        }
+
+        .add-guest-btn:hover { opacity: 0.7; }
+
+        .remove-guest-btn {
+            background-color: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-muted);
+            border-radius: 8px;
+            width: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .remove-guest-btn:hover {
+            border-color: #ff4a4a;
+            color: #ff4a4a;
+        }
+
         .form-group {
             margin-bottom: 24px;
         }
@@ -670,20 +719,32 @@
             <h2>RSVP</h2>
             <p>Please confirm your attendance by filling out the form below by <strong>[Date to be decided]</strong>.</p>
             
-            <!-- RSVP Form (Update the action attribute with your Formspree link) -->
-            <form class="rsvp-form" id="rsvp-form" action="https://formspree.io/f/xqpeelwa" method="POST">
+            <!-- RSVP Form -->
+            <form class="rsvp-form" id="rsvp-form" action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
                 
-                <div class="form-group">
-                    <label for="name">Guest Name(s)</label>
-                    <input type="text" id="name" name="Name" class="form-input" required placeholder="e.g. Maria & Matti Virtanen">
+                <div class="form-group" id="guests-group">
+                    <label>Guest Name</label>
+                    <div id="guest-names-container">
+                        <div class="guest-input-row">
+                            <!-- Naming it Guest_Name will automatically group them in Formspree -->
+                            <input type="text" name="Guest_Name" class="form-input" required placeholder="e.g. Juuso Anttila">
+                        </div>
+                    </div>
+                    
+                    <button type="button" id="add-guest-btn" class="add-guest-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Add another guest
+                    </button>
                 </div>
                 
                 <div class="form-group">
                     <label for="ceremony">Attending the Wedding Ceremony?</label>
                     <select id="ceremony" name="Ceremony_Attendance" class="form-input" required>
                         <option value="" disabled selected>Please select...</option>
-                        <option value="Yes">Joyfully accept</option>
-                        <option value="No">Regretfully decline</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
                     </select>
                 </div>
                 
@@ -691,8 +752,8 @@
                     <label for="afterparty">Attending the Afterparty in Seoul?</label>
                     <select id="afterparty" name="Afterparty_Attendance" class="form-input" required>
                         <option value="" disabled selected>Please select...</option>
-                        <option value="Yes">Yes, we will be there!</option>
-                        <option value="No">No, maybe next time</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
                     </select>
                 </div>
 
@@ -794,7 +855,7 @@
         </div>
         <div class="modal-content" style="text-align: center;">
             <p style="margin-bottom: 0; font-size: 1.1rem; color: var(--text-main);">
-                Your RSVP has been successfully sent. <br><br>We can't wait to celebrate with you!
+                Thank you, your form is submitted.
             </p>
         </div>
     </dialog>
@@ -870,6 +931,33 @@
             } else {
                 floatingRsvp.classList.remove('visible');
             }
+        });
+
+        // Dynamic Guest Inputs Logic
+        const guestNamesContainer = document.getElementById('guest-names-container');
+        const addGuestBtn = document.getElementById('add-guest-btn');
+
+        addGuestBtn.addEventListener('click', () => {
+            const newRow = document.createElement('div');
+            newRow.className = 'guest-input-row';
+            
+            const newInput = document.createElement('input');
+            newInput.type = 'text';
+            newInput.name = 'Guest_Name'; // Same name so Formspree groups them!
+            newInput.className = 'form-input';
+            newInput.required = true;
+            newInput.placeholder = 'e.g. Bomin';
+            
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.className = 'remove-guest-btn';
+            removeBtn.innerHTML = '✕';
+            removeBtn.setAttribute('aria-label', 'Remove guest');
+            removeBtn.onclick = () => newRow.remove();
+
+            newRow.appendChild(newInput);
+            newRow.appendChild(removeBtn);
+            guestNamesContainer.appendChild(newRow);
         });
 
         // Formspree AJAX Submission
