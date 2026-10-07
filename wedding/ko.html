@@ -58,6 +58,7 @@
         .container section:nth-child(4) { animation-delay: 0.4s; }
         .container section:nth-child(5) { animation-delay: 0.5s; }
         .container section:nth-child(6) { animation-delay: 0.6s; }
+        .container section:nth-child(7) { animation-delay: 0.7s; }
 
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
@@ -234,6 +235,62 @@
             margin-top: 20px; text-align: left;
         }
 
+        /* RSVP Form & Dynamic Guest Input Styling */
+        .rsvp-form {
+            margin-top: 32px; text-align: left; background-color: var(--bg-color); 
+            padding: 32px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);
+        }
+        .form-group { margin-bottom: 24px; }
+        .form-group label {
+            display: block; color: var(--accent); font-weight: 600;
+            font-size: 0.95rem; margin-bottom: 8px; font-family: 'Noto Serif KR', serif;
+        }
+        .form-input {
+            width: 100%; padding: 14px 16px; background-color: var(--alt-bg);
+            border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 8px;
+            color: var(--text-main); font-size: 1.05rem; box-sizing: border-box;
+            outline: none; font-family: 'Noto Serif KR', 'Inter', sans-serif; transition: border-color 0.3s ease;
+        }
+        .form-input:focus { border-color: var(--accent); }
+        .form-input::placeholder { color: rgba(192, 195, 183, 0.5); }
+        select.form-input {
+            appearance: none; -webkit-appearance: none; -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23D4AF37%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat; background-position: right 16px top 50%;
+            background-size: 12px auto; cursor: pointer;
+        }
+        select.form-input option { background-color: var(--alt-bg); color: var(--text-main); }
+        .submit-btn {
+            width: 100%; padding: 16px; background-color: var(--inset-bg);
+            color: var(--accent); border: 1px solid var(--accent);
+            border-radius: 8px; font-size: 1.15rem; cursor: pointer;
+            transition: all 0.3s ease; margin-top: 8px; font-family: 'Noto Serif KR', serif;
+        }
+        .submit-btn:hover:not(:disabled) { background-color: #353D2E; transform: translateY(-2px); }
+        .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+        .contact-alternatives {
+            margin-top: 24px; font-size: 0.95rem; color: var(--text-muted);
+            border-top: 1px solid var(--divider); padding-top: 24px; font-family: 'Noto Serif KR', serif;
+        }
+        .contact-alternatives a { color: var(--text-main); border-bottom: 1px solid var(--accent); text-decoration: none; transition: color 0.3s ease; }
+        .contact-alternatives a:hover { color: var(--accent); }
+        .guest-input-row { display: flex; gap: 12px; margin-bottom: 12px; }
+        .guest-input-row input { flex: 1; margin-bottom: 0; }
+        .add-guest-btn {
+            background: none; border: none; color: var(--accent);
+            font-family: 'Noto Serif KR', serif; font-size: 0.95rem; font-weight: 600;
+            cursor: pointer; padding: 0; display: flex; align-items: center;
+            gap: 6px; margin-bottom: 24px; transition: opacity 0.3s ease;
+        }
+        .add-guest-btn:hover { opacity: 0.7; }
+        .remove-guest-btn {
+            background-color: transparent; border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-muted); border-radius: 8px; width: 50px; cursor: pointer;
+            font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .remove-guest-btn:hover { border-color: #ff4a4a; color: #ff4a4a; }
+
         @media (max-width: 700px) {
             .hero-wrapper { padding: 16px; } 
             .hero h1 { font-size: 3.5rem; }
@@ -343,18 +400,61 @@
             <p>참석이 어려우시더라도 축하해 주시는 마음 깊이 간직하겠습니다.<br>따뜻한 마음으로 축복해 주시는 모든 분들께 감사드립니다.</p>
             
             <div class="account-box">
-                <p style="margin-bottom: 8px;"><strong>신랑 측 계좌:</strong> [추후 업데이트 예정]</p>
-                <p style="margin: 0;"><strong>신부 측 계좌:</strong> [추후 업데이트 예정]</p>
+                <p style="margin-bottom: 8px;"><strong>HAN Il Hong 한 일홍 (부):</strong> [추후 업데이트 예정]</p>
+                <p style="margin: 0;"><strong>PARK Hyo Jung 박 효정 (모):</strong> [추후 업데이트 예정]</p>
             </div>
         </section>
 
+        <!-- RSVP Block -->
         <section class="info-block centered-block rsvp-block" id="rsvp-section">
             <h2>참석 여부 전달</h2>
-            <p>원활한 예식 준비를 위해 참석 여부 및 애프터 파티 참석 유무, 알레르기 등 식사 관련 요청 사항을 미리 알려주시면 감사하겠습니다.</p>
-            <p style="margin-top: 24px;">
-                <strong>카카오톡 ID:</strong> [추후 업데이트 예정]<br><br>
+            <p>원활한 예식 준비를 위해 참석 여부 및 애프터 파티 참석 유무를 아래 양식을 통해 미리 알려주시면 감사하겠습니다.</p>
+            
+            <!-- RSVP Form (Update the action attribute with your Formspree link) -->
+            <form class="rsvp-form" id="rsvp-form" action="https://formspree.io/f/xqpeelwa" method="POST">
+                
+                <div class="form-group" id="guests-group">
+                    <label>참석자 성함</label>
+                    <div id="guest-names-container">
+                        <div class="guest-input-row">
+                            <input type="text" name="Guest_Name" class="form-input" required placeholder="예: 홍길동">
+                        </div>
+                    </div>
+                    
+                    <button type="button" id="add-guest-btn" class="add-guest-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        동반인 추가
+                    </button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ceremony">본식에 참석하시나요?</label>
+                    <select id="ceremony" name="Ceremony_Attendance" class="form-input" required>
+                        <option value="" disabled selected>선택해 주세요...</option>
+                        <option value="Yes">예, 참석합니다</option>
+                        <option value="No">아니요, 마음으로 축하하겠습니다</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="afterparty">애프터 파티(서울 시내)에 참석하시나요?</label>
+                    <select id="afterparty" name="Afterparty_Attendance" class="form-input" required>
+                        <option value="" disabled selected>선택해 주세요...</option>
+                        <option value="Yes">예, 참석합니다</option>
+                        <option value="No">아니요, 마음으로 축하하겠습니다</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-btn">참석 여부 보내기</button>
+            </form>
+
+            <div class="contact-alternatives">
+                직접 연락을 원하시는 경우 아래 연락처로 말씀해 주셔도 좋습니다:<br><br>
+                <strong>카카오톡 ID:</strong> [추후 업데이트 예정]<br>
                 <strong>이메일:</strong> <a href="mailto:bbbbbominhan@gmail.com">bbbbbominhan@gmail.com</a>
-            </p>
+            </div>
         </section>
     </div>
 
@@ -385,6 +485,19 @@
             <img src="photo18.jpeg" alt="Seoul Travel Photo 18" loading="lazy">
             <img src="photo19.jpeg" alt="Seoul Travel Photo 19" loading="lazy">
             <img src="photo20.jpeg" alt="Seoul Travel Photo 20" loading="lazy">
+        </div>
+    </dialog>
+
+    <!-- Success Modal Popup -->
+    <dialog id="success-modal" class="tips-modal">
+        <div class="modal-header">
+            <h2>감사합니다!</h2>
+            <button id="close-success" class="close-modal-btn" aria-label="Close popup">✕</button>
+        </div>
+        <div class="modal-content" style="text-align: center;">
+            <p style="margin-bottom: 0; font-size: 1.1rem; color: var(--text-main); font-family: 'Noto Serif KR', serif;">
+                참석 여부가 성공적으로 전달되었습니다.
+            </p>
         </div>
     </dialog>
 
@@ -432,6 +545,85 @@
                 floatingRsvp.classList.add('visible');
             } else {
                 floatingRsvp.classList.remove('visible');
+            }
+        });
+
+        // Dynamic Guest Inputs Logic
+        const guestNamesContainer = document.getElementById('guest-names-container');
+        const addGuestBtn = document.getElementById('add-guest-btn');
+
+        addGuestBtn.addEventListener('click', () => {
+            const newRow = document.createElement('div');
+            newRow.className = 'guest-input-row';
+            
+            const newInput = document.createElement('input');
+            newInput.type = 'text';
+            newInput.name = 'Guest_Name'; 
+            newInput.className = 'form-input';
+            newInput.required = true;
+            newInput.placeholder = '예: 홍길동';
+            
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.className = 'remove-guest-btn';
+            removeBtn.innerHTML = '✕';
+            removeBtn.setAttribute('aria-label', 'Remove guest');
+            removeBtn.onclick = () => newRow.remove();
+
+            newRow.appendChild(newInput);
+            newRow.appendChild(removeBtn);
+            guestNamesContainer.appendChild(newRow);
+        });
+
+        // Formspree AJAX Submission & Success Modal logic
+        const successModal = document.getElementById('success-modal');
+        const closeSuccessBtn = document.getElementById('close-success');
+        
+        closeSuccessBtn.addEventListener('click', () => {
+            successModal.close();
+            document.body.style.overflow = '';
+        });
+        
+        successModal.addEventListener('click', (e) => {
+            const dialogDimensions = successModal.getBoundingClientRect();
+            if (e.clientX < dialogDimensions.left || e.clientX > dialogDimensions.right ||
+                e.clientY < dialogDimensions.top || e.clientY > dialogDimensions.bottom) {
+                successModal.close();
+                document.body.style.overflow = '';
+            }
+        });
+
+        const rsvpForm = document.getElementById('rsvp-form');
+        const submitBtn = rsvpForm.querySelector('.submit-btn');
+
+        rsvpForm.addEventListener("submit", async function(event) {
+            event.preventDefault(); 
+            
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = "전송 중...";
+            submitBtn.disabled = true;
+
+            const data = new FormData(rsvpForm);
+            
+            try {
+                const response = await fetch(rsvpForm.action, {
+                    method: rsvpForm.method,
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                });
+                
+                if (response.ok) {
+                    rsvpForm.reset(); 
+                    successModal.showModal(); 
+                    document.body.style.overflow = 'hidden'; 
+                } else {
+                    alert("오류가 발생했습니다. 다시 시도하시거나 직접 연락해 주세요.");
+                }
+            } catch (error) {
+                alert("네트워크 오류가 발생했습니다. 다시 시도해 주세요.");
+            } finally {
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
             }
         });
     </script>
