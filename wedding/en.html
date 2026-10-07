@@ -412,7 +412,7 @@
         .rsvp-form {
             margin-top: 32px;
             text-align: left;
-            background-color: var(--bg-color); /* Darker inset for the form box */
+            background-color: var(--bg-color); 
             padding: 32px;
             border-radius: 12px;
             border: 1px solid rgba(255,255,255,0.05);
@@ -449,10 +449,9 @@
         }
 
         .form-input::placeholder {
-            color: rgba(192, 195, 183, 0.5); /* Faded text-muted */
+            color: rgba(192, 195, 183, 0.5); 
         }
 
-        /* Custom styling for Select Dropdowns */
         select.form-input {
             appearance: none;
             -webkit-appearance: none;
@@ -483,9 +482,14 @@
             font-family: 'Playfair Display', serif;
         }
 
-        .submit-btn:hover {
+        .submit-btn:hover:not(:disabled) {
             background-color: #353D2E;
             transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
         }
 
         .contact-alternatives {
@@ -586,7 +590,7 @@
             
             <ul class="timeline">
                 <li>
-                    <span class="time">11:00</span>
+                    <span class="time">11:30</span>
                     <span class="event">Guests arrive. Welcome drinks and mingling.</span>
                 </li>
                 <li class="highlight-event">
@@ -667,7 +671,7 @@
             <p>Please confirm your attendance by filling out the form below by <strong>[Date to be decided]</strong>.</p>
             
             <!-- RSVP Form (Update the action attribute with your Formspree link) -->
-            <form class="rsvp-form" action="https://formspree.io/f/xqpeelwa" method="POST">
+            <form class="rsvp-form" id="rsvp-form" action="https://formspree.io/f/xqpeelwa" method="POST">
                 
                 <div class="form-group">
                     <label for="name">Guest Name(s)</label>
@@ -782,6 +786,19 @@
         </div>
     </dialog>
 
+    <!-- Success Modal Popup -->
+    <dialog id="success-modal" class="tips-modal">
+        <div class="modal-header">
+            <h2>Thank You!</h2>
+            <button id="close-success" class="close-modal-btn" aria-label="Close popup">✕</button>
+        </div>
+        <div class="modal-content" style="text-align: center;">
+            <p style="margin-bottom: 0; font-size: 1.1rem; color: var(--text-main);">
+                Your RSVP has been successfully sent. <br><br>We can't wait to celebrate with you!
+            </p>
+        </div>
+    </dialog>
+
     <script>
         // Reusable function to handle opening/closing modals cleanly
         function setupModal(openBtnId, modalId, closeBtnId) {
@@ -789,33 +806,61 @@
             const openBtn = document.getElementById(openBtnId);
             const closeBtn = document.getElementById(closeBtnId);
 
-            openBtn.addEventListener('click', () => {
-                modal.showModal();
-                document.body.style.overflow = 'hidden'; 
-            });
+            if(openBtn) {
+                openBtn.addEventListener('click', () => {
+                    modal.showModal();
+                    document.body.style.overflow = 'hidden'; 
+                });
+            }
 
-            closeBtn.addEventListener('click', () => {
-                modal.close();
-                document.body.style.overflow = '';
-            });
-
-            modal.addEventListener('click', (e) => {
-                const dialogDimensions = modal.getBoundingClientRect();
-                if (
-                    e.clientX < dialogDimensions.left ||
-                    e.clientX > dialogDimensions.right ||
-                    e.clientY < dialogDimensions.top ||
-                    e.clientY > dialogDimensions.bottom
-                ) {
+            if(closeBtn) {
+                closeBtn.addEventListener('click', () => {
                     modal.close();
                     document.body.style.overflow = '';
-                }
-            });
+                });
+            }
+
+            if(modal) {
+                modal.addEventListener('click', (e) => {
+                    const dialogDimensions = modal.getBoundingClientRect();
+                    if (
+                        e.clientX < dialogDimensions.left ||
+                        e.clientX > dialogDimensions.right ||
+                        e.clientY < dialogDimensions.top ||
+                        e.clientY > dialogDimensions.bottom
+                    ) {
+                        modal.close();
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
         }
 
-        // Initialize both modals
+        // Initialize modals
         setupModal('open-tips', 'tips-modal', 'close-tips');
         setupModal('open-photos', 'photos-modal', 'close-photos');
+        
+        // Manual setup for success modal since it opens programmatically
+        const successModal = document.getElementById('success-modal');
+        const closeSuccessBtn = document.getElementById('close-success');
+        
+        closeSuccessBtn.addEventListener('click', () => {
+            successModal.close();
+            document.body.style.overflow = '';
+        });
+        
+        successModal.addEventListener('click', (e) => {
+            const dialogDimensions = successModal.getBoundingClientRect();
+            if (
+                e.clientX < dialogDimensions.left ||
+                e.clientX > dialogDimensions.right ||
+                e.clientY < dialogDimensions.top ||
+                e.clientY > dialogDimensions.bottom
+            ) {
+                successModal.close();
+                document.body.style.overflow = '';
+            }
+        });
 
         // Floating RSVP Button Logic
         const floatingRsvp = document.getElementById('floating-rsvp');
@@ -824,6 +869,43 @@
                 floatingRsvp.classList.add('visible');
             } else {
                 floatingRsvp.classList.remove('visible');
+            }
+        });
+
+        // Formspree AJAX Submission
+        const rsvpForm = document.getElementById('rsvp-form');
+        const submitBtn = rsvpForm.querySelector('.submit-btn');
+
+        rsvpForm.addEventListener("submit", async function(event) {
+            event.preventDefault(); // Stop the default page redirect
+            
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = "Sending...";
+            submitBtn.disabled = true;
+
+            const data = new FormData(rsvpForm);
+            
+            try {
+                const response = await fetch(rsvpForm.action, {
+                    method: rsvpForm.method,
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    rsvpForm.reset(); 
+                    successModal.showModal(); 
+                    document.body.style.overflow = 'hidden'; 
+                } else {
+                    alert("Oops! There was a problem submitting your RSVP. Please try again or contact us directly.");
+                }
+            } catch (error) {
+                alert("Oops! There was a network problem submitting your RSVP. Please try again.");
+            } finally {
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
             }
         });
     </script>
