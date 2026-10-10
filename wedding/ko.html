@@ -59,6 +59,7 @@
         .container section:nth-child(5) { animation-delay: 0.5s; }
         .container section:nth-child(6) { animation-delay: 0.6s; }
         .container section:nth-child(7) { animation-delay: 0.7s; }
+        .container section:nth-child(8) { animation-delay: 0.8s; }
 
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
@@ -166,17 +167,44 @@
             background-image: url('sunwoongak.jpeg');
         }
 
-        .tips-button {
-            background-color: var(--inset-bg); border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 8px; padding: 24px; margin-top: 20px; width: 100%;
-            text-align: left; cursor: pointer; display: flex; justify-content: space-between;
-            align-items: center; transition: all 0.3s ease;
+        /* Horizontal Scroll Gallery Styles */
+        .gallery-scroll-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 16px;
+            padding: 8px 0 24px 0;
+            margin-top: 24px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .gallery-scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .gallery-scroll-container::-webkit-scrollbar-track {
+            background: var(--inset-bg);
+            border-radius: 4px;
+        }
+        
+        .gallery-scroll-container::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.5);
+            border-radius: 4px;
+        }
+        
+        .gallery-scroll-container::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
         }
 
-        .tips-button:hover { background-color: #353D2E; }
-
-        .tips-button span:first-child { font-size: 1.4rem; color: var(--accent); font-family: 'Noto Serif KR', serif; }
-        .tips-button .plus-icon { font-family: 'Inter', sans-serif; font-size: 1.8rem; font-weight: 300; color: var(--text-muted); }
+        .gallery-scroll-container img {
+            flex: 0 0 85%;
+            max-width: 350px;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            scroll-snap-align: center;
+        }
 
         .tips-modal {
             background-color: var(--alt-bg); border: 1px solid var(--divider);
@@ -204,12 +232,6 @@
         .close-modal-btn:hover { color: var(--accent); }
 
         .modal-content { padding: 32px; overflow-y: auto; }
-
-        .photo-gallery img {
-            width: 100%; height: auto; border-radius: 8px; margin-bottom: 24px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.3); display: block;
-        }
-        .photo-gallery img:last-child { margin-bottom: 0; }
 
         .timeline { list-style: none; padding: 0; margin: 40px 0 0 0; position: relative; }
         .timeline::before { content: ''; position: absolute; top: 5px; bottom: 20px; left: 80px; width: 1px; background-color: var(--divider); }
@@ -298,6 +320,7 @@
             .container section:first-of-type { margin-top: 16px; }
             .split-section { flex-direction: column-reverse; gap: 32px; }
             .split-image-side { flex: none; width: 100%; height: 240px; }
+            .gallery-scroll-container img { height: 350px; }
             .timeline::before { left: 5px; }
             .timeline li { flex-direction: column; margin-bottom: 28px; }
             .timeline li::before { left: 1px; top: 7px; }
@@ -362,7 +385,7 @@
                 </li>
                 <li>
                     <span class="time">15:00</span>
-                    <span class="event">예식 종료 및 휴식</span>
+                    <span class="event">예식 종료</span>
                 </li>
                 <li>
                     <span class="time">18:00</span>
@@ -383,11 +406,35 @@
 
             <h3>자가용 이용 시</h3>
             <p>예식장 인근에 하객 여러분을 위한 넓은 주차장이 마련되어 있습니다.</p>
+        </section>
 
-            <button id="open-photos" class="tips-button" aria-label="Open our Seoul travel pictures">
-                <span>저희의 서울 여행 사진</span>
-                <span class="plus-icon">+</span>
-            </button>
+        <!-- New Dedicated Photo Gallery Section -->
+        <section class="info-block">
+            <h2>우리의 순간들</h2>
+            <p>함께한 소중한 추억들을 나눕니다.</p>
+            
+            <div class="gallery-scroll-container">
+                <img src="photo1.jpeg" alt="Gallery Photo 1" loading="lazy">
+                <img src="photo2.jpeg" alt="Gallery Photo 2" loading="lazy">
+                <img src="photo3.jpeg" alt="Gallery Photo 3" loading="lazy">
+                <img src="photo4.jpeg" alt="Gallery Photo 4" loading="lazy">
+                <img src="photo5.jpeg" alt="Gallery Photo 5" loading="lazy">
+                <img src="photo6.jpeg" alt="Gallery Photo 6" loading="lazy">
+                <img src="photo7.jpeg" alt="Gallery Photo 7" loading="lazy">
+                <img src="photo8.jpeg" alt="Gallery Photo 8" loading="lazy">
+                <img src="photo9.jpeg" alt="Gallery Photo 9" loading="lazy">
+                <img src="photo10.jpeg" alt="Gallery Photo 10" loading="lazy">
+                <img src="photo11.jpeg" alt="Gallery Photo 11" loading="lazy">
+                <img src="photo12.jpeg" alt="Gallery Photo 12" loading="lazy">
+                <img src="photo13.jpeg" alt="Gallery Photo 13" loading="lazy">
+                <img src="photo14.jpeg" alt="Gallery Photo 14" loading="lazy">
+                <img src="photo15.jpeg" alt="Gallery Photo 15" loading="lazy">
+                <img src="photo16.jpeg" alt="Gallery Photo 16" loading="lazy">
+                <img src="photo17.jpeg" alt="Gallery Photo 17" loading="lazy">
+                <img src="photo18.jpeg" alt="Gallery Photo 18" loading="lazy">
+                <img src="photo19.jpeg" alt="Gallery Photo 19" loading="lazy">
+                <img src="photo20.jpeg" alt="Gallery Photo 20" loading="lazy">
+            </div>
         </section>
 
         <section class="info-block">
@@ -400,8 +447,9 @@
             <p>참석이 어려우시더라도 축하해 주시는 마음 깊이 간직하겠습니다.<br>따뜻한 마음으로 축복해 주시는 모든 분들께 감사드립니다.</p>
             
             <div class="account-box">
-                <p style="margin-bottom: 8px;"><strong>HAN Il Hong 한 일홍 (부):</strong> [추후 업데이트 예정]</p>
-                <p style="margin: 0;"><strong>PARK Hyo Jung 박 효정 (모):</strong> [추후 업데이트 예정]</p>
+                <p style="margin-bottom: 8px;"><strong>HAN Il Hong 한 일홍 (부)</strong><br>우리은행 30408690602001</p>
+                <p style="margin: 0;"><strong>PARK Hyo Jung 박 효정 (모)</strong><br>농협은행 3510518906873</p>
+                <p style="margin: 0;"><strong>HAN Bo Min 한보민</strong><br>하나은행 74391044732007</p>
             </div>
         </section>
 
@@ -437,56 +485,17 @@
                         <option value="No">아니요, 마음으로 축하하겠습니다</option>
                     </select>
                 </div>
-                
-                <div class="form-group">
-                    <label for="afterparty">애프터 파티(서울 시내)에 참석하시나요?</label>
-                    <select id="afterparty" name="Afterparty_Attendance" class="form-input" required>
-                        <option value="" disabled selected>선택해 주세요...</option>
-                        <option value="Yes">예, 참석합니다</option>
-                        <option value="No">아니요, 마음으로 축하하겠습니다</option>
-                    </select>
-                </div>
 
                 <button type="submit" class="submit-btn">참석 여부 보내기</button>
             </form>
 
             <div class="contact-alternatives">
                 직접 연락을 원하시는 경우 아래 연락처로 말씀해 주셔도 좋습니다:<br><br>
-                <strong>카카오톡 ID:</strong> [추후 업데이트 예정]<br>
+                <strong>연락처:</strong> +821021144941<br>
                 <strong>이메일:</strong> <a href="mailto:bbbbbominhan@gmail.com">bbbbbominhan@gmail.com</a>
             </div>
         </section>
     </div>
-
-    <!-- The Native HTML Modal overlay for Seoul Travel Pictures -->
-    <dialog id="photos-modal" class="tips-modal">
-        <div class="modal-header">
-            <h2>저희의 서울 여행 사진</h2>
-            <button id="close-photos" class="close-modal-btn" aria-label="Close photos">✕</button>
-        </div>
-        <div class="modal-content photo-gallery">
-            <img src="photo1.jpeg" alt="Seoul Travel Photo 1" loading="lazy">
-            <img src="photo2.jpeg" alt="Seoul Travel Photo 2" loading="lazy">
-            <img src="photo3.jpeg" alt="Seoul Travel Photo 3" loading="lazy">
-            <img src="photo4.jpeg" alt="Seoul Travel Photo 4" loading="lazy">
-            <img src="photo5.jpeg" alt="Seoul Travel Photo 5" loading="lazy">
-            <img src="photo6.jpeg" alt="Seoul Travel Photo 6" loading="lazy">
-            <img src="photo7.jpeg" alt="Seoul Travel Photo 7" loading="lazy">
-            <img src="photo8.jpeg" alt="Seoul Travel Photo 8" loading="lazy">
-            <img src="photo9.jpeg" alt="Seoul Travel Photo 9" loading="lazy">
-            <img src="photo10.jpeg" alt="Seoul Travel Photo 10" loading="lazy">
-            <img src="photo11.jpeg" alt="Seoul Travel Photo 11" loading="lazy">
-            <img src="photo12.jpeg" alt="Seoul Travel Photo 12" loading="lazy">
-            <img src="photo13.jpeg" alt="Seoul Travel Photo 13" loading="lazy">
-            <img src="photo14.jpeg" alt="Seoul Travel Photo 14" loading="lazy">
-            <img src="photo15.jpeg" alt="Seoul Travel Photo 15" loading="lazy">
-            <img src="photo16.jpeg" alt="Seoul Travel Photo 16" loading="lazy">
-            <img src="photo17.jpeg" alt="Seoul Travel Photo 17" loading="lazy">
-            <img src="photo18.jpeg" alt="Seoul Travel Photo 18" loading="lazy">
-            <img src="photo19.jpeg" alt="Seoul Travel Photo 19" loading="lazy">
-            <img src="photo20.jpeg" alt="Seoul Travel Photo 20" loading="lazy">
-        </div>
-    </dialog>
 
     <!-- Success Modal Popup -->
     <dialog id="success-modal" class="tips-modal">
@@ -502,43 +511,6 @@
     </dialog>
 
     <script>
-        function setupModal(openBtnId, modalId, closeBtnId) {
-            const modal = document.getElementById(modalId);
-            const openBtn = document.getElementById(openBtnId);
-            const closeBtn = document.getElementById(closeBtnId);
-
-            if(openBtn) {
-                openBtn.addEventListener('click', () => {
-                    modal.showModal();
-                    document.body.style.overflow = 'hidden'; 
-                });
-            }
-
-            if(closeBtn) {
-                closeBtn.addEventListener('click', () => {
-                    modal.close();
-                    document.body.style.overflow = '';
-                });
-            }
-
-            if(modal) {
-                modal.addEventListener('click', (e) => {
-                    const dialogDimensions = modal.getBoundingClientRect();
-                    if (
-                        e.clientX < dialogDimensions.left ||
-                        e.clientX > dialogDimensions.right ||
-                        e.clientY < dialogDimensions.top ||
-                        e.clientY > dialogDimensions.bottom
-                    ) {
-                        modal.close();
-                        document.body.style.overflow = '';
-                    }
-                });
-            }
-        }
-
-        setupModal('open-photos', 'photos-modal', 'close-photos');
-
         const floatingRsvp = document.getElementById('floating-rsvp');
         window.addEventListener('scroll', () => {
             if (window.scrollY > window.innerHeight * 0.6) {
