@@ -64,6 +64,9 @@
         .container section:nth-child(4) { animation-delay: 0.4s; }
         .container section:nth-child(5) { animation-delay: 0.5s; }
         .container section:nth-child(6) { animation-delay: 0.6s; }
+        .container section:nth-child(7) { animation-delay: 0.7s; }
+        .container section:nth-child(8) { animation-delay: 0.8s; }
+        .container section:nth-child(9) { animation-delay: 0.9s; }
 
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
@@ -242,6 +245,45 @@
             background-image: url('sunwoongak.jpeg');
         }
 
+        /* Horizontal Scroll Gallery Styles */
+        .gallery-scroll-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 16px;
+            padding: 8px 0 24px 0;
+            margin-top: 24px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .gallery-scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .gallery-scroll-container::-webkit-scrollbar-track {
+            background: var(--inset-bg);
+            border-radius: 4px;
+        }
+        
+        .gallery-scroll-container::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.5);
+            border-radius: 4px;
+        }
+        
+        .gallery-scroll-container::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        .gallery-scroll-container img {
+            flex: 0 0 85%;
+            max-width: 350px;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            scroll-snap-align: center;
+        }
+
         /* Two Column Text Layout for Travel & Logistics */
         .two-column-text {
             display: flex;
@@ -361,19 +403,6 @@
         .modal-content li { margin-bottom: 16px; line-height: 1.8; }
         .modal-content strong { color: var(--text-main); }
 
-        /* Photo Gallery inside Modal */
-        .photo-gallery img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-            display: block;
-        }
-        .photo-gallery img:last-child {
-            margin-bottom: 0;
-        }
-
         /* Highlighted Timeline Event */
         .timeline li.highlight-event .time,
         .timeline li.highlight-event .event {
@@ -395,6 +424,54 @@
         }
         .timeline .time { font-weight: 600; width: 60px; flex-shrink: 0; color: var(--accent); text-align: right; padding-right: 0; margin-top: 1px; }
         .timeline .event { color: var(--text-muted); margin-left: 45px; flex: 1; font-size: 1.05rem; }
+
+        /* Professional Account Box Styling */
+        .account-box {
+            display: flex; flex-direction: column; gap: 16px; margin-top: 32px;
+        }
+        
+        .account-item {
+            background-color: var(--inset-bg); padding: 24px; border-radius: 12px;
+            text-align: center; border: 1px solid var(--divider);
+        }
+
+        .account-name {
+            font-size: 1.3rem; color: var(--accent); margin-bottom: 8px; font-weight: 600;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .account-details {
+            font-family: 'Inter', sans-serif; font-size: 1.15rem; color: var(--text-main);
+            margin-bottom: 16px; letter-spacing: 0.03em;
+        }
+
+        .account-bank {
+            color: var(--text-muted); font-size: 0.95rem; display: block; margin-bottom: 4px;
+        }
+
+        .copy-btn {
+            background: transparent; border: 1px solid var(--accent);
+            color: var(--accent); padding: 8px 24px; border-radius: 30px; font-size: 0.95rem;
+            cursor: pointer; transition: all 0.3s ease; font-family: 'Inter', sans-serif;
+        }
+
+        .copy-btn:hover {
+            background: var(--accent); color: var(--bg-color);
+        }
+
+        /* MobilePay Button */
+        .mobilepay-btn {
+            background: #5A78FF; /* MobilePay Brand Blue */
+            border: none;
+            color: #FFFFFF; padding: 10px 24px; border-radius: 30px; font-size: 1rem;
+            cursor: pointer; transition: all 0.3s ease; font-family: 'Inter', sans-serif;
+            font-weight: 600; display: inline-flex; align-items: center; justify-content: center;
+            text-decoration: none; margin-top: 16px; gap: 8px; width: auto;
+        }
+
+        .mobilepay-btn:hover {
+            background: #4a66eb; transform: translateY(-2px); color: #ffffff; border: none;
+        }
 
         /* The Custom RSVP Block */
         .container section.rsvp-block { 
@@ -571,6 +648,8 @@
             .split-section { flex-direction: column-reverse; gap: 32px; }
             .split-image-side { flex: none; width: 100%; height: 240px; }
             
+            .gallery-scroll-container img { height: 350px; }
+            
             .two-column-text { flex-direction: column; gap: 24px; }
             
             .timeline::before { left: 5px; }
@@ -590,6 +669,7 @@
             }
 
             .rsvp-form { padding: 24px 20px; }
+            .account-item { padding: 20px 16px; }
         }
     </style>
 </head>
@@ -648,19 +728,15 @@
                 </li>
                 <li>
                     <span class="time">12:30</span>
-                    <span class="event">Dining buffet opens. Relaxing and hanging out at the venue.</span>
+                    <span class="event">Dining buffet opens.</span>
                 </li>
                 <li>
                     <span class="time">15:00</span>
-                    <span class="event">Getting back to Seoul, time for a short break.</span>
+                    <span class="event">Ceremony ends.</span>
                 </li>
                 <li>
                     <span class="time">18:00</span>
                     <span class="event">Afterparty in Seoul.</span>
-                </li>
-                <li>
-                    <span class="time">00:00</span>
-                    <span class="event">Nightlife up to everyone's consideration.</span>
                 </li>
             </ul>
         </section>
@@ -693,12 +769,35 @@
                 <span>Tips for Exploring Seoul</span>
                 <span class="plus-icon">+</span>
             </button>
+        </section>
 
-            <!-- Photos Modal Trigger Button -->
-            <button id="open-photos" class="tips-button" aria-label="Open our Seoul travel pictures">
-                <span>Our Seoul Travel Pictures</span>
-                <span class="plus-icon">+</span>
-            </button>
+        <!-- Dedicated Photo Gallery Section -->
+        <section class="info-block">
+            <h2>Our Moments</h2>
+            <p>Sharing some of our favorite memories together.</p>
+            
+            <div class="gallery-scroll-container">
+                <img src="photo1.jpeg" alt="Gallery Photo 1" loading="lazy">
+                <img src="photo2.jpeg" alt="Gallery Photo 2" loading="lazy">
+                <img src="photo3.jpeg" alt="Gallery Photo 3" loading="lazy">
+                <img src="photo4.jpeg" alt="Gallery Photo 4" loading="lazy">
+                <img src="photo5.jpeg" alt="Gallery Photo 5" loading="lazy">
+                <img src="photo6.jpeg" alt="Gallery Photo 6" loading="lazy">
+                <img src="photo7.jpeg" alt="Gallery Photo 7" loading="lazy">
+                <img src="photo8.jpeg" alt="Gallery Photo 8" loading="lazy">
+                <img src="photo9.jpeg" alt="Gallery Photo 9" loading="lazy">
+                <img src="photo10.jpeg" alt="Gallery Photo 10" loading="lazy">
+                <img src="photo11.jpeg" alt="Gallery Photo 11" loading="lazy">
+                <img src="photo12.jpeg" alt="Gallery Photo 12" loading="lazy">
+                <img src="photo13.jpeg" alt="Gallery Photo 13" loading="lazy">
+                <img src="photo14.jpeg" alt="Gallery Photo 14" loading="lazy">
+                <img src="photo15.jpeg" alt="Gallery Photo 15" loading="lazy">
+                <img src="photo16.jpeg" alt="Gallery Photo 16" loading="lazy">
+                <img src="photo17.jpeg" alt="Gallery Photo 17" loading="lazy">
+                <img src="photo18.jpeg" alt="Gallery Photo 18" loading="lazy">
+                <img src="photo19.jpeg" alt="Gallery Photo 19" loading="lazy">
+                <img src="photo20.jpeg" alt="Gallery Photo 20" loading="lazy">
+            </div>
         </section>
 
         <!-- Afterparty -->
@@ -708,10 +807,35 @@
         </section>
 
         <!-- A Note on Gifts -->
-        <section class="info-block">
+        <section class="info-block centered-block">
             <h2>A Note on Gifts</h2>
             <p>Having you travel across the globe to celebrate with us is truly the most meaningful gift we could receive. Since we are currently living in Doha and will be traveling light, we kindly ask that no physical gifts be brought to the venue.</p>
             <p>If you would still like to bless our marriage with a gift, a monetary contribution towards our future together would be deeply appreciated. This can be sent conveniently via MobilePay or bank transfer.</p>
+
+            <!-- Redesigned Professional Account Box -->
+            <div class="account-box">
+                <div class="account-item">
+                    <div class="account-name">Juuso Anttila</div>
+                    <div class="account-details">
+                        <span class="account-bank">IBAN (Bank Account)</span>
+                        FI66 4503 0010 2152 79
+                    </div>
+                    <div>
+                        <button class="copy-btn" onclick="copyAccount('FI66 4503 0010 2152 79', this)">Copy IBAN</button>
+                    </div>
+                    
+                    <!-- MobilePay Link Button -->
+                    <div>
+                        <a href="mobilepay://send?phone=0408327729" class="mobilepay-btn">
+                            <!-- Mobile App Icon Graphic -->
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line>
+                            </svg>
+                            Open MobilePay
+                        </a>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- RSVP Block -->
@@ -812,36 +936,6 @@
         </div>
     </dialog>
 
-    <!-- The Native HTML Modal overlay for Seoul Travel Pictures -->
-    <dialog id="photos-modal" class="tips-modal">
-        <div class="modal-header">
-            <h2>Our Seoul Travel Pictures</h2>
-            <button id="close-photos" class="close-modal-btn" aria-label="Close photos">✕</button>
-        </div>
-        <div class="modal-content photo-gallery">
-            <img src="photo1.jpeg" alt="Seoul Travel Photo 1" loading="lazy">
-            <img src="photo2.jpeg" alt="Seoul Travel Photo 2" loading="lazy">
-            <img src="photo3.jpeg" alt="Seoul Travel Photo 3" loading="lazy">
-            <img src="photo4.jpeg" alt="Seoul Travel Photo 4" loading="lazy">
-            <img src="photo5.jpeg" alt="Seoul Travel Photo 5" loading="lazy">
-            <img src="photo6.jpeg" alt="Seoul Travel Photo 6" loading="lazy">
-            <img src="photo7.jpeg" alt="Seoul Travel Photo 7" loading="lazy">
-            <img src="photo8.jpeg" alt="Seoul Travel Photo 8" loading="lazy">
-            <img src="photo9.jpeg" alt="Seoul Travel Photo 9" loading="lazy">
-            <img src="photo10.jpeg" alt="Seoul Travel Photo 10" loading="lazy">
-            <img src="photo11.jpeg" alt="Seoul Travel Photo 11" loading="lazy">
-            <img src="photo12.jpeg" alt="Seoul Travel Photo 12" loading="lazy">
-            <img src="photo13.jpeg" alt="Seoul Travel Photo 13" loading="lazy">
-            <img src="photo14.jpeg" alt="Seoul Travel Photo 14" loading="lazy">
-            <img src="photo15.jpeg" alt="Seoul Travel Photo 15" loading="lazy">
-            <img src="photo16.jpeg" alt="Seoul Travel Photo 16" loading="lazy">
-            <img src="photo17.jpeg" alt="Seoul Travel Photo 17" loading="lazy">
-            <img src="photo18.jpeg" alt="Seoul Travel Photo 18" loading="lazy">
-            <img src="photo19.jpeg" alt="Seoul Travel Photo 19" loading="lazy">
-            <img src="photo20.jpeg" alt="Seoul Travel Photo 20" loading="lazy">
-        </div>
-    </dialog>
-
     <!-- Success Modal Popup -->
     <dialog id="success-modal" class="tips-modal">
         <div class="modal-header">
@@ -856,6 +950,25 @@
     </dialog>
 
     <script>
+        // Copy to clipboard function for bank accounts
+        function copyAccount(text, btnElement) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = btnElement.innerText;
+                btnElement.innerText = "Copied!";
+                btnElement.style.backgroundColor = "var(--accent)";
+                btnElement.style.color = "var(--bg-color)";
+                
+                setTimeout(() => {
+                    btnElement.innerText = originalText;
+                    btnElement.style.backgroundColor = "transparent";
+                    btnElement.style.color = "var(--accent)";
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                alert("Failed to copy. Please try manually.");
+            });
+        }
+
         // Reusable function to handle opening/closing modals cleanly
         function setupModal(openBtnId, modalId, closeBtnId) {
             const modal = document.getElementById(modalId);
@@ -894,7 +1007,6 @@
 
         // Initialize modals
         setupModal('open-tips', 'tips-modal', 'close-tips');
-        setupModal('open-photos', 'photos-modal', 'close-photos');
         
         // Manual setup for success modal since it opens programmatically
         const successModal = document.getElementById('success-modal');
