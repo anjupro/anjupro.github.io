@@ -909,15 +909,26 @@
                         <button class="copy-btn" onclick="copyAccount('FI66 4503 0010 2152 79', this)">Copy IBAN</button>
                     </div>
                     
-                    <!-- MobilePay Link Button -->
-                    <div>
-                        <a href="mobilepay://send?phone=+358408327729" class="mobilepay-btn">
-                            <!-- Mobile App Icon Graphic -->
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line>
-                            </svg>
-                            Open MobilePay
-                        </a>
+                    <!-- MobilePay Box Section -->
+                    <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--divider);">
+                        <div class="account-details" style="margin-bottom: 12px;">
+                            <span class="account-bank">MobilePay Box</span>
+                            Code: <strong>1864UA</strong>
+                        </div>
+                        
+                        <div>
+                            <!-- Replace the href below with your actual MobilePay share link -->
+                            <a href="https://qr.mobilepay.fi/box/e61e0d3b-795b-4ba9-ad48-bea13ec950b5/pay-in" class="mobilepay-btn" target="_blank" rel="noopener noreferrer">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line>
+                                </svg>
+                                Open MobilePay
+                            </a>
+                        </div>
+                        
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 12px;">
+                            On mobile, tap the button above. On desktop, open your MobilePay app and enter code <strong>1864UA</strong>.
+                        </div>
                     </div>
                 </div>
             </div>
