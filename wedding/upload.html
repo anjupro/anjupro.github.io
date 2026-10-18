@@ -306,8 +306,8 @@
     </div>
 
     <script>
-        // --- IMPORTANT: PASTE YOUR GOOGLE SCRIPT URL BELOW ---
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx3G17nXiSb_AF7krrClAUAFkIE5CaS2jT3GD24HoipN6ohdYLtO-GiiptwefvpqTei/exec';
+        // --- PASTE YOUR NEW CLOUD RUN URL HERE ---
+        const CLOUD_RUN_URL = 'https://generate-upload-url-240038891443.asia-northeast3.run.app';
 
         const fileInput = document.getElementById('file-input');
         const nameInput = document.getElementById('uploader-name');
@@ -332,18 +332,44 @@
             nameInput.disabled = true;
             loadingUi.style.display = 'block';
             statusText.innerText = "Uploading Original Files... / 원본 파일 업로드 중...";
+            progressText.innerText = `Preparing ${files.length} photos...`;
 
             let successCount = 0;
 
-            for (let i = 0; i < files.length; i++) {
-                progressText.innerText = `Sending photo ${i + 1} of ${files.length} (${Math.round(((i+1)/files.length)*100)}%)`;
+            // Execute all file uploads in parallel
+            const uploadPromises = Array.from(files).map(async (file) => {
                 try {
-                    await uploadRawFile(files[i], uploaderName);
+                    // 1. Ask Cloud Run for a temporary VIP Pass (Signed URL)
+                    const response = await fetch(CLOUD_RUN_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ 
+                            filename: file.name, 
+                            uploaderName: uploaderName 
+                        })
+                    });
+                    
+                    if (!response.ok) throw new Error('Failed to get upload URL');
+                    const { url } = await response.json();
+
+                    // 2. Upload the RAW binary file directly to Google Cloud Storage
+                    const uploadResponse = await fetch(url, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/octet-stream' },
+                        body: file
+                    });
+
+                    if (!uploadResponse.ok) throw new Error('Failed to upload file');
+                    
                     successCount++;
+                    progressText.innerText = `Uploaded ${successCount} of ${files.length} photos...`;
                 } catch (error) {
-                    console.error("Upload failed for a file", error);
+                    console.error("Upload failed for", file.name, error);
                 }
-            }
+            });
+
+            // Wait for all parallel uploads to finish
+            await Promise.all(uploadPromises);
 
             loadingUi.style.display = 'none';
             uploadInterface.style.display = 'inline-block';
@@ -357,35 +383,6 @@
             
             fileInput.value = '';
         });
-
-        function uploadRawFile(file, uploaderName) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                
-                reader.onload = function(f) {
-                    const base64Data = f.target.result.split(',')[1];
-                    
-                    const formData = new URLSearchParams();
-                    formData.append('data', base64Data);
-                    formData.append('filename', file.name);
-                    formData.append('mimeType', file.type);
-                    formData.append('uploaderName', uploaderName);
-
-                    fetch(SCRIPT_URL, {
-                        method: 'POST',
-                        body: formData,
-                        mode: 'no-cors' 
-                    }).then(() => {
-                        resolve();
-                    }).catch((error) => {
-                        reject(error);
-                    });
-                };
-                
-                reader.onerror = () => reject("Error reading file");
-                reader.readAsDataURL(file);
-            });
-        }
     </script>
 </body>
 </html>
