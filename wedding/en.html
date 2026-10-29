@@ -251,10 +251,9 @@
             overflow-x: auto;
             gap: 24px;
             padding: 8px 0 24px 0;
-            margin-top: 24px;
+            margin-top: 32px;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
-            /* Flex-start ensures cards don't stretch with empty space vertically */
             align-items: flex-start; 
         }
         
@@ -267,49 +266,124 @@
             flex: 0 0 85%;
             max-width: 480px;
             scroll-snap-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Horizontal Timeline Logic */
+        .journey-track {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+            z-index: 1;
+            padding-left: 6px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .journey-track::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 10px; /* Originates from the center of the dot */
+            width: calc(100% + 24px); /* Stretches across the gap to the next card's dot */
+            height: 1px; /* Matches the day's flow thickness */
+            background-color: var(--divider);
+            z-index: -1;
+        }
+
+        .journey-milestone:last-child .journey-track::before {
+            display: none; /* Do not draw a line after the final item */
+        }
+
+        .track-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            box-shadow: 0 0 0 5px var(--alt-bg), 0 0 0 8px rgba(212, 175, 55, 0.15); 
+            flex-shrink: 0;
+        }
+
+        .journey-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.45rem;
+            color: var(--accent);
+            margin: 0;
+            font-weight: 600;
+            background-color: var(--alt-bg); /* Opaque background cuts out the line running behind the text */
+            padding-right: 16px; 
+            line-height: 1.2;
+        }
+
+        /* The Box Containing the Content */
+        .journey-card {
             background-color: var(--inset-bg);
             border: 1px solid var(--divider);
             border-radius: 12px;
             padding: 24px;
             display: flex;
             flex-direction: column;
-            height: auto; /* Hugs the text and pictures cleanly */
-        }
-        
-        .journey-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.45rem;
-            color: var(--accent);
-            margin: 0 0 12px 0;
-            font-weight: 600;
+            height: auto; 
         }
         
         .journey-desc {
             color: var(--text-muted);
-            margin: 0 0 0 0;
-            font-size: 1rem;
+            margin: 0;
+            font-size: 1.05rem;
             line-height: 1.5;
         }
 
-        /* New Collage Photo Layout inside Milestones */
+        /* Animated Swipe Indicator */
+        .swipe-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 12px;
+            padding-right: 12px;
+            animation: pulse-indicator 2.5s infinite ease-in-out;
+        }
+
+        .swipe-indicator svg {
+            animation: bounce-right 2s infinite ease-in-out;
+            color: var(--accent);
+        }
+
+        @keyframes pulse-indicator {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes bounce-right {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(6px); }
+        }
+
+        /* Photo Collage Layout inside Milestones */
         .milestone-photos {
             display: flex;
             flex-wrap: wrap; /* Allows pictures to drop to the next line naturally */
             gap: 12px;
-            margin-top: 16px;
+            margin-top: 20px;
         }
         
         .journey-image-wrapper {
-            flex: 0 0 auto; /* Wraps tightly around the image, preventing all empty colored blocks! */
+            flex: 0 0 auto; /* Wraps tightly around the image, preventing empty blocks */
             border-radius: 6px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             cursor: zoom-in;
             overflow: hidden;
+            background-color: rgba(0,0,0,0.2);
         }
         
         .journey-image-wrapper img {
             display: block;
-            max-height: 130px; /* Thumnails are considerably smaller now */
+            max-height: 130px; /* Thumnails are considerably smaller */
             width: auto; /* Natural aspect ratio dictates width */
             max-width: 100%; /* Safety fallback for tiny screens */
             transition: transform 0.4s ease;
@@ -763,9 +837,9 @@
             .timeline .time { text-align: left; margin-left: 25px; margin-bottom: 6px; }
             .timeline .event { margin-left: 25px; }
             
-            .journey-milestone { padding: 20px; }
-            .journey-title { font-size: 1.35rem; }
-            .journey-image-wrapper img { max-height: 110px; } /* Slightly smaller for mobile collage */
+            .journey-title { font-size: 1.25rem; }
+            .journey-card { padding: 20px; }
+            .journey-image-wrapper img { max-height: 110px; } 
             
             /* Lightbox tweaks */
             .lightbox-close-btn { top: 16px; right: 16px; width: 36px; height: 36px; font-size: 1.2rem; }
@@ -892,79 +966,109 @@
                 
                 <!-- Osaka Milestone with 3 photos -->
                 <div class="journey-milestone">
-                    <h3 class="journey-title">Our first trip together in Osaka</h3>
-                    <p class="journey-desc">Exploring the vibrant streets, incredible food, and discovering Japan together.</p>
-                    <div class="milestone-photos">
-                        <div class="journey-image-wrapper">
-                            <img src="photo1.jpeg" alt="Osaka moments - 1" loading="lazy">
-                        </div>
-                        <div class="journey-image-wrapper">
-                            <img src="photo2.jpeg" alt="Osaka moments - 2" loading="lazy">
-                        </div>
-                        <div class="journey-image-wrapper">
-                            <img src="photo4.jpeg" alt="Osaka moments - 3" loading="lazy">
+                    <div class="journey-track">
+                        <div class="track-dot"></div>
+                        <h3 class="journey-title">Our first trip in Osaka</h3>
+                    </div>
+                    <div class="journey-card">
+                        <p class="journey-desc">Exploring the vibrant streets, incredible food, and discovering Japan together.</p>
+                        <div class="milestone-photos">
+                            <div class="journey-image-wrapper">
+                                <img src="photo1.jpeg" alt="Osaka moments - 1" loading="lazy">
+                            </div>
+                            <div class="journey-image-wrapper">
+                                <img src="photo2.jpeg" alt="Osaka moments - 2" loading="lazy">
+                            </div>
+                            <div class="journey-image-wrapper">
+                                <img src="photo4.jpeg" alt="Osaka moments - 3" loading="lazy">
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Doha Milestone with 8 photos example -->
                 <div class="journey-milestone">
-                    <h3 class="journey-title">Building our life in Doha</h3>
-                    <p class="journey-desc">Everyday life, desert drives, and making memories at our home base in Qatar.</p>
-                    <div class="milestone-photos">
-                        <div class="journey-image-wrapper">
-                            <img src="photo5.jpeg" alt="Life in Doha - 1" loading="lazy">
-                        </div>
-                        <div class="journey-image-wrapper">
-                            <img src="photo6.jpeg" alt="Life in Doha - 2" loading="lazy">
-                        </div>
-                        <div class="journey-image-wrapper">
-                            <img src="photo10.jpeg" alt="Life in Doha - 3" loading="lazy">
-                        </div>
-                        <div class="journey-image-wrapper">
-                            <img src="photo11.jpeg" alt="Life in Doha - 4" loading="lazy">
-                        </div>
-                        <div class="journey-image-wrapper">
-                            <img src="photo12.jpeg" alt="Life in Doha - 5" loading="lazy">
-                        </div>
-                        <div class="journey-image-wrapper">
-                            <img src="photo13.jpeg" alt="Life in Doha - 6" loading="lazy">
-                        </div>
-                        <div class="journey-image-wrapper">
-                            <img src="photo14.jpeg" alt="Life in Doha - 7" loading="lazy">
-                        </div>
-                        <div class="journey-image-wrapper">
-                            <img src="photo15.jpeg" alt="Life in Doha - 8" loading="lazy">
+                    <div class="journey-track">
+                        <div class="track-dot"></div>
+                        <h3 class="journey-title">Building our life in Doha</h3>
+                    </div>
+                    <div class="journey-card">
+                        <p class="journey-desc">Everyday life, desert drives, and making memories at our home base in Qatar.</p>
+                        <div class="milestone-photos">
+                            <div class="journey-image-wrapper">
+                                <img src="photo5.jpeg" alt="Life in Doha - 1" loading="lazy">
+                            </div>
+                            <div class="journey-image-wrapper">
+                                <img src="photo6.jpeg" alt="Life in Doha - 2" loading="lazy">
+                            </div>
+                            <div class="journey-image-wrapper">
+                                <img src="photo10.jpeg" alt="Life in Doha - 3" loading="lazy">
+                            </div>
+                            <div class="journey-image-wrapper">
+                                <img src="photo11.jpeg" alt="Life in Doha - 4" loading="lazy">
+                            </div>
+                            <div class="journey-image-wrapper">
+                                <img src="photo12.jpeg" alt="Life in Doha - 5" loading="lazy">
+                            </div>
+                            <div class="journey-image-wrapper">
+                                <img src="photo13.jpeg" alt="Life in Doha - 6" loading="lazy">
+                            </div>
+                            <div class="journey-image-wrapper">
+                                <img src="photo14.jpeg" alt="Life in Doha - 7" loading="lazy">
+                            </div>
+                            <div class="journey-image-wrapper">
+                                <img src="photo15.jpeg" alt="Life in Doha - 8" loading="lazy">
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Proposal Milestone with 1 photo -->
                 <div class="journey-milestone">
-                    <h3 class="journey-title">The Proposal in Zekreet</h3>
-                    <p class="journey-desc">A beautiful surprise getaway at Our Habitas Ras Abrouq.</p>
-                    <div class="milestone-photos">
-                        <div class="journey-image-wrapper">
-                            <img src="photo7.jpeg" alt="The Proposal at Ras Abrouq" loading="lazy">
+                    <div class="journey-track">
+                        <div class="track-dot"></div>
+                        <h3 class="journey-title">The Proposal in Zekreet</h3>
+                    </div>
+                    <div class="journey-card">
+                        <p class="journey-desc">A beautiful surprise getaway at Our Habitas Ras Abrouq.</p>
+                        <div class="milestone-photos">
+                            <div class="journey-image-wrapper">
+                                <img src="photo7.jpeg" alt="The Proposal at Ras Abrouq" loading="lazy">
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Wedding Milestone with 2 photos -->
                 <div class="journey-milestone">
-                    <h3 class="journey-title">The Wedding in Seoul</h3>
-                    <p class="journey-desc">We can't wait to add this moment to our timeline alongside all of you!</p>
-                    <div class="milestone-photos">
-                        <div class="journey-image-wrapper">
-                            <img src="photo8.jpeg" alt="Wedding Preparations - 1" loading="lazy">
-                        </div>
-                        <div class="journey-image-wrapper">
-                            <img src="photo9.jpeg" alt="Wedding Preparations - 2" loading="lazy">
+                    <div class="journey-track">
+                        <div class="track-dot"></div>
+                        <h3 class="journey-title">The Wedding in Seoul</h3>
+                    </div>
+                    <div class="journey-card">
+                        <p class="journey-desc">We can't wait to add this moment to our timeline alongside all of you!</p>
+                        <div class="milestone-photos">
+                            <div class="journey-image-wrapper">
+                                <img src="photo8.jpeg" alt="Wedding Preparations - 1" loading="lazy">
+                            </div>
+                            <div class="journey-image-wrapper">
+                                <img src="photo9.jpeg" alt="Wedding Preparations - 2" loading="lazy">
+                            </div>
                         </div>
                     </div>
                 </div>
 
             </div>
+
+            <!-- Scroll Indicator -->
+            <div class="swipe-indicator">
+                <span>Swipe to explore our journey</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="4" y1="12" x2="20" y2="12"></line>
+                    <polyline points="14 6 20 12 14 18"></polyline>
+                </svg>
+            </div>
+
         </section>
 
         <!-- Afterparty -->
