@@ -245,47 +245,164 @@
             background-image: url('sunwoongak.jpeg');
         }
 
-        /* Horizontal Scroll Gallery Styles */
-        .gallery-scroll-container {
-            display: flex;
-            overflow-x: auto;
-            gap: 20px; /* Slightly larger gap to breathe with text */
-            padding: 8px 0 24px 0;
-            margin-top: 24px;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
+        /* Our Journey Timeline Styles */
+        .journey-timeline {
+            list-style: none;
+            padding: 0;
+            margin: 40px 0 0 0;
+            position: relative;
         }
         
-        .gallery-scroll-container::-webkit-scrollbar { height: 8px; }
-        .gallery-scroll-container::-webkit-scrollbar-track { background: var(--inset-bg); border-radius: 4px; }
-        .gallery-scroll-container::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.5); border-radius: 4px; }
-        .gallery-scroll-container::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+        .journey-timeline::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            bottom: 24px;
+            left: 24px;
+            width: 2px;
+            background-color: var(--divider);
+        }
+        
+        .journey-item {
+            position: relative;
+            padding-left: 64px;
+            margin-bottom: 56px;
+        }
+        
+        .journey-item:last-child {
+            margin-bottom: 24px;
+        }
+        
+        .journey-item::before {
+            content: '';
+            position: absolute;
+            left: 17px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            box-shadow: 0 0 0 6px var(--alt-bg), 0 0 0 8px rgba(212, 175, 55, 0.2);
+            z-index: 2;
+        }
+        
+        .journey-date {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--accent);
+            margin-bottom: 4px;
+            display: block;
+        }
+        
+        .journey-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin: 0 0 12px 0;
+            color: var(--text-main);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .journey-desc {
+            color: var(--text-muted);
+            margin: 0 0 20px 0;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        
+        /* Image wrapper forces auto-height calculation to prevent cropping */
+        .journey-image-wrapper {
+            display: block;
+            width: 100%;
+            max-width: 480px; 
+            border-radius: 8px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+            cursor: zoom-in;
+            overflow: hidden;
+            background-color: var(--inset-bg); 
+            position: relative;
+        }
+        
+        .journey-image-wrapper img {
+            display: block;
+            width: 100%;
+            height: auto; 
+            transition: transform 0.4s ease;
+        }
+        
+        .journey-image-wrapper:hover img {
+            transform: scale(1.03);
+        }
 
-        /* New Photo Card Wrapper */
-        .photo-card {
-            flex: 0 0 85%;
-            max-width: 350px;
-            scroll-snap-align: center;
+        /* Full-Screen Image Lightbox Styling */
+        .lightbox-modal {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            max-width: 100vw;
+            max-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        
+        .lightbox-modal::backdrop {
+            background: rgba(15, 17, 13, 0.95);
+            backdrop-filter: blur(6px);
+        }
+        
+        .lightbox-content {
+            position: relative;
             display: flex;
             flex-direction: column;
-            gap: 12px; /* Space between the image and the text */
-        }
-
-        .photo-card img {
+            align-items: center;
+            justify-content: center;
             width: 100%;
-            height: 450px;
-            object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            height: 100%;
+            padding: 24px;
+            box-sizing: border-box;
         }
-
-        /* The Caption Text */
-        .photo-card p {
-            margin: 0;
-            font-size: 0.95rem;
-            color: var(--text-muted);
+        
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        
+        .lightbox-caption {
+            color: var(--text-main);
+            margin-top: 16px;
+            font-size: 1.15rem;
+            font-family: 'Playfair Display', serif;
             text-align: center;
-            line-height: 1.5;
+        }
+        
+        .lightbox-close-btn {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .lightbox-close-btn:hover {
+            background: var(--accent);
+            color: var(--bg-color);
+            border-color: var(--accent);
+            transform: scale(1.05);
         }
 
         /* Two Column Text Layout for Travel & Logistics */
@@ -329,7 +446,7 @@
             color: var(--text-muted);
         }
 
-        /* Full-Screen Modal Styling */
+        /* Full-Screen Informational Modal Styling */
         .tips-modal {
             background-color: var(--alt-bg);
             border: 1px solid var(--divider);
@@ -414,7 +531,7 @@
             font-weight: 600;
         }
 
-        /* Visual Timeline */
+        /* Visual Timeline for Schedule */
         .timeline { list-style: none; padding: 0; margin: 40px 0 0 0; position: relative; }
         .timeline::before {
             content: ''; position: absolute; top: 5px; bottom: 20px; left: 80px;
@@ -652,8 +769,6 @@
             .split-section { flex-direction: column-reverse; gap: 32px; }
             .split-image-side { flex: none; width: 100%; height: 240px; }
             
-            .photo-card img { height: 350px; }
-            
             .two-column-text { flex-direction: column; gap: 24px; }
             
             .timeline::before { left: 5px; }
@@ -661,6 +776,15 @@
             .timeline li::before { left: 1px; top: 7px; }
             .timeline .time { text-align: left; margin-left: 25px; margin-bottom: 6px; }
             .timeline .event { margin-left: 25px; }
+            
+            /* Mobile Journey Timeline overrides */
+            .journey-timeline::before { left: 12px; }
+            .journey-item { padding-left: 36px; }
+            .journey-item::before { left: 5px; }
+            .journey-title { font-size: 1.4rem; }
+            
+            /* Lightbox tweaks */
+            .lightbox-close-btn { top: 16px; right: 16px; width: 36px; height: 36px; font-size: 1.2rem; }
             
             .modal-header { padding: 20px 24px; }
             .modal-content { padding: 24px; }
@@ -775,104 +899,48 @@
             </button>
         </section>
 
-        <!-- Dedicated Photo Gallery Section -->
-        <section class="info-block">
-            <h2>Our Moments</h2>
-            <p>Sharing some of our favorite memories together.</p>
+        <!-- Our Journey Timeline -->
+        <section class="info-block" id="journey">
+            <h2>Our Journey</h2>
+            <p>From our first adventures to this special day.</p>
             
-            <div class="gallery-scroll-container">
-                
-                <div class="photo-card">
-                    <img src="photo1.jpeg" alt="Gallery Photo 1" loading="lazy">
-                    <p>Exploring Seoul.</p>
-                </div>
+            <ul class="journey-timeline">
+                <li class="journey-item">
+                    <span class="journey-date">April 2026</span>
+                    <h3 class="journey-title">First Trip Together</h3>
+                    <p class="journey-desc">Exploring the vibrant streets and fantastic food in Osaka, Japan.</p>
+                    <div class="journey-image-wrapper">
+                        <img src="photo1.jpeg" alt="First Trip Together in Osaka" loading="lazy">
+                    </div>
+                </li>
 
-                <div class="photo-card">
-                    <img src="photo2.jpeg" alt="Gallery Photo 2" loading="lazy">
-                    <p>Exploring Seoul.</p>
-                </div>
+                <li class="journey-item">
+                    <span class="journey-date">Summer 2026</span>
+                    <h3 class="journey-title">Doha Moments</h3>
+                    <p class="journey-desc">Everyday life, desert drives, and building our home base in Qatar.</p>
+                    <div class="journey-image-wrapper">
+                        <img src="photo2.jpeg" alt="Doha Moments" loading="lazy">
+                    </div>
+                </li>
 
-                <div class="photo-card">
-                    <img src="photo4.jpeg" alt="Gallery Photo 3" loading="lazy">
-                    <p>In Itaewon. Tere!</p>
-                </div>
+                <li class="journey-item">
+                    <span class="journey-date">September 2026</span>
+                    <h3 class="journey-title">The Proposal</h3>
+                    <p class="journey-desc">A beautiful surprise getaway at Our Habitas Ras Abrouq in the Zekreet desert.</p>
+                    <div class="journey-image-wrapper">
+                        <img src="photo4.jpeg" alt="The Proposal at Ras Abrouq" loading="lazy">
+                    </div>
+                </li>
 
-                <div class="photo-card">
-                    <img src="photo5.jpeg" alt="Gallery Photo 3" loading="lazy">
-                    <p>Jjjjannn!</p>
-                </div>
-
-                <div class="photo-card">
-                    <img src="photo6.jpeg" alt="Gallery Photo 3" loading="lazy">
-                    <p>A walk with Mr. Chic Choc!</p>
-                </div>
-
-                <div class="photo-card">
-                    <img src="photo7.jpeg" alt="Gallery Photo 3" loading="lazy">
-                    <p>Korean BBQ!</p>
-                </div>
-
-                <div class="photo-card">
-                    <img src="photo8.jpeg" alt="Gallery Photo 3" loading="lazy">
-                    <p>Wedding rings!</p>
-                </div>
-
-                <div class="photo-card">
-                    <img src="photo9.jpeg" alt="Gallery Photo 3" loading="lazy">
-                    <p>Bomin at Cheonggyecheon.</p>
-                </div>
-
-                <div class="photo-card">
-                    <img src="photo10.jpeg" alt="Gallery Photo 3" loading="lazy">
-                    <p>Palace grounds.</p>
-                </div>
-
-                <div class="photo-card">
-                    <img src="photo11.jpeg" alt="Gallery Photo 3" loading="lazy">
-                    <p>Hanok village.</p>
-                </div>
-
-                <div class="photo-card">
-                    <img src="photo12.jpeg" alt="Gallery Photo 3" loading="lazy">
-                    <p>Myeong-dong.</p>
-                </div>
-
-                <div class="photo-card">
-                    <img src="photo13.jpeg" alt="Gallery Photo 3" loading="lazy">
-                    <p>Palace grounds.</p>
-                </div>
-
-                <div class="photo-card">
-                    <img src="photo14.jpeg" alt="Gallery Photo 3" loading="lazy">
-                    <p>Another round of BBQ!.</p>
-                </div>
-
-                <div class="photo-card">
-                    <img src="photo15.jpeg" alt="Gallery Photo 3" loading="lazy">
-                    <p>Seoul and Cheonggyecheon stream.</p>
-                </div>
-
-                <div class="photo-card">
-                    <img src="photo16.jpeg" alt="Gallery Photo 3" loading="lazy">
-                    <p>Food time!.</p>
-                </div>
-
-                <div class="photo-card">
-                    <img src="photo17.jpeg" alt="Gallery Photo 3" loading="lazy">
-                    <p>Tteokbokk!</p>
-                </div>
-
-                <div class="photo-card">
-                    <img src="photo18.jpeg" alt="Gallery Photo 3" loading="lazy">
-                    <p>Breakfast cafes.</p>
-                </div>
-
-                <div class="photo-card">
-                    <img src="photo19.jpeg" alt="Gallery Photo 3" loading="lazy">
-                    <p>Juuso at Namsan tower viewpoint.</p>
-                </div>
-
-            </div>
+                <li class="journey-item">
+                    <span class="journey-date">May 1, 2027</span>
+                    <h3 class="journey-title">The Wedding</h3>
+                    <p class="journey-desc">We can't wait to add this moment to our timeline alongside all of you!</p>
+                    <div class="journey-image-wrapper">
+                        <img src="photo5.jpeg" alt="Our Wedding Day" loading="lazy">
+                    </div>
+                </li>
+            </ul>
         </section>
 
         <!-- Afterparty -->
@@ -1035,6 +1103,15 @@
         </div>
     </dialog>
 
+    <!-- Image Lightbox Modal -->
+    <dialog id="lightbox-modal" class="lightbox-modal">
+        <button id="close-lightbox" class="lightbox-close-btn" aria-label="Close image">✕</button>
+        <div class="lightbox-content">
+            <img id="lightbox-img" class="lightbox-img" src="" alt="">
+            <div id="lightbox-caption" class="lightbox-caption"></div>
+        </div>
+    </dialog>
+
     <script>
         // Copy to clipboard function for bank accounts
         function copyAccount(text, btnElement) {
@@ -1116,6 +1193,37 @@
             }
         });
 
+        // --- NEW: Lightbox Logic for Journey Images ---
+        const lightboxModal = document.getElementById('lightbox-modal');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const closeLightboxBtn = document.getElementById('close-lightbox');
+        const journeyImages = document.querySelectorAll('.journey-image-wrapper img');
+
+        journeyImages.forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightboxCaption.textContent = img.alt; // Uses the image's alt attribute as the caption
+                lightboxModal.showModal();
+                document.body.style.overflow = 'hidden'; // Lock background scrolling
+            });
+        });
+
+        closeLightboxBtn.addEventListener('click', () => {
+            lightboxModal.close();
+            document.body.style.overflow = '';
+        });
+
+        // Close lightbox if clicking outside the image
+        lightboxModal.addEventListener('click', (e) => {
+            if (e.target === lightboxModal || e.target.classList.contains('lightbox-content')) {
+                lightboxModal.close();
+                document.body.style.overflow = '';
+            }
+        });
+        // ----------------------------------------------
+
         // Floating RSVP Button Logic
         const floatingRsvp = document.getElementById('floating-rsvp');
         window.addEventListener('scroll', () => {
@@ -1139,7 +1247,7 @@
             newInput.name = 'Guest_Name'; // Same name so Formspree groups them!
             newInput.className = 'form-input';
             newInput.required = true;
-            newInput.placeholder = 'e.g. Bomin';
+            newInput.placeholder = 'e.g. Bo Min';
             
             const removeBtn = document.createElement('button');
             removeBtn.type = 'button';
