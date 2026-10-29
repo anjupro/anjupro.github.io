@@ -245,80 +245,64 @@
             background-image: url('sunwoongak.jpeg');
         }
 
-        /* Our Journey Timeline Styles */
-        .journey-timeline {
-            list-style: none;
-            padding: 0;
-            margin: 40px 0 0 0;
-            position: relative;
+        /* Horizontal Scroll Timeline Styles */
+        .journey-scroll-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 24px;
+            padding: 8px 0 24px 0;
+            margin-top: 24px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
         }
         
-        .journey-timeline::before {
-            content: '';
-            position: absolute;
-            top: 8px;
-            bottom: 24px;
-            left: 24px;
-            width: 2px;
-            background-color: var(--divider);
-        }
-        
-        .journey-item {
-            position: relative;
-            padding-left: 64px;
-            margin-bottom: 56px;
-        }
-        
-        .journey-item:last-child {
-            margin-bottom: 24px;
-        }
-        
-        .journey-item::before {
-            content: '';
-            position: absolute;
-            left: 17px;
-            top: 6px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: var(--accent);
-            box-shadow: 0 0 0 6px var(--alt-bg), 0 0 0 8px rgba(212, 175, 55, 0.2);
-            z-index: 2;
-        }
-        
-        .journey-date {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.15rem;
-            color: var(--accent);
-            margin-bottom: 4px;
-            display: block;
+        .journey-scroll-container::-webkit-scrollbar { height: 8px; }
+        .journey-scroll-container::-webkit-scrollbar-track { background: var(--inset-bg); border-radius: 4px; }
+        .journey-scroll-container::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.5); border-radius: 4px; }
+        .journey-scroll-container::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        .journey-milestone {
+            flex: 0 0 85%;
+            max-width: 420px;
+            scroll-snap-align: center;
+            background-color: var(--inset-bg);
+            border: 1px solid var(--divider);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
         }
         
         .journey-title {
-            font-size: 1.6rem;
-            font-weight: 600;
-            margin: 0 0 12px 0;
-            color: var(--text-main);
             font-family: 'Playfair Display', serif;
+            font-size: 1.45rem;
+            color: var(--accent);
+            margin: 0 0 12px 0;
+            font-weight: 600;
         }
         
         .journey-desc {
             color: var(--text-muted);
             margin: 0 0 20px 0;
-            font-size: 1.05rem;
-            line-height: 1.6;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Photo Grid inside Milestones */
+        .milestone-photos {
+            display: flex;
+            gap: 12px;
+            margin-top: auto;
+            align-items: flex-start;
         }
         
-        /* Image wrapper forces auto-height calculation to prevent cropping */
         .journey-image-wrapper {
-            display: block;
-            width: 100%;
-            max-width: 480px; 
-            border-radius: 8px;
-            box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+            flex: 1;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             cursor: zoom-in;
             overflow: hidden;
-            background-color: var(--inset-bg); 
+            background-color: rgba(0,0,0,0.2);
             position: relative;
         }
         
@@ -330,7 +314,7 @@
         }
         
         .journey-image-wrapper:hover img {
-            transform: scale(1.03);
+            transform: scale(1.05);
         }
 
         /* Full-Screen Image Lightbox Styling */
@@ -582,7 +566,7 @@
 
         /* MobilePay Button */
         .mobilepay-btn {
-            background: #5A78FF; /* MobilePay Brand Blue */
+            background: #5A78FF; 
             border: none;
             color: #FFFFFF; padding: 10px 24px; border-radius: 30px; font-size: 1rem;
             cursor: pointer; transition: all 0.3s ease; font-family: 'Inter', sans-serif;
@@ -777,11 +761,8 @@
             .timeline .time { text-align: left; margin-left: 25px; margin-bottom: 6px; }
             .timeline .event { margin-left: 25px; }
             
-            /* Mobile Journey Timeline overrides */
-            .journey-timeline::before { left: 12px; }
-            .journey-item { padding-left: 36px; }
-            .journey-item::before { left: 5px; }
-            .journey-title { font-size: 1.4rem; }
+            .journey-milestone { padding: 20px; }
+            .journey-title { font-size: 1.35rem; }
             
             /* Lightbox tweaks */
             .lightbox-close-btn { top: 16px; right: 16px; width: 36px; height: 36px; font-size: 1.2rem; }
@@ -899,48 +880,70 @@
             </button>
         </section>
 
-        <!-- Our Journey Timeline -->
+        <!-- Our Journey Horizontal Scrolling Milestones -->
         <section class="info-block" id="journey">
             <h2>Our Journey</h2>
             <p>From our first adventures to this special day.</p>
             
-            <ul class="journey-timeline">
-                <li class="journey-item">
-                    <span class="journey-date">April 2026</span>
-                    <h3 class="journey-title">First Trip Together</h3>
-                    <p class="journey-desc">Exploring the vibrant streets and fantastic food in Osaka, Japan.</p>
-                    <div class="journey-image-wrapper">
-                        <img src="photo1.jpeg" alt="First Trip Together in Osaka" loading="lazy">
+            <div class="journey-scroll-container">
+                
+                <!-- Osaka Milestone with 3 photos -->
+                <div class="journey-milestone">
+                    <h3 class="journey-title">Our first trip together in Osaka</h3>
+                    <p class="journey-desc">Exploring the vibrant streets, incredible food, and discovering Japan together.</p>
+                    <div class="milestone-photos">
+                        <div class="journey-image-wrapper">
+                            <img src="photo1.jpeg" alt="Osaka moments - 1" loading="lazy">
+                        </div>
+                        <div class="journey-image-wrapper">
+                            <img src="photo2.jpeg" alt="Osaka moments - 2" loading="lazy">
+                        </div>
+                        <div class="journey-image-wrapper">
+                            <img src="photo4.jpeg" alt="Osaka moments - 3" loading="lazy">
+                        </div>
                     </div>
-                </li>
+                </div>
 
-                <li class="journey-item">
-                    <span class="journey-date">Summer 2026</span>
-                    <h3 class="journey-title">Doha Moments</h3>
-                    <p class="journey-desc">Everyday life, desert drives, and building our home base in Qatar.</p>
-                    <div class="journey-image-wrapper">
-                        <img src="photo2.jpeg" alt="Doha Moments" loading="lazy">
+                <!-- Doha Milestone with 2 photos -->
+                <div class="journey-milestone">
+                    <h3 class="journey-title">Building our life in Doha</h3>
+                    <p class="journey-desc">Everyday life, desert drives, and making memories at our home base in Qatar.</p>
+                    <div class="milestone-photos">
+                        <div class="journey-image-wrapper">
+                            <img src="photo5.jpeg" alt="Life in Doha - 1" loading="lazy">
+                        </div>
+                        <div class="journey-image-wrapper">
+                            <img src="photo6.jpeg" alt="Life in Doha - 2" loading="lazy">
+                        </div>
                     </div>
-                </li>
+                </div>
 
-                <li class="journey-item">
-                    <span class="journey-date">September 2026</span>
-                    <h3 class="journey-title">The Proposal</h3>
-                    <p class="journey-desc">A beautiful surprise getaway at Our Habitas Ras Abrouq in the Zekreet desert.</p>
-                    <div class="journey-image-wrapper">
-                        <img src="photo4.jpeg" alt="The Proposal at Ras Abrouq" loading="lazy">
+                <!-- Proposal Milestone with 1 photo -->
+                <div class="journey-milestone">
+                    <h3 class="journey-title">The Proposal in Zekreet</h3>
+                    <p class="journey-desc">A beautiful surprise getaway at Our Habitas Ras Abrouq.</p>
+                    <div class="milestone-photos">
+                        <div class="journey-image-wrapper">
+                            <img src="photo7.jpeg" alt="The Proposal at Ras Abrouq" loading="lazy">
+                        </div>
                     </div>
-                </li>
+                </div>
 
-                <li class="journey-item">
-                    <span class="journey-date">May 1, 2027</span>
-                    <h3 class="journey-title">The Wedding</h3>
+                <!-- Wedding Milestone with 2 photos -->
+                <div class="journey-milestone">
+                    <h3 class="journey-title">The Wedding in Seoul</h3>
                     <p class="journey-desc">We can't wait to add this moment to our timeline alongside all of you!</p>
-                    <div class="journey-image-wrapper">
-                        <img src="photo5.jpeg" alt="Our Wedding Day" loading="lazy">
+                    <div class="milestone-photos">
+                        <div class="journey-image-wrapper">
+                            <img src="photo8.jpeg" alt="Wedding Preparations - 1" loading="lazy">
+                        </div>
+                        <div class="journey-image-wrapper">
+                            <img src="photo9.jpeg" alt="Wedding Preparations - 2" loading="lazy">
+                        </div>
                     </div>
-                </li>
-            </ul>
+                </div>
+
+            </div>
         </section>
 
         <!-- Afterparty -->
@@ -1193,7 +1196,7 @@
             }
         });
 
-        // --- NEW: Lightbox Logic for Journey Images ---
+        // Lightbox Logic for Journey Images
         const lightboxModal = document.getElementById('lightbox-modal');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxCaption = document.getElementById('lightbox-caption');
@@ -1204,9 +1207,9 @@
             img.addEventListener('click', () => {
                 lightboxImg.src = img.src;
                 lightboxImg.alt = img.alt;
-                lightboxCaption.textContent = img.alt; // Uses the image's alt attribute as the caption
+                lightboxCaption.textContent = img.alt;
                 lightboxModal.showModal();
-                document.body.style.overflow = 'hidden'; // Lock background scrolling
+                document.body.style.overflow = 'hidden'; 
             });
         });
 
@@ -1222,7 +1225,6 @@
                 document.body.style.overflow = '';
             }
         });
-        // ----------------------------------------------
 
         // Floating RSVP Button Logic
         const floatingRsvp = document.getElementById('floating-rsvp');
@@ -1266,7 +1268,7 @@
         const submitBtn = rsvpForm.querySelector('.submit-btn');
 
         rsvpForm.addEventListener("submit", async function(event) {
-            event.preventDefault(); // Stop the default page redirect
+            event.preventDefault(); 
             
             const originalBtnText = submitBtn.innerText;
             submitBtn.innerText = "Sending...";
