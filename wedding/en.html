@@ -254,6 +254,8 @@
             margin-top: 24px;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
+            /* Flex-start ensures cards don't stretch with empty space vertically */
+            align-items: flex-start; 
         }
         
         .journey-scroll-container::-webkit-scrollbar { height: 8px; }
@@ -263,7 +265,7 @@
 
         .journey-milestone {
             flex: 0 0 85%;
-            max-width: 420px;
+            max-width: 480px;
             scroll-snap-align: center;
             background-color: var(--inset-bg);
             border: 1px solid var(--divider);
@@ -271,6 +273,7 @@
             padding: 24px;
             display: flex;
             flex-direction: column;
+            height: auto; /* Hugs the text and pictures cleanly */
         }
         
         .journey-title {
@@ -283,33 +286,32 @@
         
         .journey-desc {
             color: var(--text-muted);
-            margin: 0 0 20px 0;
+            margin: 0 0 0 0;
             font-size: 1rem;
             line-height: 1.5;
         }
 
-        /* Photo Grid inside Milestones */
+        /* New Collage Photo Layout inside Milestones */
         .milestone-photos {
             display: flex;
+            flex-wrap: wrap; /* Allows pictures to drop to the next line naturally */
             gap: 12px;
-            margin-top: auto;
-            align-items: flex-start;
+            margin-top: 16px;
         }
         
         .journey-image-wrapper {
-            flex: 1;
+            flex: 0 0 auto; /* Wraps tightly around the image, preventing all empty colored blocks! */
             border-radius: 6px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             cursor: zoom-in;
             overflow: hidden;
-            background-color: rgba(0,0,0,0.2);
-            position: relative;
         }
         
         .journey-image-wrapper img {
             display: block;
-            width: 100%;
-            height: auto; 
+            max-height: 130px; /* Thumnails are considerably smaller now */
+            width: auto; /* Natural aspect ratio dictates width */
+            max-width: 100%; /* Safety fallback for tiny screens */
             transition: transform 0.4s ease;
         }
         
@@ -763,6 +765,7 @@
             
             .journey-milestone { padding: 20px; }
             .journey-title { font-size: 1.35rem; }
+            .journey-image-wrapper img { max-height: 110px; } /* Slightly smaller for mobile collage */
             
             /* Lightbox tweaks */
             .lightbox-close-btn { top: 16px; right: 16px; width: 36px; height: 36px; font-size: 1.2rem; }
@@ -904,7 +907,7 @@
                     </div>
                 </div>
 
-                <!-- Doha Milestone with 2 photos -->
+                <!-- Doha Milestone with 8 photos example -->
                 <div class="journey-milestone">
                     <h3 class="journey-title">Building our life in Doha</h3>
                     <p class="journey-desc">Everyday life, desert drives, and making memories at our home base in Qatar.</p>
@@ -914,6 +917,24 @@
                         </div>
                         <div class="journey-image-wrapper">
                             <img src="photo6.jpeg" alt="Life in Doha - 2" loading="lazy">
+                        </div>
+                        <div class="journey-image-wrapper">
+                            <img src="photo10.jpeg" alt="Life in Doha - 3" loading="lazy">
+                        </div>
+                        <div class="journey-image-wrapper">
+                            <img src="photo11.jpeg" alt="Life in Doha - 4" loading="lazy">
+                        </div>
+                        <div class="journey-image-wrapper">
+                            <img src="photo12.jpeg" alt="Life in Doha - 5" loading="lazy">
+                        </div>
+                        <div class="journey-image-wrapper">
+                            <img src="photo13.jpeg" alt="Life in Doha - 6" loading="lazy">
+                        </div>
+                        <div class="journey-image-wrapper">
+                            <img src="photo14.jpeg" alt="Life in Doha - 7" loading="lazy">
+                        </div>
+                        <div class="journey-image-wrapper">
+                            <img src="photo15.jpeg" alt="Life in Doha - 8" loading="lazy">
                         </div>
                     </div>
                 </div>
