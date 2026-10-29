@@ -254,7 +254,8 @@
             margin-top: 32px;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
-            align-items: flex-start; 
+            /* align-items: stretch forces all milestones in the row to be equal height */
+            align-items: stretch; 
         }
         
         .journey-scroll-container::-webkit-scrollbar { height: 8px; }
@@ -289,7 +290,7 @@
             top: 50%;
             left: 10px; /* Originates from the center of the dot */
             width: calc(100% + 24px); /* Stretches across the gap to the next card's dot */
-            height: 1px; /* Matches the day's flow thickness */
+            height: 1px; 
             background-color: var(--divider);
             z-index: -1;
         }
@@ -313,7 +314,7 @@
             color: var(--accent);
             margin: 0;
             font-weight: 600;
-            background-color: var(--alt-bg); /* Opaque background cuts out the line running behind the text */
+            background-color: var(--alt-bg); 
             padding-right: 16px; 
             line-height: 1.2;
         }
@@ -326,7 +327,8 @@
             padding: 24px;
             display: flex;
             flex-direction: column;
-            height: auto; 
+            /* flex: 1 makes the card itself stretch to fill the height dictated by the container */
+            flex: 1; 
         }
         
         .journey-desc {
@@ -367,26 +369,58 @@
         /* Photo Collage Layout inside Milestones */
         .milestone-photos {
             display: flex;
-            flex-wrap: wrap; /* Allows pictures to drop to the next line naturally */
+            flex-wrap: wrap; 
             gap: 12px;
             margin-top: 20px;
+            /* flex: 1 combined with align-content: center clusters the photos in the middle of any empty space */
+            flex: 1; 
+            align-content: center;
+            justify-content: center; 
         }
         
         .journey-image-wrapper {
-            flex: 0 0 auto; /* Wraps tightly around the image, preventing empty blocks */
+            flex: 0 1 auto; 
             border-radius: 6px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             cursor: zoom-in;
             overflow: hidden;
             background-color: rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         .journey-image-wrapper img {
             display: block;
-            max-height: 130px; /* Thumnails are considerably smaller */
-            width: auto; /* Natural aspect ratio dictates width */
-            max-width: 100%; /* Safety fallback for tiny screens */
+            width: auto; 
+            max-width: 100%; 
+            /* Default small height for a high count of images (5+) */
+            max-height: 110px; 
+            object-fit: contain;
             transition: transform 0.4s ease;
+        }
+
+        /* --- CSS QUANTITY QUERIES --- 
+           These selectors automatically detect how many pictures are inside the 
+           card and apply the correct sizing, filling the space cleanly! */
+        
+        /* 1 Image */
+        .journey-image-wrapper:first-child:nth-last-child(1) img { 
+            max-height: 280px; 
+        }
+        
+        /* 2 Images */
+        .journey-image-wrapper:first-child:nth-last-child(2) img,
+        .journey-image-wrapper:first-child:nth-last-child(2) ~ .journey-image-wrapper img { 
+            max-height: 200px; 
+        }
+        
+        /* 3 or 4 Images */
+        .journey-image-wrapper:first-child:nth-last-child(3) img,
+        .journey-image-wrapper:first-child:nth-last-child(3) ~ .journey-image-wrapper img,
+        .journey-image-wrapper:first-child:nth-last-child(4) img,
+        .journey-image-wrapper:first-child:nth-last-child(4) ~ .journey-image-wrapper img { 
+            max-height: 160px; 
         }
         
         .journey-image-wrapper:hover img {
@@ -839,7 +873,16 @@
             
             .journey-title { font-size: 1.25rem; }
             .journey-card { padding: 20px; }
-            .journey-image-wrapper img { max-height: 110px; } 
+            
+            /* Responsive quantity queries for small screens */
+            .journey-image-wrapper img { max-height: 90px; } 
+            .journey-image-wrapper:first-child:nth-last-child(1) img { max-height: 220px; }
+            .journey-image-wrapper:first-child:nth-last-child(2) img,
+            .journey-image-wrapper:first-child:nth-last-child(2) ~ .journey-image-wrapper img { max-height: 160px; }
+            .journey-image-wrapper:first-child:nth-last-child(3) img,
+            .journey-image-wrapper:first-child:nth-last-child(3) ~ .journey-image-wrapper img,
+            .journey-image-wrapper:first-child:nth-last-child(4) img,
+            .journey-image-wrapper:first-child:nth-last-child(4) ~ .journey-image-wrapper img { max-height: 120px; }
             
             /* Lightbox tweaks */
             .lightbox-close-btn { top: 16px; right: 16px; width: 36px; height: 36px; font-size: 1.2rem; }
