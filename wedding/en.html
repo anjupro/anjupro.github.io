@@ -254,7 +254,8 @@
             margin-top: 32px;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
-            align-items: flex-start; /* CRITICAL: Allows cards to only be as tall as their content */
+            /* Flex-start ensures each card shrink-wraps its height perfectly instead of stretching */
+            align-items: flex-start; 
         }
         
         .journey-scroll-container::-webkit-scrollbar { height: 8px; }
@@ -269,13 +270,12 @@
             display: flex;
             flex-direction: column;
             gap: 16px;
-            height: max-content; /* Ensure the milestone hugs its content */
         }
 
         /* Horizontal Timeline Logic */
         .journey-track {
             display: flex;
-            align-items: center;
+            align-items: flex-start; /* Ensures dots don't move vertically if titles are 2 lines */
             gap: 16px;
             position: relative;
             z-index: 1;
@@ -287,7 +287,7 @@
         .journey-track::before {
             content: '';
             position: absolute;
-            top: 50%;
+            top: 14px; /* Locked horizontally based on the top edge */
             left: 10px; 
             width: calc(100% + 24px); 
             height: 1px; 
@@ -306,6 +306,7 @@
             background-color: var(--accent);
             box-shadow: 0 0 0 5px var(--alt-bg), 0 0 0 8px rgba(212, 175, 55, 0.15); 
             flex-shrink: 0;
+            margin-top: 10px; /* Pushes the dot down to perfectly center with the first line of text */
         }
 
         .journey-title {
@@ -316,7 +317,7 @@
             font-weight: 600;
             background-color: var(--alt-bg); 
             padding-right: 16px; 
-            line-height: 1.2;
+            line-height: 1.4;
         }
 
         /* The Box Containing the Content */
@@ -327,6 +328,7 @@
             padding: 24px;
             display: flex;
             flex-direction: column;
+            height: auto; 
         }
         
         .journey-desc {
@@ -364,98 +366,76 @@
             50% { transform: translateX(6px); }
         }
 
-        /* --- NEW DYNAMIC PHOTO COLLAGE SYSTEM --- */
+        /* --- ADVANCED CSS QUANTITY QUERIES --- */
+        /* Dynamic Photo Collage Layout inside Milestones */
         .milestone-photos {
             display: flex;
             flex-wrap: wrap; 
             gap: 12px;
             margin-top: 20px;
-            justify-content: center;
-            align-items: center; 
+            align-content: center;
+            justify-content: center; 
         }
         
-        /* The wrapper is now invisible scaffolding holding the picture */
         .journey-image-wrapper {
+            /* Default: Allow up to 3 columns per row (for 3, 5, or 6 images) */
+            flex: 1 1 calc(33.333% - 12px); 
+            max-width: 100%; /* Default max */
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            cursor: zoom-in;
+            overflow: hidden;
+            background-color: rgba(0,0,0,0.2);
             display: flex;
             justify-content: center;
             align-items: center;
-            cursor: zoom-in;
-            flex: 1 1 auto; 
         }
-        
-        /* The styling and shadow moves directly to the image to eliminate gaps */
+
         .journey-image-wrapper img {
             display: block;
-            width: auto;
-            max-width: 100%;
-            height: auto;
-            border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            width: auto; 
+            max-width: 100%; 
+            max-height: 140px; /* Default height */
+            object-fit: contain;
             transition: transform 0.4s ease;
         }
         
         .journey-image-wrapper:hover img {
             transform: scale(1.05);
-            z-index: 2;
-            position: relative;
         }
 
-        /* QUANTITY QUERIES (Automatically sets layout based on picture count) */
+        /* Rule for exactly 1 Image */
+        .journey-image-wrapper:first-child:nth-last-child(1) { 
+            flex: 1 1 100%; 
+        }
+        .journey-image-wrapper:first-child:nth-last-child(1) img { 
+            max-height: 260px; 
+        }
         
-        /* Layout for 1 Image */
-        .journey-image-wrapper:first-child:nth-last-child(1) { flex: 1 1 100%; }
-        .journey-image-wrapper:first-child:nth-last-child(1) img { max-height: 320px; }
-
-        /* Layout for 2 Images */
+        /* Rule for exactly 2 Images or 4 Images (Locks them to 2 per row) */
         .journey-image-wrapper:first-child:nth-last-child(2),
-        .journey-image-wrapper:first-child:nth-last-child(2) ~ .journey-image-wrapper { 
-            flex: 1 1 calc(50% - 12px); 
-        }
-        .journey-image-wrapper:first-child:nth-last-child(2) img,
-        .journey-image-wrapper:first-child:nth-last-child(2) ~ .journey-image-wrapper img { 
-            max-height: 240px; 
-        }
-
-        /* Layout for 3 or 4 Images (Forces 2-per-row grid, centers orphan if 3) */
-        .journey-image-wrapper:first-child:nth-last-child(3),
-        .journey-image-wrapper:first-child:nth-last-child(3) ~ .journey-image-wrapper,
+        .journey-image-wrapper:first-child:nth-last-child(2) ~ .journey-image-wrapper,
         .journey-image-wrapper:first-child:nth-last-child(4),
         .journey-image-wrapper:first-child:nth-last-child(4) ~ .journey-image-wrapper { 
             flex: 1 1 calc(50% - 12px); 
-            max-width: calc(50% - 6px); 
+            max-width: calc(50% - 6px); /* Prevents flex-grow from stretching one to 100% width if orphaned */
         }
-        .journey-image-wrapper:first-child:nth-last-child(3) img,
-        .journey-image-wrapper:first-child:nth-last-child(3) ~ .journey-image-wrapper img,
-        .journey-image-wrapper:first-child:nth-last-child(4) img,
-        .journey-image-wrapper:first-child:nth-last-child(4) ~ .journey-image-wrapper img { 
+        .journey-image-wrapper:first-child:nth-last-child(2) img,
+        .journey-image-wrapper:first-child:nth-last-child(2) ~ .journey-image-wrapper img { 
             max-height: 180px; 
         }
 
-        /* Layout for 5 or 6 Images (Forces 3-per-row grid) */
-        .journey-image-wrapper:first-child:nth-last-child(5),
-        .journey-image-wrapper:first-child:nth-last-child(5) ~ .journey-image-wrapper,
-        .journey-image-wrapper:first-child:nth-last-child(6),
-        .journey-image-wrapper:first-child:nth-last-child(6) ~ .journey-image-wrapper { 
-            flex: 1 1 calc(33.333% - 12px); 
-            max-width: calc(33.333% - 8px); 
+        /* Rule for 5 or 6+ Images (Forces 3 columns, and prevents bottom row from looking huge) */
+        .journey-image-wrapper:first-child:nth-last-child(n+5),
+        .journey-image-wrapper:first-child:nth-last-child(n+5) ~ .journey-image-wrapper {
+            flex: 1 1 calc(33.333% - 12px);
+            max-width: calc(50% - 6px); /* For 5 photos, the bottom 2 will expand cleanly to 50% each */
         }
-        .journey-image-wrapper:first-child:nth-last-child(5) img,
-        .journey-image-wrapper:first-child:nth-last-child(5) ~ .journey-image-wrapper img,
-        .journey-image-wrapper:first-child:nth-last-child(6) img,
-        .journey-image-wrapper:first-child:nth-last-child(6) ~ .journey-image-wrapper img { 
-            max-height: 130px; 
+        .journey-image-wrapper:first-child:nth-last-child(n+5) img,
+        .journey-image-wrapper:first-child:nth-last-child(n+5) ~ .journey-image-wrapper img {
+            max-height: 110px; /* Slight shrink for very large collages */
         }
-
-        /* Layout for 7+ Images */
-        .journey-image-wrapper:first-child:nth-last-child(n+7),
-        .journey-image-wrapper:first-child:nth-last-child(n+7) ~ .journey-image-wrapper { 
-            flex: 1 1 calc(33.333% - 12px); 
-            max-width: calc(33.333% - 8px); 
-        }
-        .journey-image-wrapper:first-child:nth-last-child(n+7) img,
-        .journey-image-wrapper:first-child:nth-last-child(n+7) ~ .journey-image-wrapper img { 
-            max-height: 110px; 
-        }
+        /* ------------------------------------- */
 
         /* Full-Screen Image Lightbox Styling */
         .lightbox-modal {
@@ -904,16 +884,13 @@
             .journey-title { font-size: 1.25rem; }
             .journey-card { padding: 20px; }
             
-            /* Tighten up mobile collage */
-            .journey-image-wrapper:first-child:nth-last-child(n+3),
-            .journey-image-wrapper:first-child:nth-last-child(n+3) ~ .journey-image-wrapper {
-                flex: 1 1 calc(50% - 12px) !important;
-                max-width: calc(50% - 6px) !important;
-            }
-            .journey-image-wrapper:first-child:nth-last-child(n+3) img,
-            .journey-image-wrapper:first-child:nth-last-child(n+3) ~ .journey-image-wrapper img {
-                max-height: 130px !important;
-            }
+            /* Responsive quantity queries for small screens */
+            .journey-image-wrapper img { max-height: 90px; } 
+            .journey-image-wrapper:first-child:nth-last-child(1) img { max-height: 200px; }
+            .journey-image-wrapper:first-child:nth-last-child(2) img,
+            .journey-image-wrapper:first-child:nth-last-child(2) ~ .journey-image-wrapper img { max-height: 140px; }
+            .journey-image-wrapper:first-child:nth-last-child(n+5) img,
+            .journey-image-wrapper:first-child:nth-last-child(n+5) ~ .journey-image-wrapper img { max-height: 80px; }
             
             /* Lightbox tweaks */
             .lightbox-close-btn { top: 16px; right: 16px; width: 36px; height: 36px; font-size: 1.2rem; }
