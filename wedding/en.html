@@ -509,23 +509,19 @@
             transform: scale(1.05);
         }
 
-        /* Two Column Text Layout for Travel & Logistics */
-        .two-column-text {
+        /* Modal Trigger Buttons Group */
+        .modal-buttons-group {
             display: flex;
-            gap: 40px;
+            flex-direction: column;
+            gap: 16px;
             margin-top: 32px;
-            margin-bottom: 40px;
         }
 
-        .two-column-text > div { flex: 1; }
-
-        /* Modal Trigger Buttons */
         .tips-button {
             background-color: var(--inset-bg);
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 8px;
             padding: 24px;
-            margin-top: 20px;
             width: 100%;
             text-align: left;
             cursor: pointer;
@@ -627,6 +623,7 @@
         .modal-content ul:last-child { margin-bottom: 0; }
         .modal-content li { margin-bottom: 16px; line-height: 1.8; }
         .modal-content strong { color: var(--text-main); }
+        .modal-content p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; margin-bottom: 16px; }
 
         /* Highlighted Timeline Event */
         .timeline li.highlight-event .time,
@@ -873,8 +870,6 @@
             .split-section { flex-direction: column-reverse; gap: 32px; }
             .split-image-side { flex: none; width: 100%; height: 240px; }
             
-            .two-column-text { flex-direction: column; gap: 24px; }
-            
             .timeline::before { left: 5px; }
             .timeline li { flex-direction: column; margin-bottom: 28px; }
             .timeline li::before { left: 1px; top: 7px; }
@@ -988,24 +983,27 @@
         <!-- Travel & Logistics -->
         <section class="info-block">
             <h2>Travel & Logistics</h2>
+            <p>Click the sections below for detailed information regarding accommodation recommendations, navigation, and tips for making the most out of your stay in Seoul.</p>
             
-            <div class="two-column-text">
-                <div>
-                    <h3 style="margin-top: 0;">Where to Stay</h3>
-                    <p>For our guests traveling from Finland, we highly recommend booking your hotel in the <strong>Myeongdong</strong> area. It is centrally located and serves as the perfect base for exploring the city. Myeongdong is famous for its vibrant street food night markets, fantastic shopping, and lively atmosphere, while also offering seamless public transport connections to both historical palaces and modern districts.</p>
-                </div>
-                <div>
-                    <h3 style="margin-top: 0;">Getting to the Venue</h3>
-                    <p>Our venue, Sunwoongak, is tucked away in the beautiful nature of northern Seoul. The easiest way to arrive via public transit is to take the subway to <strong>Bukhansan Ui</strong> station. From there, a dedicated shuttle bus will be operating to bring guests directly to the venue doors.</p>
-                    <p>For those arriving by car, there is a large, spacious parking area near the venue.</p>
-                </div>
-            </div>
+            <div class="modal-buttons-group">
+                <!-- Accommodation Modal Trigger -->
+                <button id="open-accommodation" class="tips-button" aria-label="Open accommodation info">
+                    <span>Where to Stay</span>
+                    <span class="plus-icon">+</span>
+                </button>
 
-            <!-- Tips Modal Trigger Button -->
-            <button id="open-tips" class="tips-button" aria-label="Open tips for exploring Seoul">
-                <span>Tips for Exploring Seoul</span>
-                <span class="plus-icon">+</span>
-            </button>
+                <!-- Venue Navigation Modal Trigger -->
+                <button id="open-venue-nav" class="tips-button" aria-label="Open venue navigation info">
+                    <span>Getting to the Venue</span>
+                    <span class="plus-icon">+</span>
+                </button>
+
+                <!-- Tips Modal Trigger -->
+                <button id="open-tips" class="tips-button" aria-label="Open tips for exploring Seoul">
+                    <span>Tips for Exploring Seoul</span>
+                    <span class="plus-icon">+</span>
+                </button>
+            </div>
         </section>
 
         <!-- Our Journey Horizontal Scrolling Milestones (Temporarily commented out) -->
@@ -1399,6 +1397,59 @@
         </section>
     </div>
 
+    <!-- The Native HTML Modal overlay for Accommodation -->
+    <dialog id="accommodation-modal" class="tips-modal">
+        <div class="modal-header">
+            <h2>Where to Stay</h2>
+            <button id="close-accommodation" class="close-modal-btn" aria-label="Close accommodation info">✕</button>
+        </div>
+        <div class="modal-content">
+            <h3>Our Recommendation</h3>
+            <p>For our guests traveling from Finland, we highly recommend booking your hotel in the <strong>Myeongdong</strong> area. It is centrally located and serves as the perfect base for exploring the city. Myeongdong is famous for its vibrant street food night markets, fantastic shopping, and lively atmosphere, while also offering seamless public transport connections to both historical palaces and modern districts.</p>
+            
+            <h3>A Quick Note on Location</h3>
+            <p>We <strong>do not recommend</strong> booking a hotel close to the wedding venue. While the venue is set in stunning nature in the northern foothills of Seoul, it is quite far from the city's main attractions, restaurants, and shopping areas. Staying centrally in areas like Myeongdong will make exploring the city much easier and your overall trip much more enjoyable!</p>
+        </div>
+    </dialog>
+
+    <!-- The Native HTML Modal overlay for Venue Navigation -->
+    <dialog id="venue-nav-modal" class="tips-modal">
+        <div class="modal-header">
+            <h2>Getting to the Venue</h2>
+            <button id="close-venue-nav" class="close-modal-btn" aria-label="Close venue navigation info">✕</button>
+        </div>
+        <div class="modal-content">
+            <p><strong>Sunwoongak (선운각)</strong><br>
+            223 Samyang-ro 173-gil, Gangbuk-gu, Seoul<br>
+            (우이동 260-6)<br>
+            Tel: 0507-1399-1105</p>
+
+            <h3>Free Shuttle Bus (Recommended)</h3>
+            <ul>
+                <li><strong>Where:</strong> Take the subway to <strong>Bukhansan Ui Station</strong> (Ui-Sinseol Line) and use <strong>Exit 2</strong>. Walk about 30 meters to the front of the <em>Nonghyup Scholarship Center (농협장학관)</em>. Staff will be there to guide you!</li>
+                <li><strong>When:</strong> 11:00 AM to 3:00 PM (Starting one hour prior to the ceremony).</li>
+                <li><strong>Details:</strong> Shuttles depart immediately as groups gather for a quick 10-minute ride up to the venue. They will run continuously based on the situation.</li>
+            </ul>
+
+            <h3>By Subway & Walking</h3>
+            <ul>
+                <li>Take the subway to <strong>Bukhansan Ui Station</strong> (Ui-Sinseol Line) and use <strong>Exit 2</strong>. It is a scenic but uphill 20-minute walk to the venue.</li>
+            </ul>
+
+            <h3>By Car or Taxi</h3>
+            <ul>
+                <li>Search for <strong>'Sunwoongak 260-6' (선운각 260-6)</strong> in your navigation app (like Naver Map).</li>
+                <li>Upon arrival, parking guides will direct you to the large parking lot where they will assist you.</li>
+            </ul>
+
+            <h3>By City Bus</h3>
+            <ul>
+                <li><strong>Ui-dong Terminus:</strong> Buses 109, 120, 130, 144, 1167</li>
+                <li><strong>Doseonsa Entrance:</strong> Buses 101, 151, 163, Nowon15, 1144</li>
+            </ul>
+        </div>
+    </dialog>
+
     <!-- The Native HTML Modal overlay for Seoul Tips -->
     <dialog id="tips-modal" class="tips-modal">
         <div class="modal-header">
@@ -1521,7 +1572,9 @@
             }
         }
 
-        // Initialize modals
+        // Initialize Modals
+        setupModal('open-accommodation', 'accommodation-modal', 'close-accommodation');
+        setupModal('open-venue-nav', 'venue-nav-modal', 'close-venue-nav');
         setupModal('open-tips', 'tips-modal', 'close-tips');
         
         // Manual setup for success modal since it opens programmatically
