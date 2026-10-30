@@ -98,9 +98,10 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
             transition: all 0.3s ease;
             box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            position: relative;
         }
 
-        .nav-btn:hover {
+        .nav-btn:not(.disabled-btn):hover {
             background-color: rgba(48, 55, 41, 0.95);
             border-color: var(--accent);
             transform: translateY(-3px);
@@ -112,6 +113,28 @@
             padding: 20px 0;
             font-size: 3rem; /* Massive, clickable emojis */
             line-height: 1.2;
+        }
+        
+        /* Styling for the disabled Korean button */
+        .disabled-btn {
+            opacity: 0.6;
+            cursor: default;
+            /* Override the standard nav-btn link behavior to prevent clicking */
+            pointer-events: none;
+        }
+        
+        /* The coming soon overlay text */
+        .coming-soon-label {
+            position: absolute;
+            bottom: 6px;
+            width: 100%;
+            text-align: center;
+            font-family: 'Noto Serif KR', serif;
+            font-size: 0.7rem;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
 
         /* Updated Camera Button to be square/balanced with icon on top and stacked text */
@@ -157,6 +180,7 @@
             .hero-wrapper { padding: 16px; } 
             .hero h1 { font-size: 3.5rem; margin-bottom: 32px; }
             .flag-btn { padding: 16px 0; font-size: 2.8rem; }
+            .coming-soon-label { font-size: 0.65rem; bottom: 4px; }
         }
     </style>
 </head>
@@ -171,10 +195,11 @@
                     <a href="en.html" class="nav-btn flag-btn" aria-label="English / Finnish">
                         🇫🇮
                     </a>
-                    <!-- Korean Flag links to ko.html -->
-                    <a href="ko.html" class="nav-btn flag-btn" aria-label="Korean">
+                    <!-- Korean Flag disabled for now -->
+                    <div class="nav-btn flag-btn disabled-btn" aria-label="Korean (Coming Soon)">
                         🇰🇷
-                    </a>
+                        <span class="coming-soon-label">Coming Soon</span>
+                    </div>
                 </div>
                 
                 <!-- Camera Button links to upload.html -->
